@@ -14,7 +14,7 @@ class ImageClassifier(
     companion object {
         private const val ACCURACY_THRESHOLD = 0.55f
         private const val NUM_THREADS = 1
-        private val CLASSIFICATION_MODEL = Classifier.Model.QUANTIZED_EFFICIENT
+        private val CLASSIFICATION_MODEL = Classifier.Model.QUANTIZED_EFFICIENTNET
         private val PROCESSING_DEVICE = Classifier.Device.CPU
     }
 
