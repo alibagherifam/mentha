@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings"
+        style="@style/Widget.MyApp.Button.IconOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_large"
+        android:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_settings"
+        app:iconSize="@dimen/icon_size_medium"
+        app:iconTint="@color/material_on_surface_emphasis_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_toggle_flash"
+        style="@style/Widget.MyApp.Button.IconOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:backgroundTint="@color/csl_flash_toggle_background"
+        android:checkable="true"
+        app:icon="@drawable/ic_flash_toggle"
+        app:iconTint="@color/csl_flash_toggle_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/view_finder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_scan_square"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_food_summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_xx_large"
+        android:layout_marginBottom="@dimen/margin_x_large"
+        android:translationY="30px"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="@dimen/component_width_xx_large"
+        tools:ignore="PxUsage"
+        tools:translationY="0dp"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_medium">
+
+            <ImageView
+                android:id="@+id/img_food_icon"
+                android:layout_width="@dimen/image_size_xx_small"
+                android:layout_height="@dimen/image_size_xx_small"
+                android:contentDescription="@string/content_description_food_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/img_banana" />
+
+            <TextView
+                android:id="@+id/tv_food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/material_on_surface_emphasis_high_type"
+                app:layout_constraintEnd_toStartOf="@id/img_food_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/sample_food" />
+
+            <ImageView
+                android:id="@+id/img_energy_icon"
+                android:layout_width="@dimen/icon_size_x_small"
+                android:layout_height="@dimen/icon_size_x_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:contentDescription="@string/content_description_energy_icon"
+                android:src="@drawable/img_fire"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_food_energy"
+                app:layout_constraintEnd_toStartOf="@id/img_food_icon"
+                app:layout_constraintTop_toTopOf="@+id/tv_food_energy"
+                app:layout_constraintVertical_bias="0.35"
+                app:tint="?attr/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tv_food_energy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_x_small"
+                android:layout_marginEnd="@dimen/margin_xxx_small"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/material_on_surface_emphasis_high_type"
+                app:layout_constraintEnd_toStartOf="@id/img_energy_icon"
+                app:layout_constraintTop_toBottomOf="@+id/tv_food_name"
+                tools:text="@string/sample_energy" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_show_nutrition_facts"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_nutrition_facts"
+                app:icon="@drawable/ic_chevron_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Mentha</string>
+
+    <string name="sample_food">توت فرنگی</string>
+    <string name="sample_nutrition">کربوهیدرات</string>
+    <string name="sample_summary">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</string>
+    <string name="sample_energy">31 کیلو کالری</string>
+    <string name="sample_weight">30 گرم</string>
+    <string name="sample_percentage">10%</string>
+
+    <string name="content_description_share_button">دکمه اشتراک گذاری</string>
+    <string name="content_description_food_image">تصویر خوراکی</string>
+    <string name="content_description_back_button">دکمه بازگشت به صفحه قبل</string>
+    <string name="content_description_energy_icon">آیکون کالری</string>
+    <string name="content_description_chevron_left">دکمه انتقال به صفحه جزئیات خوراکی</string>
+
+    <string name="label_weight_in_gram">%1$s گرم</string>
+    <string name="label_weight_in_milligram">%1$s میلی‌گرم</string>
+    <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
+    <string name="label_percentage">%1$d%%</string>
+    <string name="label_less_than_one_percent">&lt;1%</string>
+    <string name="label_nutrition_facts">ارزش غذایی</string>
+    <string name="label_serving_size">1 %1$s %2$s (%3$d گرم)</string>
+    <string name="label_energy">انرژی</string>
+    <string name="label_share">اشتراک گذاری</string>
+
+    <string name="message_share_text">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n https://mentha-health.com/download</string>
+    <string name="message_commercial_slogan">Your Health Matters</string>
 </resources>

@@ -1,2 +1,3 @@
-* Mentha
+*** Mentha
+
 ** Your health matters
