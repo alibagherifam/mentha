@@ -1,6 +1,6 @@
 # 🍀 Mentha
 
-<img width="160" alt="mentha" src="https://raw.github.com/alibagherifam/mentha/master/app/src/main/ic_launcher-playstore.png">
+<img width="160" alt="mentha" src="https://raw.github.com/alibagherifam/mentha/master/banner.png">
 
 Find nutrition facts using your phone camera!
 
@@ -30,12 +30,12 @@ This app was my final project on B.Sc. in Computer Engineering
 
 ## 🤝 Contribution
 
-Feel free to create pull request, specially if it improves AI model ;)
+Feel free to create pull requests, specially if it improves AI model ;)
 
 License
 -------
 
-	Copyright (C) 2017 Ali Bagherifam
+	Copyright (C) 2023 Ali Bagherifam
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
