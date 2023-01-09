@@ -22,13 +22,28 @@ Other Android technologies:
 - Coil
 - KSP
 
+## Terminology
+
+According to Wikipedia:
+
+> "Mentha (also known as mint) is a genus of plants in the family Lamiaceae (mint family)."
+
+As a boy whose childhood was full of stomachaches, the word mentha
+means to me as a potion of healing. So I decided to set it as the project's name.
+
 ## 💡 Inspiration
 
-This app was my final project on B.Sc. in Computer Engineering
+The subject was final project for my B.Sc. in Computer Engineering
 
 ## 🤝 Contribution
 
-Feel free to create pull requests, specially if it improves AI model ;)
+Feel free to create pull requests, especially AI model improvements ;)
+
+## 🙏 Acknowledgement
+
+Special thanks to [Dr. Hamidreza Hamidi](http://ikiu.ac.ir/members/?id=46&lang=1) for his guidance toward the project.
+
+Thanks [Amir H. Bagherifam](https://dribbble.com/Amirh_UiUX) for designing the logo.
 
 License
 -------
