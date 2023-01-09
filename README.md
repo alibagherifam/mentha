@@ -1,5 +1,3 @@
-# 🍀 Mentha
-
 <img width="160" alt="mentha" src="https://raw.github.com/alibagherifam/mentha/master/banner.png">
 
 Find nutrition facts using your phone camera!
