@@ -8,7 +8,8 @@ It uses image classification and neural networks under the hood.
 
 ## ⚙ Technologies
 
-Image classification is based on [TensorFlow Lite](https://www.tensorflow.org/lite) with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite0/classification/2) model
+Image classification is based on [TensorFlow Lite](https://www.tensorflow.org/lite) 
+with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite0/classification/2) model
 
 Other Android technologies:
 
@@ -22,28 +23,29 @@ Other Android technologies:
 - Coil
 - KSP
 
-## Terminology
+## 📕 Terminology
 
 According to Wikipedia:
 
 > "Mentha (also known as mint) is a genus of plants in the family Lamiaceae (mint family)."
 
 As a boy whose childhood was full of stomachaches, the word mentha
-means to me as a potion of healing. So I decided to set it as the project's name.
+means as a potion of healing to me. So I set it as the project's name.
 
 ## 💡 Inspiration
 
-The subject was final project for my B.Sc. in Computer Engineering
+This was the final project for my B.Sc. in Computer Engineering.
 
 ## 🤝 Contribution
 
 Feel free to create pull requests, especially AI model improvements ;)
 
-## 🙏 Acknowledgement
+## 🙏 Acknowledgment
 
-Special thanks to [Dr. Hamidreza Hamidi](http://ikiu.ac.ir/members/?id=46&lang=1) for his guidance toward the project.
+- Thanks to [Dr. Hamidreza Hamidi](http://ikiu.ac.ir/members/?id=46&lang=1) for his 
+guidance toward the project.
 
-Thanks [Amir H. Bagherifam](https://dribbble.com/Amirh_UiUX) for designing the logo.
+- Thanks to [Amir H. Bagherifam](https://dribbble.com/Amirh_UiUX) for designing the logo.
 
 License
 -------
