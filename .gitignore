@@ -19,7 +19,7 @@ output.json
 *.iml
 .idea/
 misc.xml
-deploymentTargetDropDownn.xml
+deploymentTargetDropDown.xml
 render.experimental.xml
 
 # Keystore files
