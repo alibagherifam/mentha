@@ -3,7 +3,6 @@ androidPlugin = "7.3.1"
 androidxLifecycle = "2.5.1"
 androidxCamera = "1.2.0"
 kotlin = "1.7.22"
-coroutines = "1.6.4"
 
 [libraries]
 # AndroidX
@@ -49,8 +48,6 @@ test-androidx-rules = { group = "androidx.test", name = "rules", version = "1.4.
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
-[bundles]
-androidx-lifecycle = ["androidx-lifecycle-viewmodel", "androidx-lifecycle-runtime"]
 androidx-camera = ["androidx-camera-lifecycle", "androidx-camera-core", "androidx-camera-view"]
 
 [plugins]
