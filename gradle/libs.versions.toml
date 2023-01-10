@@ -42,8 +42,6 @@ materialDesign = { group = "com.google.android.material", name = "material", ver
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
-androidx-camera = ["androidx-camera-lifecycle", "androidx-camera-core", "androidx-camera-view"]
-
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
