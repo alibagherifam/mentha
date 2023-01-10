@@ -38,7 +38,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core)
-    implementation(libs.androidx.fragment)
     implementation(libs.androidx.recyclerview)
     implementation(libs.bundles.androidx.camera)
     implementation(libs.androidx.lifecycle.runtime)
