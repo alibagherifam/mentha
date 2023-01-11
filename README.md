@@ -8,7 +8,9 @@ image classification and neural networks under the hood.
 ## Screenshots
 
 ![Screenshot 1](https://raw.github.com/alibagherifam/mentha/master/screenshots/mentha_screenshot_1.png)
+&emsp;&emsp;
 ![Screenshot 2](https://raw.github.com/alibagherifam/mentha/master/screenshots/mentha_screenshot_2.png)
+&emsp;&emsp;
 ![Screenshot 3](https://raw.github.com/alibagherifam/mentha/master/screenshots/mentha_screenshot_3.png)
 
 ## ⚙ Technologies
