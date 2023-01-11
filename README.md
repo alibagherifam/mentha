@@ -8,10 +8,8 @@ It uses image classification and neural networks under the hood.
 ## ⚙ Technologies
 
 Image classification is based on [TensorFlow Lite](https://www.tensorflow.org/lite) 
-with following models:
-
-- [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite2/classification/2)
-- [MobileNet](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1)
+with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite2/classification/2) and 
+[MobileNet](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1) models.
 
 Other Android technologies:
 
