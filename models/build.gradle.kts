@@ -13,49 +13,34 @@ android.namespace = "org.tensorflow.lite.examples.classification.models"
 project.ext.set("ASSET_DIR", "$projectDir/src/main/assets/")
 //apply(from = "download.gradle.kts")
 
-val tfModelRepository = "https://tfhub.dev/tensorflow/lite-model/"
-val liteFormatQuery = "?lite-format=tflite"
-val modelFloatDownloadUrl = "mobilenet_v1_1.0_224/1/metadata/1"
-val modelQuantDownloadUrl = "mobilenet_v1_1.0_224_quantized/1/metadata/1"
-val modelEfficientNetFloatDownloadUrl = "efficientnet/lite0/fp32/2"
-val modelEfficientNetQuantDownloadUrl = "efficientnet/lite0/int8/2"
-
-val tfLiteMimeType = ".tflite"
-val modelFloatFileName = "mobilenet_v1_1.0_224"
-val modelQuantFileName = "mobilenet_v1_1.0_224_quant"
-val modelEfficientNetFloatFileName = "efficientnet-lite0-fp32"
-val modelEfficientNetQuantFileName = "efficientnet-lite0-int8"
-
-fun Project.assetDirectory(): String =
-    this.ext.get("ASSET_DIR") as String
-
-tasks.register<Download>("downloadModelFloat") {
-    src(tfModelRepository + modelFloatDownloadUrl + liteFormatQuery)
-    dest(assetDirectory() + modelFloatFileName + tfLiteMimeType)
+fun Download.tfModel(remoteName: String, localName: String) {
+    val assetDir = ext.get("ASSET_DIR") as String
+    val tfLiteMimeType = ".tflite"
+    val modelRepository = "https://storage.googleapis.com/download.tensorflow.org/models/tflite/task_library/image_classification/android"
+    src(modelRepository + remoteName + tfLiteMimeType)
+    dest(assetDir + localName + tfLiteMimeType)
     overwrite(false)
 }
 
-tasks.register<Download>("downloadModelQuant") {
-    src(tfModelRepository + modelQuantDownloadUrl + liteFormatQuery)
-    dest(assetDirectory() + modelQuantFileName + tfLiteMimeType)
-    overwrite(false)
+tasks.register<Download>("mobilenetv1") {
+    tfModel(remoteName = "mobilenet_v1_1.0_224_quantized_1_metadata_1", localName = "mobilenetv1")
 }
 
-tasks.register<Download>("downloadEfficientNetFloat") {
-    src(tfModelRepository + modelEfficientNetFloatDownloadUrl + liteFormatQuery)
-    dest(assetDirectory() + modelEfficientNetFloatFileName + tfLiteMimeType)
-    overwrite(false)
+tasks.register<Download>("efficientnet0") {
+    tfModel(remoteName = "efficientnet_lite0_int8_2", localName = "efficientnet-lite0")
 }
 
-tasks.register<Download>("downloadEfficientNetQuant") {
-    src(tfModelRepository + modelEfficientNetQuantDownloadUrl + liteFormatQuery)
-    dest(assetDirectory() + modelEfficientNetQuantFileName + tfLiteMimeType)
-    overwrite(false)
+tasks.register<Download>("efficientnet1") {
+    tfModel(remoteName = "efficientnet_lite1_int8_2", localName = "efficientnet-lite1")
+}
+
+tasks.register<Download>("efficientnet2") {
+    tfModel(remoteName = "efficientnet_lite2_int8_2", localName = "efficientnet-lite2")
 }
 
 tasks.preBuild.apply {
-    dependsOn("downloadModelFloat")
-    dependsOn("downloadModelQuant")
-    dependsOn("downloadEfficientNetFloat")
-    dependsOn("downloadEfficientNetQuant")
+    dependsOn("mobilenetv1")
+    dependsOn("efficientnet0")
+    dependsOn("efficientnet1")
+    dependsOn("efficientnet2")
 }

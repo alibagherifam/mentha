@@ -1,28 +1,26 @@
 package com.alibagherifam.mentha.business
 
-import android.app.Activity
+import android.content.Context
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.alibagherifam.mentha.classifier.Classifier
+import com.alibagherifam.mentha.ImageClassifierHelper
+import org.tensorflow.lite.support.label.Category
+import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class ImageClassifier(
-    activity: Activity,
-    private val onRecognition: (Classifier.Recognition?) -> Unit
-) : ImageAnalysis.Analyzer {
+    context: Context,
+    private val onRecognition: (Category?) -> Unit
+) : ImageAnalysis.Analyzer, ImageClassifierHelper.ClassifierListener {
 
-    companion object {
-        private const val ACCURACY_THRESHOLD = 0.55f
-        private const val NUM_THREADS = 1
-        private val CLASSIFICATION_MODEL = Classifier.Model.QUANTIZED_EFFICIENTNET
-        private val PROCESSING_DEVICE = Classifier.Device.CPU
-    }
-
-    private val classifier = Classifier.create(
-        activity,
-        CLASSIFICATION_MODEL,
-        PROCESSING_DEVICE,
-        NUM_THREADS
+    private val classifier = ImageClassifierHelper(
+        threshold = 0.55f,
+        numThreads = 2,
+        maxResults = 1,
+        currentDelegate = ImageClassifierHelper.DELEGATE_CPU,
+        currentModel = ImageClassifierHelper.MODEL_MOBILENETV1,
+        context,
+        imageClassifierListener = this
     )
 
     var pauseAnalysis: Boolean = false
@@ -45,17 +43,47 @@ class ImageClassifier(
             return
         }
 
-        // Copy out RGB bits to our shared buffer
+        // Copy out RGB bits to the shared bitmap buffer
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
-        // Perform the object classification for the current frame
-        val recognitions = classifier.recognizeImage(bitmapBuffer, imageRotationDegrees)
+        // Perform the image classification for the current frame
+        classifier.classify(bitmapBuffer, imageRotationDegrees)
+    }
 
-        // Report only the top recognition with enough accuracy
-        val acceptedRecognition =
-            recognitions.maxByOrNull { it.confidence }
-                ?.takeIf { it.confidence >= ACCURACY_THRESHOLD }
+    override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+        onRecognition(
+            results?.firstOrNull()?.categories
+                ?.minByOrNull { category -> category.index }
+        )
+    }
 
-        onRecognition(acceptedRecognition)
+    override fun onError(error: String) {
+        TODO("Not yet implemented")
     }
 }
+
+
+/*override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+    val imageAnalyzer: ImageAnalysis? = null
+    imageAnalyzer?.targetRotation = binding.viewFinder.display.rotation
+}*/
+
+/*
+private fun getScreenOrientation() : Int {
+    val outMetrics = DisplayMetrics()
+
+    val display: Display?
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+        display = requireActivity().display
+        display?.getRealMetrics(outMetrics)
+    } else {
+        @Suppress("DEPRECATION")
+        display = requireActivity().windowManager.defaultDisplay
+        @Suppress("DEPRECATION")
+        display.getMetrics(outMetrics)
+    }
+
+    return display?.rotation ?: 0
+}
+*/

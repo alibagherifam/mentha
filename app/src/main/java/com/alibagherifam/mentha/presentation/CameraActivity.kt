@@ -29,13 +29,13 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.business.ImageClassifier
-import com.alibagherifam.mentha.classifier.Classifier
 import com.alibagherifam.mentha.databinding.ActivityCameraBinding
 import com.alibagherifam.mentha.model.Food
 import com.alibagherifam.mentha.model.FoodRepository
 import com.alibagherifam.mentha.utils.stringFormatted
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
+import org.tensorflow.lite.support.label.Category
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -46,6 +46,8 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityCameraBinding
+
+    // Todo: is init on object creation expensive?
     private val executor = Executors.newSingleThreadExecutor()
     private lateinit var camera: Camera
     private var isFoodSummaryAnimationRunning = false
@@ -95,6 +97,8 @@ class CameraActivity : AppCompatActivity() {
             .setTargetAspectRatio(AspectRatio.RATIO_4_3)
             .setTargetRotation(viewFinder.display.rotation)
             .build().also {
+                // Attach the viewfinder's surface provider to preview use case
+                // Todo: Sample calls this after binding use-cases
                 it.setSurfaceProvider(viewFinder.surfaceProvider)
             }
 
@@ -119,7 +123,7 @@ class CameraActivity : AppCompatActivity() {
                 binding.viewFinder,
                 executor,
                 ImageClassifier(
-                    activity = this@CameraActivity,
+                    context = this@CameraActivity,
                     onRecognition = ::handleRecognition
                 )
             )
@@ -127,7 +131,7 @@ class CameraActivity : AppCompatActivity() {
             val cameraProvider = ProcessCameraProvider
                 .getInstance(this@CameraActivity).await()
 
-            // Unbind use cases before rebinding
+            // Unbind use-cases before rebinding
             cameraProvider.unbindAll()
 
             camera = cameraProvider.bindToLifecycle(
@@ -143,7 +147,7 @@ class CameraActivity : AppCompatActivity() {
 
     @UiThread
     private fun handleRecognition(
-        newRecognition: Classifier.Recognition?
+        newRecognition: Category?
     ) = runOnUiThread {
         val newFood = newRecognition?.takeIf { it.isFood() }?.mapToFood()
         if (newFood != null && isHidingFoodSummaryRunning()) {
@@ -250,9 +254,9 @@ class CameraActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-    private fun Classifier.Recognition.isFood() =
-        repository.foods.any { it.id == this.title }
+    private fun Category.isFood() =
+        repository.foods.any { it.id == this.label }
 
-    private fun Classifier.Recognition.mapToFood() =
-        repository.getFood(this.title)
+    private fun Category.mapToFood() =
+        repository.getFood(this.label)
 }

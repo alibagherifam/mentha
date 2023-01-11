@@ -15,24 +15,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
-
-    flavorDimensions += "tfliteInference"
-    productFlavors {
-        // The TFLite inference is built using the TFLite Support library.
-        create("support") {
-            dimension = "tfliteInference"
-        }
-        // Default: The TFLite inference is built using the TFLite Task library (high-level API).
-        create("taskApi") {
-            dimension = "tfliteInference"
-            isDefault = true
-        }
-    }
 }
 
 dependencies {
-    "supportImplementation"(project(":lib-support"))
-    "taskApiImplementation"(project(":lib-task-api"))
+    implementation(project(":models"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
@@ -49,4 +35,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.materialDesign)
+
+    implementation(libs.tensorflow.taskVision)
+    implementation(libs.tensorflow.gpu)
+    implementation(libs.tensorflow.gpuDelegate)
 }

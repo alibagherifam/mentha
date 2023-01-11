@@ -20,6 +20,4 @@ dependencyResolutionManagement {
 rootProject.name = "Mentha"
 
 include(":app")
-include(":lib-support")
-include(":lib-task-api")
 include(":models")

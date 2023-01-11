@@ -33,7 +33,4 @@ google-services.json
 *.hprof
 
 # Tensorflow models
-models/src/main/assets/efficientnet-lite0-fp32.tflite
-models/src/main/assets/efficientnet-lite0-int8.tflite
-models/src/main/assets/mobilenet_v1_1.0_224.tflite
-models/src/main/assets/mobilenet_v1_1.0_224_quant.tflite
+models/src/main/assets/*.tflite

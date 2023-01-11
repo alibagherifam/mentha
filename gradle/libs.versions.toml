@@ -26,13 +26,9 @@ kotlinx-coroutines-guava = { group = "org.jetbrains.kotlinx", name = "kotlinx-co
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.4.1" }
 
 # TensorFlow
-tensorflow-core = { group = "org.tensorflow", name = "tensorflow-lite", version = "2.9.0" }
-tensorflow-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu", version = "2.9.0" }
-tensorflow-local = { group = "org.tensorflow", name = "tensorflow-lite-local", version = "0.0.0" }
-tensorflow-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version = "0.4.1" }
-tensorflow-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version = "0.4.1" }
-tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version = "0.4.1" }
-tensorflow-gpuDelegate = { group = "org.tensorflow", name = "tensorflow-lite-gpu-delegate-plugin", version = "0.4.1" }
+tensorflow-gpu = { group = "org.tensorflow", name = "tensorflow-lite-gpu", version = "2.11.0" }
+tensorflow-gpuDelegate = { group = "org.tensorflow", name = "tensorflow-lite-gpu-delegate-plugin", version = "0.4.3" }
+tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version = "0.4.3" }
 
 # Others
 coil = { group = "io.coil-kt", name = "coil", version = "2.2.2" }
