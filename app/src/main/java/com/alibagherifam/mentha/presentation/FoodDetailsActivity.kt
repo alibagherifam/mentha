@@ -2,16 +2,15 @@ package com.alibagherifam.mentha.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import coil.load
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.databinding.ActivityFoodDetailsBinding
 import com.alibagherifam.mentha.model.Food
 import com.alibagherifam.mentha.model.FoodRepository
+import com.alibagherifam.mentha.theme.AppTheme
 
 class FoodDetailsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFoodDetailsBinding
     private lateinit var food: Food
 
     private val repository: FoodRepository by lazy {
@@ -20,28 +19,14 @@ class FoodDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFoodDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         food = getFoodFromIntent(intent)
-        setupAppBar(title = food.name)
-        updateFoodDetails(food)
-        binding.listNutritionFacts.adapter = NutritionFactsAdapter(food)
-    }
-
-    private fun setupAppBar(title: String) {
-        val appBar = binding.appBar
-        appBar.title = title
-        appBar.setNavigationOnClickListener {
-            finish()
-        }
-        appBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.btn_share -> {
-                    shareFoodDetails()
-                    true
-                }
-                else -> false
+        setContent {
+            AppTheme {
+                FoodDetailsScreen(
+                    food = food,
+                    onShareClick = { shareFoodDetails() },
+                    onBackPressed = { finish() }
+                )
             }
         }
     }
@@ -70,19 +55,5 @@ class FoodDetailsActivity : AppCompatActivity() {
     private fun getFoodFromIntent(intent: Intent): Food {
         val foodId = intent.extras?.getString(Food::id.name)!!
         return repository.getFood(foodId)
-    }
-
-    private fun updateFoodDetails(food: Food) {
-        binding.apply {
-            tvServingSize.text = getString(
-                R.string.label_serving_size,
-                food.measure,
-                food.name,
-                food.weight
-            )
-            tvFoodName.text = food.name
-            tvFoodSummary.text = food.summary
-            imgFoodIcon.load(food.icon ?: R.drawable.img_banana)
-        }
     }
 }
