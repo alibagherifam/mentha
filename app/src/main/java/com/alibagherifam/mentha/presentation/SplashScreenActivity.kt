@@ -33,7 +33,13 @@ import kotlin.time.Duration
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { SplashScreen() }
+        setContent {
+            AppTheme {
+                Surface {
+                    SplashScreen()
+                }
+            }
+        }
         lifecycleScope.launch {
             delay(with(Duration) { 2.seconds + 500.milliseconds })
             finishSplash()
@@ -50,15 +56,6 @@ class SplashScreenActivity : AppCompatActivity() {
 @Preview
 @Composable
 fun SplashScreen() {
-    AppTheme {
-        Surface {
-            SplashContent()
-        }
-    }
-}
-
-@Composable
-fun SplashContent() {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,7 +64,7 @@ fun SplashContent() {
         Image(
             modifier = Modifier.size(110.dp),
             painter = painterResource(id = R.drawable.img_mentha_logo),
-            contentDescription = "logo"
+            contentDescription = stringResource(R.string.content_description_mentha_logo)
         )
         Spacer(modifier = Modifier.size(120.dp))
         Text(
