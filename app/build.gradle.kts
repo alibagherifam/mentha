@@ -12,19 +12,30 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         buildConfig = true
+        compose = true
+        viewBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 }
 
 dependencies {
     implementation(project(":models"))
 
-    implementation(libs.androidx.activity)
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.tooling.preview)
+    debugImplementation(libs.androidx.compose.tooling)
+
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core)
-    implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
@@ -34,7 +45,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.materialDesign)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.constraintlayout)
 
     implementation(libs.tensorflow.taskVision)
     implementation(libs.tensorflow.gpu)

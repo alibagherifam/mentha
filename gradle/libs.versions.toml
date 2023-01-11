@@ -3,15 +3,19 @@ androidPlugin = "7.3.1"
 androidxCamera = "1.2.0"
 androidxLifecycle = "2.5.1"
 coroutines = "1.6.4"
-kotlin = "1.7.22"
+kotlin = "1.7.20"
 
 [libraries]
 # AndroidX
-androidx-activity = { group = "androidx.activity", name = "activity-ktx", version = "1.6.1" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.6.1" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.0-rc01" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2022.12.00" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material" }
+androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.1.4" }
 androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.9.0" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version = "1.5.4" }
