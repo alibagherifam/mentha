@@ -2,14 +2,16 @@
 
 Find nutrition facts using your phone camera!
 
-Mentha is an Android application that finds nutrition facts of the food you are scanning.
-
+Mentha is an Android application that finds nutrition facts of the food you are scanning. 
 It uses image classification and neural networks under the hood.
 
 ## ⚙ Technologies
 
 Image classification is based on [TensorFlow Lite](https://www.tensorflow.org/lite) 
-with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite0/classification/2) model
+with following models:
+
+- [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite2/classification/2)
+- [MobileNet](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1)
 
 Other Android technologies:
 
@@ -25,7 +27,7 @@ Other Android technologies:
 
 ## 📕 Terminology
 
-According to Wikipedia:
+According to [Wikipedia](https://en.wikipedia.org/wiki/Mentha):
 
 > "Mentha (also known as mint) is a genus of plants in the family Lamiaceae (mint family)."
 
