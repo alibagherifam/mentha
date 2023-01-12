@@ -1,6 +1,4 @@
-import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
@@ -17,24 +15,10 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
 fun setSdkVersionBoundaries(android: CommonExtension<*, *, *, *>) {
     android.apply {
         compileSdk = 33
-        setTargetSdkVersion(android, version = 33)
         buildToolsVersion = "33.0.1"
         defaultConfig {
             minSdk = 23
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
-    }
-}
-
-fun setTargetSdkVersion(android: CommonExtension<*, *, *, *>, version: Int) {
-    android.apply {
-        when (this) {
-            is LibraryExtension -> {
-                defaultConfig.targetSdk = version
-            }
-            is ApplicationExtension -> {
-                defaultConfig.targetSdk = version
-            }
         }
     }
 }
