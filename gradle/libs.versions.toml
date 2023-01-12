@@ -1,5 +1,5 @@
 [versions]
-androidPlugin = "7.3.1"
+androidPlugin = "7.4.0"
 androidxCamera = "1.2.0"
 androidxLifecycle = "2.5.1"
 coroutines = "1.6.4"
