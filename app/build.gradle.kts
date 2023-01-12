@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation(project(":models"))
+    implementation(project(":nutrition-facts"))
 
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)

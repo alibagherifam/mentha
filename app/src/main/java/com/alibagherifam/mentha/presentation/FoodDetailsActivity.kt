@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.model.Food
-import com.alibagherifam.mentha.model.FoodRepository
+import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.theme.AppTheme
 
 class FoodDetailsActivity : AppCompatActivity() {

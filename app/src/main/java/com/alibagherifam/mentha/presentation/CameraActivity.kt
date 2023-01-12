@@ -14,8 +14,8 @@ import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.business.ImageAnalyzer
-import com.alibagherifam.mentha.model.Food
-import com.alibagherifam.mentha.model.FoodRepository
+import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.SharingStarted

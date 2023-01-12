@@ -1,7 +1,4 @@
-package com.alibagherifam.mentha.presentation
-
-import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.model.Food
+package com.alibagherifam.mentha.nutritionfacts
 
 fun getSampleFood() = Food(
     id = "orange",

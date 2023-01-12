@@ -1,8 +1,7 @@
-package com.alibagherifam.mentha.model
+package com.alibagherifam.mentha.nutritionfacts
 
 import android.app.Activity
 import androidx.annotation.DrawableRes
-import com.alibagherifam.mentha.R
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 

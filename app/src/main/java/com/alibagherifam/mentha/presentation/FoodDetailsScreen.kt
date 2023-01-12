@@ -33,7 +33,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.model.Food
+import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 import com.alibagherifam.mentha.utils.stringFormatted
 import kotlin.math.roundToInt

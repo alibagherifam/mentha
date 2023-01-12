@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.model.Food
+import com.alibagherifam.mentha.nutritionfacts.Food
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

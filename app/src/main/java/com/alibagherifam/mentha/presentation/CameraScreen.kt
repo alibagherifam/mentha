@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.business.ImageAnalyzer
-import com.alibagherifam.mentha.model.Food
+import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @Composable

@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.model
+package com.alibagherifam.mentha.nutritionfacts
 
 import androidx.annotation.DrawableRes
 import kotlinx.serialization.Serializable
