@@ -46,10 +46,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.materialDesign)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.constraintlayout)
-
     implementation(libs.tensorflow.taskVision)
     implementation(libs.tensorflow.gpu)
     implementation(libs.tensorflow.gpuDelegate)
