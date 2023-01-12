@@ -4,21 +4,22 @@ import android.content.Context
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import kotlinx.coroutines.channels.SendChannel
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
-class ImageClassifier(
+class ImageAnalyzer(
     context: Context,
-    private val onRecognition: (Category?) -> Unit
+    private val recognitionChannel: SendChannel<Category?>
 ) : ImageAnalysis.Analyzer, ImageClassifierHelper.ClassifierListener {
 
     private val classifier = ImageClassifierHelper(
+        context,
         threshold = 0.55f,
         numThreads = 2,
         maxResults = 1,
         currentDelegate = ImageClassifierHelper.DELEGATE_CPU,
         currentModel = ImageClassifierHelper.MODEL_MOBILENETV1,
-        context,
         imageClassifierListener = this
     )
 
@@ -50,7 +51,7 @@ class ImageClassifier(
     }
 
     override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
-        onRecognition(
+        recognitionChannel.trySend(
             results?.firstOrNull()?.categories
                 ?.minByOrNull { category -> category.index }
         )

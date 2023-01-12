@@ -14,12 +14,12 @@ import org.tensorflow.lite.task.vision.classifier.Classifications
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class ImageClassifierHelper(
+    private val context: Context,
     var threshold: Float = 0.5f,
     var numThreads: Int = 2,
     var maxResults: Int = 3,
     var currentDelegate: Int = 0,
     var currentModel: Int = 0,
-    private val context: Context,
     private val imageClassifierListener: ClassifierListener?
 ) {
     private var imageClassifier: ImageClassifier? = null

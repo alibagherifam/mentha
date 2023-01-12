@@ -4,12 +4,14 @@
     <string name="sample_food">توت فرنگی</string>
     <string name="sample_energy">31 کیلو کالری</string>
 
-    <string name="content_description_back_button">دکمه بازگشت به صفحه قبل</string>
-    <string name="content_description_chevron_left">دکمه انتقال به صفحه جزئیات خوراکی</string>
+    <string name="content_description_back_button">دکمه‌ی بازگشت به صفحه قبل</string>
+    <string name="content_description_chevron_left">دکمه‌ی انتقال به صفحه جزئیات خوراکی</string>
     <string name="content_description_energy_icon">آیکون کالری</string>
+    <string name="content_description_flashlight_button">دکمه‌ی چراغ قوه</string>
     <string name="content_description_food_image">تصویر خوراکی</string>
     <string name="content_description_mentha_logo">آیکون برنامه</string>
-    <string name="content_description_share_button">دکمه اشتراک گذاری</string>
+    <string name="content_description_settings_button">دکمه‌ی تنظیمات</string>
+    <string name="content_description_share_button">دکمه‌ی اشتراک گذاری</string>
 
     <string name="label_energy">انرژی</string>
     <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>

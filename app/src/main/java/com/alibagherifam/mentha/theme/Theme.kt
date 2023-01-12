@@ -4,7 +4,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 
 private val LightColorPalette = lightColors(
     primary = DarkGreen,
@@ -37,7 +40,10 @@ fun AppTheme(
     MaterialTheme(
         colors = colors,
         typography = AppTypography,
-        shapes = AppShapes,
-        content = content
-    )
+        shapes = AppShapes
+    ) {
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+            content()
+        }
+    }
 }
