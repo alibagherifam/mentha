@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.business
+package com.alibagherifam.mentha.camera
 
 import android.content.Context
 import androidx.camera.core.AspectRatio

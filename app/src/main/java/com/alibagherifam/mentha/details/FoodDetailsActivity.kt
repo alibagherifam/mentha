@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha.details
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha.camera
 
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
-import com.alibagherifam.mentha.business.ImageAnalyzer
-import com.alibagherifam.mentha.business.setupCamera
 import kotlinx.coroutines.launch
 
 @Composable

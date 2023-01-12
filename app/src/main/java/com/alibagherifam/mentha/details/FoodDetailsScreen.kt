@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha.details
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -35,8 +35,8 @@ import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
+import com.alibagherifam.mentha.camera.stringFormatted
 import com.alibagherifam.mentha.theme.AppTheme
-import com.alibagherifam.mentha.utils.stringFormatted
 import kotlin.math.roundToInt
 
 @Composable

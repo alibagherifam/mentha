@@ -22,7 +22,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".presentation.SplashScreenActivity"
+            android:name=".camera.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +37,11 @@
         </activity>
 
         <activity
-            android:name=".presentation.CameraActivity"
+            android:name=".camera.CameraActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.FoodDetailsActivity"
+            android:name=".details.FoodDetailsActivity"
             android:exported="false" />
 
     </application>

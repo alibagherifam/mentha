@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha.camera
 
 import android.Manifest
 import android.content.Intent
@@ -13,7 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.alibagherifam.mentha.business.ImageAnalyzer
+import com.alibagherifam.mentha.details.FoodDetailsActivity
 import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.theme.AppTheme

@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha
 
 import android.content.Intent
 import android.os.Bundle
@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.R
+import com.alibagherifam.mentha.camera.CameraActivity
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

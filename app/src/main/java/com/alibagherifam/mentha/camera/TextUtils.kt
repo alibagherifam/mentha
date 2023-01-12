@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.utils
+package com.alibagherifam.mentha.camera
 
 import java.text.DecimalFormat
 

@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.presentation
+package com.alibagherifam.mentha.camera
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.business.ImageAnalyzer
 import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
