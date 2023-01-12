@@ -6,7 +6,16 @@ plugins {
     alias(libs.plugins.gradleDownload)
 }
 
-android.namespace = "org.tensorflow.lite.examples.classification.models"
+android {
+    namespace = "com.alibagherifam.mentha.imageclassifier"
+}
+
+dependencies {
+    implementation(libs.tensorflow.taskVision)
+    implementation(libs.tensorflow.gpu)
+    implementation(libs.tensorflow.gpuDelegate)
+}
+
 
 // Download default models; if you wish to use your own models then
 // place them in the "assets" directory and comment out this line.

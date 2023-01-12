@@ -16,5 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "Mentha"
 
 include(":app")
-include(":models")
+include(":image-classifier")
 include(":nutrition-facts")

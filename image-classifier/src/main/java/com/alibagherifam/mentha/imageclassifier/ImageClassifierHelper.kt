@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.business
+package com.alibagherifam.mentha.imageclassifier
 
 import android.content.Context
 import android.graphics.Bitmap

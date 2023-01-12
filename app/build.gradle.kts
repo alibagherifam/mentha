@@ -1,6 +1,5 @@
 plugins {
     id("com.alibagherifam.mentha.android.application")
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -23,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":models"))
+    implementation(project(":image-classifier"))
     implementation(project(":nutrition-facts"))
 
     val composeBom = platform(libs.androidx.compose.bom)
@@ -45,9 +44,6 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
-    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.tensorflow.taskVision)
-    implementation(libs.tensorflow.gpu)
-    implementation(libs.tensorflow.gpuDelegate)
 }
