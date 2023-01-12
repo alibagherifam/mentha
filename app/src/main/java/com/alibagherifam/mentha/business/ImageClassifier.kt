@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.alibagherifam.mentha.ImageClassifierHelper
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
