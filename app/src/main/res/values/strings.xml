@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Mentha</string>
 
-    <string name="sample_food">توت فرنگی</string>
-    <string name="sample_energy">31 کیلو کالری</string>
-
     <string name="content_description_back_button">دکمه‌ی بازگشت به صفحه قبل</string>
     <string name="content_description_chevron_left">دکمه‌ی انتقال به صفحه جزئیات خوراکی</string>
     <string name="content_description_energy_icon">آیکون کالری</string>
@@ -15,9 +12,7 @@
 
     <string name="label_energy">انرژی</string>
     <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
-    <string name="label_less_than_one_percent">&lt;1%</string>
     <string name="label_nutrition_facts">ارزش غذایی</string>
-    <string name="label_percentage">%1$d%%</string>
     <string name="label_serving_size">1 %1$s %2$s (%3$d گرم)</string>
     <string name="label_share">اشتراک گذاری</string>
     <string name="label_weight_in_gram">%1$s گرم</string>
