@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.alibagherifam.menta.buildlogic"
+group = "com.alibagherifam.mentha.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
