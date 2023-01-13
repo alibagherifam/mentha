@@ -24,7 +24,7 @@ class ImageAnalyzer(
         imageClassifierListener = this
     )
 
-    var pauseAnalysis: Boolean = false
+    private var pauseAnalysis: Boolean = false
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
 

@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
-import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.camera.CameraActivity
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
