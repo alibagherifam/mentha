@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -34,11 +31,7 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
-                Surface {
-                    SplashScreen()
-                }
-            }
+            SplashScreen()
         }
         lifecycleScope.launch {
             delay(with(Duration) { 2.seconds + 500.milliseconds })
@@ -56,27 +49,29 @@ class SplashScreenActivity : AppCompatActivity() {
 @Preview
 @Composable
 fun SplashScreen() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            modifier = Modifier.size(110.dp),
-            painter = painterResource(id = R.drawable.img_mentha_logo),
-            contentDescription = stringResource(R.string.content_description_mentha_logo)
-        )
-        Spacer(modifier = Modifier.size(120.dp))
-        Text(
-            color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.h1,
-            text = stringResource(id = R.string.app_name)
-        )
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            Text(
-                style = MaterialTheme.typography.h3,
-                text = stringResource(id = R.string.message_commercial_slogan)
-            )
+    AppTheme {
+        Surface {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier.size(110.dp),
+                    painter = painterResource(id = R.drawable.img_mentha_logo),
+                    contentDescription = stringResource(R.string.content_description_mentha_logo)
+                )
+                Spacer(modifier = Modifier.size(120.dp))
+                Text(
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.displayLarge,
+                    text = stringResource(id = R.string.app_name)
+                )
+                Text(
+                    style = MaterialTheme.typography.titleLarge,
+                    text = stringResource(id = R.string.message_commercial_slogan)
+                )
+            }
         }
     }
 }

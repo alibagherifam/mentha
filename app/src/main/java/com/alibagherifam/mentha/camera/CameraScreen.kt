@@ -1,7 +1,6 @@
 package com.alibagherifam.mentha.camera
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,22 +9,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.IconToggleButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.FilledTonalIconToggleButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.nutritionfacts.Food
@@ -74,45 +67,23 @@ fun ActionBar(
     onSettingsClick: () -> Unit
 ) {
     Row(modifier) {
-        FlashlightToggleButton(isFlashlightEnabled, onFlashlightToggle)
-        Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = onSettingsClick) {
+        FilledTonalIconToggleButton(
+            checked = isFlashlightEnabled,
+            onCheckedChange = onFlashlightToggle
+        ) {
+            val icon = if (isFlashlightEnabled) R.drawable.ic_flash_on else R.drawable.ic_flash_off
             Icon(
-                modifier = Modifier
-                    .background(
-                        color = MaterialTheme.colors.surface,
-                        shape = MaterialTheme.shapes.medium
-                    )
-                    .padding(8.dp)
-                    .size(32.dp),
+                painter = painterResource(icon),
+                contentDescription = stringResource(R.string.content_description_flashlight_button)
+            )
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        FilledTonalIconButton(onClick = onSettingsClick) {
+            Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
                 contentDescription = stringResource(R.string.content_description_settings_button)
             )
         }
-    }
-}
-
-@Composable
-fun FlashlightToggleButton(
-    isEnabled: Boolean,
-    onToggle: (Boolean) -> Unit
-) {
-    IconToggleButton(
-        checked = isEnabled,
-        onCheckedChange = onToggle
-    ) {
-        val bgColor = with(MaterialTheme.colors) { if (isEnabled) secondary else surface }
-        Icon(
-            modifier = Modifier
-                .background(color = bgColor, shape = MaterialTheme.shapes.medium)
-                .padding(8.dp)
-                .size(32.dp),
-            painter = painterResource(
-                if (isEnabled) R.drawable.ic_flash_on else R.drawable.ic_flash_off
-            ),
-            tint = contentColorFor(backgroundColor = bgColor),
-            contentDescription = stringResource(R.string.content_description_flashlight_button)
-        )
     }
 }
 
@@ -133,13 +104,11 @@ fun ScanAreaRectangle(modifier: Modifier) {
 @Composable
 fun CameraScreenPreview() {
     AppTheme {
-        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-            CameraScreen(
-                getSampleFood(),
-                isFlashlightOn = true,
-                {}, {}, {},
-                imageAnalyzer = null
-            )
-        }
+        CameraScreen(
+            getSampleFood(),
+            isFlashlightOn = false,
+            {}, {}, {},
+            imageAnalyzer = null
+        )
     }
 }

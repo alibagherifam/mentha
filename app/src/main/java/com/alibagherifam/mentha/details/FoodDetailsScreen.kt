@@ -10,35 +10,36 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
+import com.alibagherifam.mentha.camera.stringFormatted
 import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
-import com.alibagherifam.mentha.camera.stringFormatted
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlin.math.roundToInt
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodDetailsScreen(
     food: Food,
@@ -53,33 +54,33 @@ fun FoodDetailsScreen(
                 onBackPressed = onBackPressed,
                 onShareClick = onShareClick
             )
-        },
-        content = { innerPadding ->
-            Column(
-                Modifier
-                    .verticalScroll(scrollState)
-                    .padding(innerPadding)
-                    .padding(all = 16.dp)
-            ) {
-                FoodSummary(
-                    iconRes = food.icon!!,
-                    name = food.name,
-                    summary = food.summary
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-                NutritionFacts(food)
-            }
         }
-    )
+    ) { innerPadding ->
+        Column(
+            Modifier
+                .verticalScroll(scrollState)
+                .padding(innerPadding)
+                .padding(all = 16.dp)
+        ) {
+            FoodSummary(
+                iconRes = food.icon!!,
+                name = food.name,
+                summary = food.summary
+            )
+            Spacer(modifier = Modifier.size(16.dp))
+            NutritionFacts(food)
+        }
+    }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
     title: String,
     onBackPressed: () -> Unit,
     onShareClick: () -> Unit
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = { Text(text = title) },
         navigationIcon = {
             IconButton(onClick = onBackPressed) {
@@ -116,15 +117,13 @@ fun FoodSummary(
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = name,
-            style = MaterialTheme.typography.h3
+            style = MaterialTheme.typography.displaySmall
         )
         Spacer(modifier = Modifier.size(8.dp))
-        CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-            Text(
-                text = summary,
-                style = MaterialTheme.typography.body1
-            )
-        }
+        Text(
+            text = summary,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
@@ -135,7 +134,7 @@ fun FoodIcon(@DrawableRes iconRes: Int) {
             .padding(start = 18.dp)
             .size(160.dp)
             .background(
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = CircleShape
             ),
         painter = painterResource(id = iconRes),
@@ -149,7 +148,7 @@ fun NutritionFacts(food: Food) {
         Modifier
             .border(
                 width = 2.dp,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+                color = MaterialTheme.colorScheme.outlineVariant,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(horizontal = 24.dp, vertical = 12.dp)
@@ -165,11 +164,11 @@ fun NutritionFacts(food: Food) {
 @Composable
 fun NutritionFactsHeader(food: Food) {
     Text(
-        style = MaterialTheme.typography.h4,
+        style = MaterialTheme.typography.headlineMedium,
         text = stringResource(id = R.string.label_nutrition_facts)
     )
     Text(
-        style = MaterialTheme.typography.h6,
+        style = MaterialTheme.typography.titleLarge,
         text = stringResource(
             R.string.label_serving_size,
             food.measure,
@@ -210,24 +209,24 @@ fun Nutrition(
     Column {
         Row {
             Text(
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.titleMedium,
                 text = nutritionName
             )
             Spacer(modifier = Modifier.size(8.dp))
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                Text(
-                    style = MaterialTheme.typography.subtitle2,
-                    text = stringResource(
-                        id = R.string.label_weight_in_gram,
-                        nutritionWeight.stringFormatted()
-                    )
+            Text(
+                style = MaterialTheme.typography.titleSmall,
+                text = stringResource(
+                    id = R.string.label_weight_in_gram,
+                    nutritionWeight.stringFormatted()
                 )
-                Spacer(modifier = Modifier.weight(1f))
-                Text(
-                    style = MaterialTheme.typography.subtitle2,
-                    text = nutritionPercentage
-                )
-            }
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = nutritionPercentage,
+                modifier = Modifier.widthIn(min = 28.dp),
+                style = MaterialTheme.typography.titleSmall,
+                textAlign = TextAlign.Center
+            )
         }
         LinearProgressIndicator(modifier = Modifier.fillMaxWidth(), progress = factor)
     }
