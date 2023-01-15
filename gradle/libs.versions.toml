@@ -9,7 +9,7 @@ kotlin = "1.7.21"
 [libraries]
 # AndroidX
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.6.1" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.0-rc01" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.0" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
