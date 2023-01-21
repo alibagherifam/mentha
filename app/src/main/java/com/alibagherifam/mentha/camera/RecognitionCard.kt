@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
@@ -29,7 +29,7 @@ import com.alibagherifam.mentha.theme.AppTheme
 @Composable
 fun RecognitionCard(
     modifier: Modifier = Modifier,
-    food: Food,
+    food: FoodEntity,
     onShowDetailsClick: () -> Unit
 ) {
     Card(modifier = modifier, onClick = onShowDetailsClick) {
@@ -53,10 +53,10 @@ fun RecognitionCard(
 }
 
 @Composable
-fun RecognitionInfo(food: Food) {
+fun RecognitionInfo(food: FoodEntity) {
     Image(
         modifier = Modifier.size(60.dp),
-        painter = painterResource(food.icon!!),
+        painter = painterResource(food.icon),
         contentDescription = stringResource(R.string.content_description_food_image)
     )
     Spacer(modifier = Modifier.size(10.dp))
@@ -76,7 +76,10 @@ fun RecognitionInfo(food: Food) {
             )
             Spacer(modifier = Modifier.size(6.dp))
             Text(
-                text = stringResource(R.string.label_energy_in_kilo_calorie, food.energy),
+                text = stringResource(
+                    R.string.label_energy_in_kilo_calorie,
+                    food.nutritionFact.energy
+                ),
                 style = MaterialTheme.typography.titleMedium
             )
         }

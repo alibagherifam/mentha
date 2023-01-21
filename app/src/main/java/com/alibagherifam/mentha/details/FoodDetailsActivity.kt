@@ -4,29 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.nutritionfacts.Food
+import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
+import com.alibagherifam.mentha.nutritionfacts.provideFoodRepository
 import com.alibagherifam.mentha.theme.AppTheme
+import kotlinx.coroutines.launch
 
 class FoodDetailsActivity : AppCompatActivity() {
 
-    private lateinit var food: Food
+    private lateinit var food: FoodEntity
 
     private val repository: FoodRepository by lazy {
-        FoodRepository.getInstance(this)
+        provideFoodRepository(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        food = getFoodFromIntent(intent)
-        setContent {
-            AppTheme {
-                FoodDetailsScreen(
-                    food = food,
-                    onShareClick = { shareFoodDetails() },
-                    onBackPressed = { finish() }
-                )
+        lifecycleScope.launch {
+            food = getFoodFromIntent(intent)
+            setContent {
+                AppTheme {
+                    FoodDetailsScreen(
+                        food = food,
+                        onShareClick = { shareFoodDetails() },
+                        onBackPressed = { finish() }
+                    )
+                }
             }
         }
     }
@@ -52,8 +57,8 @@ class FoodDetailsActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-    private fun getFoodFromIntent(intent: Intent): Food {
-        val foodId = intent.extras?.getString(Food::id.name)!!
+    private suspend fun getFoodFromIntent(intent: Intent): FoodEntity {
+        val foodId = intent.extras?.getString(FoodEntity::id.name)!!
         return repository.getFood(foodId)
     }
 }

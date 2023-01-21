@@ -14,6 +14,25 @@ class ImageAnalyzer(
     private val recognitionChannel: SendChannel<Category?>
 ) : ImageAnalysis.Analyzer, ImageClassifierHelper.ClassifierListener {
 
+    /*
+    TODO: Remove this after changing model with
+          a new one that only contains food labels
+    */
+    companion object {
+        private val foods = listOf(
+            "banana",
+            "broccoli",
+            "cucumber",
+            "lemon",
+            "orange",
+            "pineapple",
+            "pomegranate",
+            "strawberry",
+            "mushroom",
+            "French loaf"
+        )
+    }
+
     private val classifier = ImageClassifierHelper(
         context,
         threshold = 0.55f,
@@ -52,10 +71,10 @@ class ImageAnalyzer(
     }
 
     override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
-        recognitionChannel.trySend(
-            results?.firstOrNull()?.categories
-                ?.minByOrNull { category -> category.index }
-        )
+        results?.firstOrNull()?.categories
+            ?.minByOrNull { category -> category.index }
+            ?.takeIf { it.label in foods }
+            .let { recognitionChannel.trySend(it) }
     }
 
     override fun onError(error: String) {

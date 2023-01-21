@@ -34,15 +34,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.camera.stringFormatted
-import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
+import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodDetailsScreen(
-    food: Food,
+    food: FoodEntity,
     onShareClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -63,7 +63,7 @@ fun FoodDetailsScreen(
                 .padding(all = 16.dp)
         ) {
             FoodSummary(
-                iconRes = food.icon!!,
+                iconRes = food.icon,
                 name = food.name,
                 summary = food.summary
             )
@@ -143,7 +143,7 @@ fun FoodIcon(@DrawableRes iconRes: Int) {
 }
 
 @Composable
-fun NutritionFacts(food: Food) {
+fun NutritionFacts(food: FoodEntity) {
     Column(
         Modifier
             .border(
@@ -162,7 +162,7 @@ fun NutritionFacts(food: Food) {
 }
 
 @Composable
-fun NutritionFactsHeader(food: Food) {
+fun NutritionFactsHeader(food: FoodEntity) {
     Text(
         style = MaterialTheme.typography.headlineMedium,
         text = stringResource(id = R.string.label_nutrition_facts)
@@ -171,26 +171,26 @@ fun NutritionFactsHeader(food: Food) {
         style = MaterialTheme.typography.titleLarge,
         text = stringResource(
             R.string.label_serving_size,
-            food.measure,
+            food.nutritionFact.measure,
             food.name,
-            food.weight
+            food.nutritionFact.weight
         )
     )
 }
 
 @Composable
-fun NutritionFactsContent(food: Food) {
+fun NutritionFactsContent(food: FoodEntity) {
     listOf(
-        "آب" to food.water,
-        "پروتئین" to food.protein,
-        "کربوهیدرات" to food.carbohydrate,
-        "چربی" to food.fat,
-        "قند" to food.sugar
+        "آب" to food.nutritionFact.water,
+        "پروتئین" to food.nutritionFact.protein,
+        "کربوهیدرات" to food.nutritionFact.carbohydrate,
+        "چربی" to food.nutritionFact.fat,
+        "قند" to food.nutritionFact.sugar
     ).forEach {
         Nutrition(
             nutritionName = it.first,
             nutritionWeight = it.second,
-            foodWeight = food.weight
+            foodWeight = food.nutritionFact.weight
         )
         Spacer(modifier = Modifier.size(16.dp))
     }

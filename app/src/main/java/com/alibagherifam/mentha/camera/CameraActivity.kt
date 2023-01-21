@@ -14,8 +14,9 @@ import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.details.FoodDetailsActivity
-import com.alibagherifam.mentha.nutritionfacts.Food
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
+import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
+import com.alibagherifam.mentha.nutritionfacts.provideFoodRepository
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,14 +32,12 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private val recognitionChannel = Channel<Category?>(capacity = Channel.CONFLATED)
-    private val repository by lazy {
-        FoodRepository.getInstance(this)
+    private val repository: FoodRepository by lazy {
+        provideFoodRepository(this)
     }
     private lateinit var camera: Camera
     private val food = recognitionChannel.consumeAsFlow().map { recognition ->
-        recognition?.label?.let { label ->
-            repository.foods.find { it.id == label }
-        }
+        recognition?.label?.let { label -> repository.getFood(label) }
     }.stateIn(
         lifecycleScope,
         started = SharingStarted.Lazily,
@@ -72,9 +71,9 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun openFoodDetails(food: Food) {
+    private fun openFoodDetails(food: FoodEntity) {
         val i = Intent(this, FoodDetailsActivity::class.java)
-        i.putExtra(Food::id.name, food.id)
+        i.putExtra(FoodEntity::id.name, food.id)
         startActivity(i)
     }
 
