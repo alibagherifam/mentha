@@ -18,15 +18,16 @@ with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite2/classif
 Other Android technologies:
 
 - Kotlin Coroutines
-- Kotlin Serialization
 - AndroidX Camera
 - AndroidX Lifecycle
+- AndroidX Room
+- KSP
 - Jetpack Compose
+- Material 3
+- Coil
 - Composite Builds
 - Convention Plugins
 - Version Catalog
-- Coil
-- KSP
 
 ## 📕 Terminology
 
