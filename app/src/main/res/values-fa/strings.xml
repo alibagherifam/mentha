@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="a11y_back_button">دکمه‌ی بازگشت به صفحه‌ی قبل</string>
+    <string name="a11y_energy_icon">آیکون کالری</string>
+    <string name="a11y_flashlight_toggle">دکمه‌ی چراغ قوه</string>
+    <string name="a11y_food_image">تصویر خوراکی</string>
+    <string name="a11y_mentha_logo">آیکون برنامه</string>
+    <string name="a11y_settings_button">دکمه‌ی تنظیمات</string>
+    <string name="a11y_share_button">دکمه‌ی اشتراک گذاری</string>
+    <string name="a11y_show_nutrition_facts">دکمه‌ی انتقال به صفحه جزئیات خوراکی</string>
+
+    <string name="label_carbohydrate">کربوهیدرات</string>
+    <string name="label_energy">انرژی</string>
+    <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
+    <string name="label_fat">چربی</string>
+    <string name="label_nutrition_facts">ارزش غذایی</string>
+    <string name="label_protein">پروتئین</string>
+    <string name="label_serving_size">به ازای ‍۱ %1$s (%2$d گرم)</string>
+    <string name="label_share">اشتراک گذاری</string>
+    <string name="label_sugar">قند</string>
+    <string name="label_water">آب</string>
+    <string name="label_weight_in_gram">%1$s گرم</string>
+    <string name="label_weight_in_milligram">%1$s میلی‌گرم</string>
+
+    <string name="sample_data_food_measure">عدد</string>
+    <string name="sample_data_food_name">پرتقال</string>
+    <string name="sample_data_food_summary">پرتقال منبع خوبی از ویتامین C و پتاسیم است که هر دو می‌توانند به کاهش فشار خون کمک کنند. ویتامین C موجود در پرتقال یک آنتی اکسیدان قوی است که در حفظ جوانی پوست بسیار مهم بوده و در ترمیم سلولی و بهبود زخم نقش دارد.</string>
+
+    <string name="app_name">مِنتا</string>
+    <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
+    <string name="message_share_app">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n %1$s</string>
+</resources>

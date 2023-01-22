@@ -28,13 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.camera.stringFormatted
-import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
+import com.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
+import com.alibagherifam.mentha.sampledata.LocalizationPreview
+import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlin.math.roundToInt
 
@@ -67,7 +68,7 @@ fun FoodDetailsScreen(
                 imageUri = food.image
             )
             Spacer(modifier = Modifier.size(16.dp))
-            NutritionFacts(food)
+            NutritionFacts(food.nutritionFacts)
         }
     }
 }
@@ -85,8 +86,8 @@ fun TopBar(
             IconButton(onClick = onBackPressed) {
                 Icon(
                     modifier = Modifier.size(28.dp),
-                    painter = painterResource(id = R.drawable.ic_chevron_left),
-                    contentDescription = stringResource(R.string.content_description_back_button)
+                    painter = painterResource(id = R.drawable.ic_chevron_toward_start),
+                    contentDescription = stringResource(R.string.a11y_back_button)
                 )
             }
         },
@@ -97,7 +98,7 @@ fun TopBar(
                         .size(28.dp)
                         .padding(all = 3.dp),
                     painter = painterResource(id = R.drawable.ic_share),
-                    contentDescription = stringResource(R.string.content_description_share_button)
+                    contentDescription = stringResource(R.string.a11y_share_button)
                 )
             }
         }
@@ -130,19 +131,20 @@ fun FoodSummary(
 fun FoodImage(imageUri: String) {
     AsyncImage(
         modifier = Modifier
-            .padding(start = 18.dp)
-            .size(160.dp)
+            .padding(start = 20.dp)
+            .size(150.dp)
             .background(
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = CircleShape
             ),
         model = imageUri,
-        contentDescription = stringResource(R.string.content_description_food_image)
+        placeholder = painterResource(R.drawable.img_food_placeholder),
+        contentDescription = stringResource(R.string.a11y_food_image)
     )
 }
 
 @Composable
-fun NutritionFacts(food: FoodEntity) {
+fun NutritionFacts(data: NutritionFacts) {
     Column(
         Modifier
             .border(
@@ -152,56 +154,55 @@ fun NutritionFacts(food: FoodEntity) {
             )
             .padding(horizontal = 24.dp, vertical = 12.dp)
     ) {
-        NutritionFactsHeader(food)
+        NutritionFactsHeader(data)
         Spacer(modifier = Modifier.size(10.dp))
         Divider(thickness = 2.dp)
         Spacer(modifier = Modifier.size(12.dp))
-        NutritionFactsContent(food)
+        NutritionFactsContent(data)
     }
 }
 
 @Composable
-fun NutritionFactsHeader(food: FoodEntity) {
+fun NutritionFactsHeader(data: NutritionFacts) {
     Text(
         style = MaterialTheme.typography.headlineMedium,
-        text = stringResource(id = R.string.label_nutrition_facts)
+        text = stringResource(R.string.label_nutrition_facts)
     )
     Text(
         style = MaterialTheme.typography.titleLarge,
         text = stringResource(
             R.string.label_serving_size,
-            food.nutritionFact.measure,
-            food.name,
-            food.nutritionFact.weight
+            data.measure,
+            data.weight
         )
     )
 }
 
 @Composable
-fun NutritionFactsContent(food: FoodEntity) {
+fun NutritionFactsContent(data: NutritionFacts) {
     listOf(
-        "آب" to food.nutritionFact.water,
-        "پروتئین" to food.nutritionFact.protein,
-        "کربوهیدرات" to food.nutritionFact.carbohydrate,
-        "چربی" to food.nutritionFact.fat,
-        "قند" to food.nutritionFact.sugar
+        R.string.label_water to data.water,
+        R.string.label_protein to data.protein,
+        R.string.label_carbohydrate to data.carbohydrate,
+        R.string.label_fat to data.fat,
+        R.string.label_sugar to data.sugar
     ).forEach {
-        Nutrition(
-            nutritionName = it.first,
-            nutritionWeight = it.second,
-            foodWeight = food.nutritionFact.weight
+        MicroNutrition(
+            name = stringResource(it.first),
+            weight = it.second,
+            totalWeight = data.weight
         )
         Spacer(modifier = Modifier.size(16.dp))
     }
 }
 
 @Composable
-fun Nutrition(
-    nutritionName: String,
-    nutritionWeight: Float,
-    foodWeight: Int
+fun MicroNutrition(
+    name: String,
+    weight: Float,
+    totalWeight: Int
 ) {
-    val factor = nutritionWeight / foodWeight
+    val factor = weight / totalWeight
     val nutritionPercentage = (factor * 100).roundToInt().let {
         if (it < 1) "<1%" else "$it%"
     }
@@ -209,14 +210,14 @@ fun Nutrition(
         Row {
             Text(
                 style = MaterialTheme.typography.titleMedium,
-                text = nutritionName
+                text = name
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
                 style = MaterialTheme.typography.titleSmall,
                 text = stringResource(
                     id = R.string.label_weight_in_gram,
-                    nutritionWeight.stringFormatted()
+                    weight.stringFormatted()
                 )
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -231,7 +232,7 @@ fun Nutrition(
     }
 }
 
-@Preview
+@LocalizationPreview
 @Composable
 fun FoodDetailsScreenPreview() {
     AppTheme {

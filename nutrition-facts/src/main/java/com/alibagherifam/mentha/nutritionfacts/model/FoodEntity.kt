@@ -12,5 +12,5 @@ data class FoodEntity(
     val summary: String,
     val image: String,
     @Embedded
-    val nutritionFact: NutritionFact
+    val nutritionFacts: NutritionFacts
 )

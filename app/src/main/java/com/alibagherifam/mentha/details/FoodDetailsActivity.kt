@@ -37,7 +37,7 @@ class FoodDetailsActivity : AppCompatActivity() {
     }
 
     private fun shareFoodDetails() {
-        val appInfo = getString(R.string.message_share_text)
+        val appInfo = getString(R.string.message_share_app)
         val content = """
             "${food.summary}"
             

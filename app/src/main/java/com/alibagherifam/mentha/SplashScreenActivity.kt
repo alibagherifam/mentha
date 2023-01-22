@@ -59,7 +59,7 @@ fun SplashScreen() {
                 Image(
                     modifier = Modifier.size(110.dp),
                     painter = painterResource(id = R.drawable.img_mentha_logo),
-                    contentDescription = stringResource(R.string.content_description_mentha_logo)
+                    contentDescription = stringResource(R.string.a11y_mentha_logo)
                 )
                 Spacer(modifier = Modifier.size(120.dp))
                 Text(

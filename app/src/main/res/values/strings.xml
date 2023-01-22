@@ -1,23 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="website_url" translatable="false">https://mentha-health.com/download</string>
+
+    <string name="a11y_back_button">Back button</string>
+    <string name="a11y_energy_icon">Calorie icon</string>
+    <string name="a11y_flashlight_toggle">Toggle flashlight</string>
+    <string name="a11y_food_image">Food image</string>
+    <string name="a11y_mentha_logo">Mentha logo</string>
+    <string name="a11y_settings_button">Settings button</string>
+    <string name="a11y_share_button">Share food information button</string>
+    <string name="a11y_show_nutrition_facts">Show nutrition facts button</string>
+
+    <string name="label_carbohydrate">Carbohydrate</string>
+    <string name="label_energy">Energy</string>
+    <string name="label_energy_in_kilo_calorie">%1$s kcal</string>
+    <string name="label_fat">Fat</string>
+    <string name="label_nutrition_facts">Nutrition Facts</string>
+    <string name="label_protein">Protein</string>
+    <string name="label_serving_size">Serving size: 1 %1$s (%2$dg)</string>
+    <string name="label_share">Share</string>
+    <string name="label_sugar">Sugar</string>
+    <string name="label_water">Water</string>
+    <string name="label_weight_in_gram">%1$sg</string>
+    <string name="label_weight_in_milligram">%1$smg</string>
+
+    <string name="sample_data_food_measure">medium</string>
+    <string name="sample_data_food_name">Orange</string>
+    <string name="sample_data_food_summary">All citrus trees belong to the single genus Citrus and remain almost entirely interfertile. This includes grapefruits, lemons, limes, oranges, and various other types and hybrids.</string>
+
     <string name="app_name">Mentha</string>
-
-    <string name="content_description_back_button">دکمه‌ی بازگشت به صفحه قبل</string>
-    <string name="content_description_chevron_left">دکمه‌ی انتقال به صفحه جزئیات خوراکی</string>
-    <string name="content_description_energy_icon">آیکون کالری</string>
-    <string name="content_description_flashlight_button">دکمه‌ی چراغ قوه</string>
-    <string name="content_description_food_image">تصویر خوراکی</string>
-    <string name="content_description_mentha_logo">آیکون برنامه</string>
-    <string name="content_description_settings_button">دکمه‌ی تنظیمات</string>
-    <string name="content_description_share_button">دکمه‌ی اشتراک گذاری</string>
-
-    <string name="label_energy">انرژی</string>
-    <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
-    <string name="label_nutrition_facts">ارزش غذایی</string>
-    <string name="label_serving_size">1 %1$s %2$s (%3$d گرم)</string>
-    <string name="label_share">اشتراک گذاری</string>
-    <string name="label_weight_in_gram">%1$s گرم</string>
-    <string name="label_weight_in_milligram">%1$s میلی‌گرم</string>
-
-    <string name="message_commercial_slogan">Scan foods before eating</string>
-    <string name="message_share_text">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n https://mentha-health.com/download</string>
+    <string name="message_commercial_slogan">Scan foods before eating!</string>
+    <string name="message_share_app">Control your diet with Mentha 💚\nDownload:\n%1$s</string>
 </resources>

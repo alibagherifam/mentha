@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import com.alibagherifam.mentha.nutritionfacts.getSampleFood
+import com.alibagherifam.mentha.sampledata.LocalizationPreview
+import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @Composable
@@ -74,14 +74,14 @@ fun ActionBar(
             val icon = if (isFlashlightEnabled) R.drawable.ic_flash_on else R.drawable.ic_flash_off
             Icon(
                 painter = painterResource(icon),
-                contentDescription = stringResource(R.string.content_description_flashlight_button)
+                contentDescription = stringResource(R.string.a11y_flashlight_toggle)
             )
         }
         Spacer(modifier = Modifier.weight(1f))
         FilledTonalIconButton(onClick = onSettingsClick) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
-                contentDescription = stringResource(R.string.content_description_settings_button)
+                contentDescription = stringResource(R.string.a11y_settings_button)
             )
         }
     }
@@ -100,7 +100,7 @@ fun ScanAreaRectangle(modifier: Modifier) {
     )
 }
 
-@Preview
+@LocalizationPreview
 @Composable
 fun CameraScreenPreview() {
     AppTheme {

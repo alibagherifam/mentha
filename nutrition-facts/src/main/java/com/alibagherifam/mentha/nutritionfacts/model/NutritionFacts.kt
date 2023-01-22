@@ -8,7 +8,7 @@ import androidx.room.ColumnInfo
  * @param measure: how the food is measured (cup, tbsp, etc.)
  * @param energy: energy in kilo calorie
  */
-data class NutritionFact(
+data class NutritionFacts(
     val weight: Int,
     val measure: String,
     val energy: Float,

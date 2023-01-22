@@ -17,12 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.nutritionfacts.getSampleFood
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
+import com.alibagherifam.mentha.sampledata.LocalizationPreview
+import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +44,7 @@ fun RecognitionCard(
             TextButton(onClick = onShowDetailsClick) {
                 Text(text = stringResource(R.string.label_nutrition_facts))
                 Icon(
-                    painter = painterResource(R.drawable.ic_chevron_left),
+                    painter = painterResource(R.drawable.ic_chevron_toward_end),
                     contentDescription = ""
                 )
             }
@@ -57,7 +57,8 @@ fun RecognitionInfo(food: FoodEntity) {
     AsyncImage(
         modifier = Modifier.size(60.dp),
         model = food.image,
-        contentDescription = stringResource(R.string.content_description_food_image)
+        contentDescription = stringResource(R.string.a11y_food_image),
+        placeholder = painterResource(R.drawable.img_food_placeholder)
     )
     Spacer(modifier = Modifier.size(10.dp))
     Column {
@@ -78,7 +79,7 @@ fun RecognitionInfo(food: FoodEntity) {
             Text(
                 text = stringResource(
                     R.string.label_energy_in_kilo_calorie,
-                    food.nutritionFact.energy
+                    food.nutritionFacts.energy
                 ),
                 style = MaterialTheme.typography.titleMedium
             )
@@ -86,7 +87,7 @@ fun RecognitionInfo(food: FoodEntity) {
     }
 }
 
-@Preview
+@LocalizationPreview
 @Composable
 fun RecognitionCardPreview() {
     AppTheme {
