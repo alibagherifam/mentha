@@ -1,6 +1,5 @@
 package com.alibagherifam.mentha.camera
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,9 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
+import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,9 +54,9 @@ fun RecognitionCard(
 
 @Composable
 fun RecognitionInfo(food: FoodEntity) {
-    Image(
+    AsyncImage(
         modifier = Modifier.size(60.dp),
-        painter = painterResource(food.icon),
+        model = food.image,
         contentDescription = stringResource(R.string.content_description_food_image)
     )
     Spacer(modifier = Modifier.size(10.dp))

@@ -39,7 +39,8 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.coil)
+    implementation(libs.coil.core)
+    implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
 

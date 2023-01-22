@@ -10,7 +10,7 @@ data class FoodEntity(
     val id: String,
     val name: String,
     val summary: String,
-    val icon: Int,
+    val image: String,
     @Embedded
     val nutritionFact: NutritionFact
 )

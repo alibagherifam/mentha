@@ -1,7 +1,5 @@
 package com.alibagherifam.mentha.details
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -32,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.camera.stringFormatted
 import com.alibagherifam.mentha.nutritionfacts.getSampleFood
@@ -63,9 +62,9 @@ fun FoodDetailsScreen(
                 .padding(all = 16.dp)
         ) {
             FoodSummary(
-                iconRes = food.icon,
                 name = food.name,
-                summary = food.summary
+                summary = food.summary,
+                imageUri = food.image
             )
             Spacer(modifier = Modifier.size(16.dp))
             NutritionFacts(food)
@@ -107,12 +106,12 @@ fun TopBar(
 
 @Composable
 fun FoodSummary(
-    @DrawableRes iconRes: Int,
     name: String,
-    summary: String
+    summary: String,
+    imageUri: String
 ) {
     Column {
-        FoodIcon(iconRes)
+        FoodImage(imageUri)
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -128,8 +127,8 @@ fun FoodSummary(
 }
 
 @Composable
-fun FoodIcon(@DrawableRes iconRes: Int) {
-    Image(
+fun FoodImage(imageUri: String) {
+    AsyncImage(
         modifier = Modifier
             .padding(start = 18.dp)
             .size(160.dp)
@@ -137,8 +136,8 @@ fun FoodIcon(@DrawableRes iconRes: Int) {
                 color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = CircleShape
             ),
-        painter = painterResource(id = iconRes),
-        contentDescription = "food icon"
+        model = imageUri,
+        contentDescription = stringResource(R.string.content_description_food_image)
     )
 }
 
