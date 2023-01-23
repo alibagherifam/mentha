@@ -23,7 +23,7 @@
         tools:targetApi="tiramisu">
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".camera.CameraActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,10 +36,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <activity
-            android:name=".camera.CameraActivity"
-            android:exported="false" />
 
         <activity
             android:name=".details.FoodDetailsActivity"

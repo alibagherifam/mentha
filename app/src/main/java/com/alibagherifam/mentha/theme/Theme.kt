@@ -81,6 +81,10 @@ fun AppTheme(
         AppDarkColorScheme
     }
 
+    /*val font = when(Locale.current.language){
+        "fa" ->
+        else ->
+    }*/
     MaterialTheme(
         appColorScheme,
         AppShapes,
