@@ -15,7 +15,10 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 configureAndroidBaseOptions(this)
                 configureBuildTypes(this)
                 configureLint(this)
-                defaultConfig.targetSdk = 33
+                defaultConfig {
+                    targetSdk = 33
+                    resourceConfigurations.addAll(listOf("en", "es"))
+                }
             }
         }
     }
