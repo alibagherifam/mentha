@@ -1,11 +1,12 @@
 [versions]
 androidPlugin = "7.4.0"
 androidxCamera = "1.2.0"
-androidxComposeCompiler = "1.4.0-alpha02"
+androidxComposeCompiler = "1.4.0"
 androidxLifecycle = "2.5.1"
 androidxRoom = "2.5.0"
+coil = "2.2.2"
 coroutines = "1.6.4"
-kotlin = "1.7.21"
+kotlin = "1.8.0"
 
 [libraries]
 # AndroidX
@@ -39,8 +40,8 @@ tensorflow-gpuDelegate = { group = "org.tensorflow", name = "tensorflow-lite-gpu
 tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version = "0.4.3" }
 
 # Others
-coil-core = { group = "io.coil-kt", name = "coil", version = "2.2.2" }
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version = "2.2.2" }
+coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
@@ -54,4 +55,4 @@ gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
 gradleDownload = { id = "de.undercouch.download", version = "5.3.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "1.7.21-1.0.8" }
+ksp = { id = "com.google.devtools.ksp", version = "1.8.0-1.0.8" }
