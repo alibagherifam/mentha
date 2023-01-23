@@ -38,7 +38,7 @@ fun AnimatedRecognitionCard(
     modifier: Modifier,
     food: FoodEntity?,
     onShowDetailsClick: () -> Unit
-){
+) {
     val safeFood = remember {
         Ref<FoodEntity>()
     }
@@ -98,13 +98,12 @@ fun RecognitionInfo(food: FoodEntity) {
             style = MaterialTheme.typography.headlineSmall
         )
         Spacer(modifier = Modifier.size(10.dp))
-        // TODO: Replace fire image with vector one
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(16.dp),
                 tint = MaterialTheme.colorScheme.primary,
                 painter = painterResource(R.drawable.img_fire),
-                contentDescription = "Calorie Icon"
+                contentDescription = stringResource(R.string.a11y_energy_icon)
             )
             Spacer(modifier = Modifier.size(6.dp))
             Text(
