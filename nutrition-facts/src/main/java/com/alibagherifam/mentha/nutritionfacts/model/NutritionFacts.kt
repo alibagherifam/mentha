@@ -3,14 +3,17 @@ package com.alibagherifam.mentha.nutritionfacts.model
 import androidx.room.ColumnInfo
 
 /**
- * Value object (composite attribute) for micro-nutrition
- * @param weight: weight of 1 unit of measure in gram
- * @param measure: how the food is measured (cup, tbsp, etc.)
+ * Value object (composite attribute) for nutrition facts
+ *
+ * @param servingSize: how the food is measured (cup, tbsp, etc.)
+ * @param servingWeight: weight of serving size
  * @param energy: energy in kilo calorie
  */
 data class NutritionFacts(
-    val weight: Int,
-    val measure: String,
+    @ColumnInfo("serving_size")
+    val servingSize: String,
+    @ColumnInfo("serving_weight")
+    val servingWeight: Int,
     val energy: Float,
     val water: Float,
     val protein: Float,

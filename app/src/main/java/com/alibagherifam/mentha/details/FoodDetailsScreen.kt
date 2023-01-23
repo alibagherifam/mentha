@@ -172,8 +172,8 @@ fun NutritionFactsHeader(data: NutritionFacts) {
         style = MaterialTheme.typography.titleLarge,
         text = stringResource(
             R.string.label_serving_size,
-            data.measure,
-            data.weight
+            data.servingSize,
+            data.servingWeight
         )
     )
 }
@@ -190,7 +190,7 @@ fun NutritionFactsContent(data: NutritionFacts) {
         MicroNutrition(
             name = stringResource(it.first),
             weight = it.second,
-            totalWeight = data.weight
+            totalWeight = data.servingWeight
         )
         Spacer(modifier = Modifier.size(16.dp))
     }

@@ -24,9 +24,9 @@
     <string name="label_weight_in_gram">%1$sg</string>
     <string name="label_weight_in_milligram">%1$smg</string>
 
-    <string name="sample_data_food_measure">medium</string>
     <string name="sample_data_food_name">Orange</string>
     <string name="sample_data_food_summary">All citrus trees belong to the single genus Citrus and remain almost entirely interfertile. This includes grapefruits, lemons, limes, oranges, and various other types and hybrids.</string>
+    <string name="sample_data_serving_size">medium</string>
 
     <string name="app_name">Mentha</string>
     <string name="message_commercial_slogan">Scan foods before eating!</string>

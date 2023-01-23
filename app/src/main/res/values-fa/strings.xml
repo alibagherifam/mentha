@@ -22,9 +22,9 @@
     <string name="label_weight_in_gram">%1$s گرم</string>
     <string name="label_weight_in_milligram">%1$s میلی‌گرم</string>
 
-    <string name="sample_data_food_measure">عدد</string>
     <string name="sample_data_food_name">پرتقال</string>
     <string name="sample_data_food_summary">پرتقال منبع خوبی از ویتامین C و پتاسیم است که هر دو می‌توانند به کاهش فشار خون کمک کنند. ویتامین C موجود در پرتقال یک آنتی اکسیدان قوی است که در حفظ جوانی پوست بسیار مهم بوده و در ترمیم سلولی و بهبود زخم نقش دارد.</string>
+    <string name="sample_data_serving_size">عدد</string>
 
     <string name="app_name">مِنتا</string>
     <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
