@@ -173,7 +173,10 @@ fun NutritionFactsHeader(data: NutritionFacts) {
         text = stringResource(
             R.string.label_serving_size,
             data.servingSize,
-            data.servingWeight
+            stringResource(
+                R.string.label_weight_in_gram,
+                data.servingWeight.toString()
+            )
         )
     )
 }
@@ -187,22 +190,22 @@ fun NutritionFactsContent(data: NutritionFacts) {
         R.string.label_fat to data.fat,
         R.string.label_sugar to data.sugar
     ).forEach {
-        MicroNutrition(
-            name = stringResource(it.first),
-            weight = it.second,
-            totalWeight = data.servingWeight
+        Nutrition(
+            nutritionName = stringResource(it.first),
+            nutritionWeight = it.second,
+            foodServingWeight = data.servingWeight
         )
         Spacer(modifier = Modifier.size(16.dp))
     }
 }
 
 @Composable
-fun MicroNutrition(
-    name: String,
-    weight: Float,
-    totalWeight: Int
+fun Nutrition(
+    nutritionName: String,
+    nutritionWeight: Float,
+    foodServingWeight: Int
 ) {
-    val factor = weight / totalWeight
+    val factor = nutritionWeight / foodServingWeight
     val nutritionPercentage = (factor * 100).roundToInt().let {
         if (it < 1) "<1%" else "$it%"
     }
@@ -210,14 +213,14 @@ fun MicroNutrition(
         Row {
             Text(
                 style = MaterialTheme.typography.titleMedium,
-                text = name
+                text = nutritionName
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
                 style = MaterialTheme.typography.titleSmall,
                 text = stringResource(
                     id = R.string.label_weight_in_gram,
-                    weight.stringFormatted()
+                    nutritionWeight.stringFormatted()
                 )
             )
             Spacer(modifier = Modifier.weight(1f))

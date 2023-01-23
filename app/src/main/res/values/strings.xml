@@ -17,7 +17,7 @@
     <string name="label_fat">Fat</string>
     <string name="label_nutrition_facts">Nutrition Facts</string>
     <string name="label_protein">Protein</string>
-    <string name="label_serving_size">Serving size: 1 %1$s (%2$dg)</string>
+    <string name="label_serving_size">Serving size: %1$s (%2$s)</string>
     <string name="label_share">Share</string>
     <string name="label_sugar">Sugar</string>
     <string name="label_water">Water</string>
@@ -26,7 +26,7 @@
 
     <string name="sample_data_food_name">Orange</string>
     <string name="sample_data_food_summary">All citrus trees belong to the single genus Citrus and remain almost entirely interfertile. This includes grapefruits, lemons, limes, oranges, and various other types and hybrids.</string>
-    <string name="sample_data_serving_size">medium</string>
+    <string name="sample_data_serving_size">1 medium orange</string>
 
     <string name="app_name">Mentha</string>
     <string name="message_commercial_slogan">Scan foods before eating!</string>

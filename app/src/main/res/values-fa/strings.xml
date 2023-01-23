@@ -15,7 +15,7 @@
     <string name="label_fat">چربی</string>
     <string name="label_nutrition_facts">ارزش غذایی</string>
     <string name="label_protein">پروتئین</string>
-    <string name="label_serving_size">به ازای ‍۱ %1$s (%2$d گرم)</string>
+    <string name="label_serving_size">به ازای %1$s (%2$s)</string>
     <string name="label_share">اشتراک گذاری</string>
     <string name="label_sugar">قند</string>
     <string name="label_water">آب</string>
@@ -24,7 +24,7 @@
 
     <string name="sample_data_food_name">پرتقال</string>
     <string name="sample_data_food_summary">پرتقال منبع خوبی از ویتامین C و پتاسیم است که هر دو می‌توانند به کاهش فشار خون کمک کنند. ویتامین C موجود در پرتقال یک آنتی اکسیدان قوی است که در حفظ جوانی پوست بسیار مهم بوده و در ترمیم سلولی و بهبود زخم نقش دارد.</string>
-    <string name="sample_data_serving_size">عدد</string>
+    <string name="sample_data_serving_size">۱ پرتقال متوسط</string>
 
     <string name="app_name">مِنتا</string>
     <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
