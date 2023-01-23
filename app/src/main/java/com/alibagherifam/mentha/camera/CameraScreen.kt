@@ -46,16 +46,14 @@ fun CameraScreen(
             onSettingsClick
         )
         ScanAreaRectangle(Modifier.align(Alignment.Center))
-        if (food != null) {
-            RecognitionCard(
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 24.dp)
-                    .padding(bottom = 20.dp),
-                food,
-                onShowDetailsClick
-            )
-        }
+        AnimatedRecognitionCard(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(horizontal = 24.dp)
+                .padding(bottom = 20.dp),
+            food,
+            onShowDetailsClick
+        )
     }
 }
 

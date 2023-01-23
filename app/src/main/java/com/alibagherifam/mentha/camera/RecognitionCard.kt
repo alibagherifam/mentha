@@ -1,5 +1,11 @@
 package com.alibagherifam.mentha.camera
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.node.Ref
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -25,14 +33,39 @@ import com.alibagherifam.mentha.sampledata.LocalizationPreview
 import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
+@Composable
+fun AnimatedRecognitionCard(
+    modifier: Modifier,
+    food: FoodEntity?,
+    onShowDetailsClick: () -> Unit
+){
+    val safeFood = remember {
+        Ref<FoodEntity>()
+    }
+
+    food?.let {
+        safeFood.value = it
+    }
+
+    AnimatedVisibility(
+        modifier = modifier,
+        visible = food != null,
+        enter = fadeIn(tween(durationMillis = 500)) +
+                slideInVertically(tween(durationMillis = 500)) { it / 2 },
+        exit = fadeOut(tween(durationMillis = 500, delayMillis = 1000)) +
+                slideOutVertically(tween(durationMillis = 500, delayMillis = 1000)) { it / 2 }
+    ) {
+        safeFood.value?.let { RecognitionCard(food = it, onShowDetailsClick) }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecognitionCard(
-    modifier: Modifier = Modifier,
     food: FoodEntity,
     onShowDetailsClick: () -> Unit
 ) {
-    Card(modifier = modifier, onClick = onShowDetailsClick) {
+    Card(onClick = onShowDetailsClick) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
