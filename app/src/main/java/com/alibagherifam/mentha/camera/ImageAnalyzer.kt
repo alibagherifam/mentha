@@ -29,7 +29,23 @@ class ImageAnalyzer(
             "pomegranate",
             "strawberry",
             "mushroom",
-            "French loaf"
+            "French loaf",
+            "Granny Smith",
+            "bell pepper",
+            "cauliflower",
+            "head cabbage",
+            "fig",
+            "zucchini",
+            "bagel",
+            "pizza",
+            "hot dog",
+            "cheeseburger",
+            "mashed potato",
+            "espresso",
+            "chocolate sauce",
+            "butternut squash",
+            "ice cream",
+            "carbonara"
         )
     }
 
