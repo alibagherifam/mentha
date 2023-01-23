@@ -29,9 +29,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.camera.stringFormatted
+import com.alibagherifam.mentha.comoon.FoodImage
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
 import com.alibagherifam.mentha.sampledata.LocalizationPreview
@@ -62,7 +62,7 @@ fun FoodDetailsScreen(
                 .padding(innerPadding)
                 .padding(all = 16.dp)
         ) {
-            FoodSummary(
+            FoodDetails(
                 name = food.name,
                 summary = food.summary,
                 imageUri = food.image
@@ -106,13 +106,22 @@ fun TopBar(
 }
 
 @Composable
-fun FoodSummary(
+fun FoodDetails(
     name: String,
     summary: String,
     imageUri: String
 ) {
     Column {
-        FoodImage(imageUri)
+        FoodImage(
+            modifier = Modifier
+                .padding(start = 20.dp)
+                .size(150.dp)
+                .background(
+                    color = MaterialTheme.colorScheme.secondaryContainer,
+                    shape = CircleShape
+                ),
+            imageUri = imageUri
+        )
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -125,22 +134,6 @@ fun FoodSummary(
             style = MaterialTheme.typography.bodyLarge
         )
     }
-}
-
-@Composable
-fun FoodImage(imageUri: String) {
-    AsyncImage(
-        modifier = Modifier
-            .padding(start = 20.dp)
-            .size(150.dp)
-            .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                shape = CircleShape
-            ),
-        model = imageUri,
-        placeholder = painterResource(R.drawable.img_food_placeholder),
-        contentDescription = stringResource(R.string.a11y_food_image)
-    )
 }
 
 @Composable

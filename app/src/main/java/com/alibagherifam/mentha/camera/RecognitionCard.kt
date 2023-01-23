@@ -26,8 +26,8 @@ import androidx.compose.ui.node.Ref
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.alibagherifam.mentha.R
+import com.alibagherifam.mentha.comoon.FoodImage
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.sampledata.LocalizationPreview
 import com.alibagherifam.mentha.sampledata.getSampleFood
@@ -87,11 +87,9 @@ fun RecognitionCard(
 
 @Composable
 fun RecognitionInfo(food: FoodEntity) {
-    AsyncImage(
+    FoodImage(
         modifier = Modifier.size(60.dp),
-        model = food.image,
-        contentDescription = stringResource(R.string.a11y_food_image),
-        placeholder = painterResource(R.drawable.img_food_placeholder)
+        imageUri = food.image,
     )
     Spacer(modifier = Modifier.size(10.dp))
     Column {
