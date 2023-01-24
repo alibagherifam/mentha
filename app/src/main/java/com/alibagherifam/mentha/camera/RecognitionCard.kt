@@ -70,7 +70,8 @@ fun RecognitionCard(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(vertical = 12.dp)
+                .padding(start = 12.dp)
         ) {
             RecognitionInfo(food)
             Spacer(modifier = Modifier.weight(1f))
@@ -78,7 +79,7 @@ fun RecognitionCard(
                 Text(text = stringResource(R.string.label_nutrition_facts))
                 Icon(
                     painter = painterResource(R.drawable.ic_chevron_toward_end),
-                    contentDescription = ""
+                    contentDescription = stringResource(R.string.a11y_show_nutrition_facts)
                 )
             }
         }
@@ -91,13 +92,13 @@ fun RecognitionInfo(food: FoodEntity) {
         modifier = Modifier.size(60.dp),
         imageUri = food.image,
     )
-    Spacer(modifier = Modifier.size(10.dp))
+    Spacer(modifier = Modifier.size(14.dp))
     Column {
         Text(
             text = food.name,
             style = MaterialTheme.typography.headlineSmall
         )
-        Spacer(modifier = Modifier.size(10.dp))
+        Spacer(modifier = Modifier.size(6.dp))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(16.dp),
@@ -109,7 +110,7 @@ fun RecognitionInfo(food: FoodEntity) {
             Text(
                 text = stringResource(
                     R.string.label_energy_in_kilo_calorie,
-                    food.nutritionFacts.energy
+                    food.nutritionFacts.energy.stringFormatted()
                 ),
                 style = MaterialTheme.typography.titleMedium
             )

@@ -13,7 +13,7 @@
 
     <string name="label_carbohydrate">Carbohydrate</string>
     <string name="label_energy">Energy</string>
-    <string name="label_energy_in_kilo_calorie">%1$f kcal</string>
+    <string name="label_energy_in_kilo_calorie">%1$s kcal</string>
     <string name="label_fat">Fat</string>
     <string name="label_nutrition_facts">Nutrition Facts</string>
     <string name="label_protein">Protein</string>

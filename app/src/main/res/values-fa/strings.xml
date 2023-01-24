@@ -11,7 +11,7 @@
 
     <string name="label_carbohydrate">کربوهیدرات</string>
     <string name="label_energy">انرژی</string>
-    <string name="label_energy_in_kilo_calorie">%1$f کیلو کالری</string>
+    <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
     <string name="label_fat">چربی</string>
     <string name="label_nutrition_facts">ارزش غذایی</string>
     <string name="label_protein">پروتئین</string>

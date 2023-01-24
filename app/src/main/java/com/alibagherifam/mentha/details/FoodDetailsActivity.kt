@@ -54,7 +54,7 @@ class FoodDetailsActivity : AppCompatActivity() {
     private fun prepareShareNutritionFactsMessage(): String {
         val foodEnergy = getString(
             R.string.label_energy_in_kilo_calorie,
-            food.nutritionFacts.energy
+            food.nutritionFacts.energy.stringFormatted()
         )
         val foodCarbohydrate = getString(
             R.string.label_weight_in_gram,

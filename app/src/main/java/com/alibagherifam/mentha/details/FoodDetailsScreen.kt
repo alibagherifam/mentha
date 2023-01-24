@@ -1,24 +1,17 @@
 package com.alibagherifam.mentha.details
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -27,17 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.camera.stringFormatted
 import com.alibagherifam.mentha.comoon.FoodImage
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import com.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
 import com.alibagherifam.mentha.sampledata.LocalizationPreview
 import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
-import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +38,7 @@ fun FoodDetailsScreen(
     val scrollState = rememberScrollState()
     Scaffold(
         topBar = {
-            TopBar(
+            FoodDetailsTopBar(
                 title = food.name,
                 onBackPressed = onBackPressed,
                 onShareClick = onShareClick
@@ -68,14 +57,14 @@ fun FoodDetailsScreen(
                 imageUri = food.image
             )
             Spacer(modifier = Modifier.size(16.dp))
-            NutritionFacts(food.nutritionFacts)
+            NutritionFactsBox(food.nutritionFacts)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
+fun FoodDetailsTopBar(
     title: String,
     onBackPressed: () -> Unit,
     onShareClick: () -> Unit
@@ -133,98 +122,6 @@ fun FoodDetails(
             text = summary,
             style = MaterialTheme.typography.bodyLarge
         )
-    }
-}
-
-@Composable
-fun NutritionFacts(data: NutritionFacts) {
-    Column(
-        Modifier
-            .border(
-                width = 2.dp,
-                color = MaterialTheme.colorScheme.outlineVariant,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .padding(horizontal = 24.dp, vertical = 12.dp)
-    ) {
-        NutritionFactsHeader(data)
-        Spacer(modifier = Modifier.size(10.dp))
-        Divider(thickness = 2.dp)
-        Spacer(modifier = Modifier.size(12.dp))
-        NutritionFactsContent(data)
-    }
-}
-
-@Composable
-fun NutritionFactsHeader(data: NutritionFacts) {
-    Text(
-        style = MaterialTheme.typography.headlineMedium,
-        text = stringResource(R.string.label_nutrition_facts)
-    )
-    Text(
-        style = MaterialTheme.typography.titleLarge,
-        text = stringResource(
-            R.string.label_serving_size,
-            data.servingSize,
-            stringResource(
-                R.string.label_weight_in_gram,
-                data.servingWeight.toString()
-            )
-        )
-    )
-}
-
-@Composable
-fun NutritionFactsContent(data: NutritionFacts) {
-    listOf(
-        R.string.label_water to data.water,
-        R.string.label_protein to data.protein,
-        R.string.label_carbohydrate to data.carbohydrate,
-        R.string.label_fat to data.fat,
-        R.string.label_sugar to data.sugar
-    ).forEach {
-        Nutrition(
-            nutritionName = stringResource(it.first),
-            nutritionWeight = it.second,
-            foodServingWeight = data.servingWeight
-        )
-        Spacer(modifier = Modifier.size(16.dp))
-    }
-}
-
-@Composable
-fun Nutrition(
-    nutritionName: String,
-    nutritionWeight: Float,
-    foodServingWeight: Int
-) {
-    val factor = nutritionWeight / foodServingWeight
-    val nutritionPercentage = (factor * 100).roundToInt().let {
-        if (it < 1) "<1%" else "$it%"
-    }
-    Column {
-        Row {
-            Text(
-                style = MaterialTheme.typography.titleMedium,
-                text = nutritionName
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                style = MaterialTheme.typography.titleSmall,
-                text = stringResource(
-                    id = R.string.label_weight_in_gram,
-                    nutritionWeight.stringFormatted()
-                )
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = nutritionPercentage,
-                modifier = Modifier.widthIn(min = 28.dp),
-                style = MaterialTheme.typography.titleSmall,
-                textAlign = TextAlign.Center
-            )
-        }
-        LinearProgressIndicator(modifier = Modifier.fillMaxWidth(), progress = factor)
     }
 }
 
