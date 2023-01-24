@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Mentha"
+rootProject.name = "mentha"
 
 include(":app")
 include(":image-classifier")
