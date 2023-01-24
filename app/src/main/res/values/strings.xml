@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="website_url" translatable="false">https://mentha-health.com/download</string>
+    <string name="download_app_url" translatable="false">https://mentha-health.com/download</string>
 
     <string name="a11y_back_button">Back button</string>
     <string name="a11y_energy_icon">Calorie icon</string>
@@ -13,7 +13,7 @@
 
     <string name="label_carbohydrate">Carbohydrate</string>
     <string name="label_energy">Energy</string>
-    <string name="label_energy_in_kilo_calorie">%1$s kcal</string>
+    <string name="label_energy_in_kilo_calorie">%1$f kcal</string>
     <string name="label_fat">Fat</string>
     <string name="label_nutrition_facts">Nutrition Facts</string>
     <string name="label_protein">Protein</string>
@@ -30,5 +30,5 @@
 
     <string name="app_name">Mentha</string>
     <string name="message_commercial_slogan">Scan foods before eating!</string>
-    <string name="message_share_app">Control your diet with Mentha 💚\nDownload:\n%1$s</string>
+    <string name="message_download_app">Control your diet with Mentha 💚\nDownload:\n%1$s</string>
 </resources>

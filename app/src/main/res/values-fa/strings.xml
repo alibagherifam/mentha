@@ -11,7 +11,7 @@
 
     <string name="label_carbohydrate">کربوهیدرات</string>
     <string name="label_energy">انرژی</string>
-    <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
+    <string name="label_energy_in_kilo_calorie">%1$f کیلو کالری</string>
     <string name="label_fat">چربی</string>
     <string name="label_nutrition_facts">ارزش غذایی</string>
     <string name="label_protein">پروتئین</string>
@@ -28,5 +28,5 @@
 
     <string name="app_name">مِنتا</string>
     <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
-    <string name="message_share_app">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n %1$s</string>
+    <string name="message_download_app">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n %1$s</string>
 </resources>
