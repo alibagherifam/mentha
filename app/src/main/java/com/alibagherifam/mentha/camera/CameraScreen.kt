@@ -1,5 +1,6 @@
 package com.alibagherifam.mentha.camera
 
+import androidx.camera.view.PreviewView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -27,13 +28,13 @@ import com.alibagherifam.mentha.theme.AppTheme
 @Composable
 fun CameraScreen(
     uiState: CameraUiState,
-    imageAnalyzer: ImageAnalyzer?,
     onFlashlightToggle: (Boolean) -> Unit,
     onSettingsClick: () -> Unit,
-    onShowDetailsClick: () -> Unit
+    onShowDetailsClick: () -> Unit,
+    onPreviewViewCreated: ((PreviewView) -> Unit)?
 ) {
     Box(Modifier.fillMaxSize()) {
-        CameraPreviewView(imageAnalyzer)
+        CameraPreviewView(onPreviewViewCreated)
         ActionBar(
             Modifier
                 .align(Alignment.TopCenter)
@@ -102,8 +103,10 @@ fun CameraScreenPreview() {
     AppTheme {
         CameraScreen(
             uiState = CameraUiState(food = getSampleFood()),
-            imageAnalyzer = null,
-            {}, {}, {}
+            onFlashlightToggle = {},
+            onSettingsClick = {},
+            onShowDetailsClick = {},
+            onPreviewViewCreated = null
         )
     }
 }

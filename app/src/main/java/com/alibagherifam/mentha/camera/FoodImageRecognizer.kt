@@ -5,14 +5,16 @@ import android.graphics.Bitmap
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
-import kotlinx.coroutines.channels.SendChannel
-import org.tensorflow.lite.support.label.Category
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.consumeAsFlow
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
-class ImageAnalyzer(
-    context: Context,
-    private val recognitionChannel: SendChannel<Category?>
-) : ImageAnalysis.Analyzer, ImageClassifierHelper.ClassifierListener {
+class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
+    ImageClassifierHelper.ClassifierListener {
+
+    private val recognitions = Channel<String?>(capacity = Channel.CONFLATED)
+    val recognizedFoodLabels: Flow<String?> = recognitions.consumeAsFlow()
 
     /*
     TODO: Remove this after changing model with
@@ -90,7 +92,7 @@ class ImageAnalyzer(
         results?.firstOrNull()?.categories
             ?.minByOrNull { category -> category.index }
             ?.takeIf { it.label in foods }
-            .let { recognitionChannel.trySend(it) }
+            .let { recognitions.trySend(it?.label) }
     }
 
     override fun onError(error: String) {

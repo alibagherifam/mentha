@@ -15,7 +15,7 @@ import java.util.concurrent.Executors
 
 suspend fun setupCamera(
     viewFinder: PreviewView,
-    imageAnalyzer: ImageAnalyzer,
+    imageAnalyzer: ImageAnalysis.Analyzer,
     lifecycleOwner: LifecycleOwner
 ): Camera {
     val useCases = UseCaseGroup.Builder()
@@ -41,7 +41,7 @@ fun getPreviewUseCase(viewFinder: PreviewView) =
 
 fun getImageAnalysisUseCase(
     viewFinder: PreviewView,
-    imageAnalyzer: ImageAnalyzer
+    imageAnalyzer: ImageAnalysis.Analyzer
 ) = ImageAnalysis.Builder()
     .setTargetAspectRatio(AspectRatio.RATIO_4_3)
     .setTargetRotation(viewFinder.display.rotation)
@@ -61,8 +61,6 @@ suspend fun bindCameraUseCases(
 
     // Unbind use-cases before rebinding
     cameraProvider.unbindAll()
-
-    // binding.btnToggleFlash.isEnabled = camera.cameraInfo.hasFlashUnit()
 
     return cameraProvider.bindToLifecycle(
         lifecycleOwner,

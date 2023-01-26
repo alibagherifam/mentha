@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
+import androidx.camera.view.PreviewView
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
@@ -19,13 +20,10 @@ import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.provideFoodRepository
 import com.alibagherifam.mentha.theme.AppTheme
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.tensorflow.lite.support.label.Category
 
 class CameraActivity : AppCompatActivity() {
 
@@ -33,7 +31,6 @@ class CameraActivity : AppCompatActivity() {
         private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
 
-    private val recognitionChannel = Channel<Category?>(capacity = Channel.CONFLATED)
     private val repository: FoodRepository by lazy {
         provideFoodRepository(this)
     }
@@ -42,7 +39,6 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch { collectFoodRecognitions() }
         uiState.update { it.copy(isCameraPermissionGranted = hasCameraPermission()) }
         setContent {
             AppTheme {
@@ -50,10 +46,10 @@ class CameraActivity : AppCompatActivity() {
                 if (state.isCameraPermissionGranted) {
                     CameraScreen(
                         state,
-                        imageAnalyzer = ImageAnalyzer(this, recognitionChannel),
                         onFlashlightToggle = ::toggleFlashlight,
                         onSettingsClick = { },
-                        onShowDetailsClick = ::openFoodDetails
+                        onShowDetailsClick = ::openFoodDetails,
+                        onPreviewViewCreated = ::startFoodRecognition
                     )
                 } else {
                     requestCameraPermission()
@@ -62,13 +58,26 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun collectFoodRecognitions() {
-        recognitionChannel.consumeAsFlow()
-            .map { recognition ->
-                recognition?.label?.let { repository.getFood(it) }
-            }.collect { recognizedFood ->
-                uiState.update { it.copy(food = recognizedFood) }
+    private fun startFoodRecognition(viewFinder: PreviewView) {
+        lifecycleScope.launch {
+            // TODO: This delay is a workaround for unknown crash
+            delay(2000)
+
+            val recognizer = FoodImageRecognizer(this@CameraActivity)
+            camera = setupCamera(
+                viewFinder,
+                recognizer,
+                lifecycleOwner = this@CameraActivity
+            )
+
+            // TODO: Add isFlashlightSupported to UI state
+            // uiState.update { it.copy(isFlashlightSupported = camera.cameraInfo.hasFlashUnit()) }
+
+            recognizer.recognizedFoodLabels.collect { foodLabel ->
+                val food = foodLabel?.let { repository.getFood(foodLabel) }
+                uiState.update { it.copy(food = food) }
             }
+        }
     }
 
     private fun openFoodDetails() {
@@ -80,9 +89,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun toggleFlashlight(isEnabled: Boolean) {
         uiState.update { it.copy(isFlashlightEnabled = isEnabled) }
-
-        // TODO: Uncomment after storing bound camera in camera variable
-        // camera.cameraControl.enableTorch(isEnabled)
+        camera.cameraControl.enableTorch(isEnabled)
     }
 
     private fun hasCameraPermission() = ContextCompat
