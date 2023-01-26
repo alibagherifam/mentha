@@ -20,19 +20,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.sampledata.LocalizationPreview
 import com.alibagherifam.mentha.sampledata.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @Composable
 fun CameraScreen(
-    food: FoodEntity?,
-    isFlashlightOn: Boolean,
+    uiState: CameraUiState,
+    imageAnalyzer: ImageAnalyzer?,
     onFlashlightToggle: (Boolean) -> Unit,
     onSettingsClick: () -> Unit,
-    onShowDetailsClick: () -> Unit,
-    imageAnalyzer: ImageAnalyzer?
+    onShowDetailsClick: () -> Unit
 ) {
     Box(Modifier.fillMaxSize()) {
         CameraPreviewView(imageAnalyzer)
@@ -41,7 +39,7 @@ fun CameraScreen(
                 .align(Alignment.TopCenter)
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp),
-            isFlashlightOn,
+            uiState.isFlashlightEnabled,
             onFlashlightToggle,
             onSettingsClick
         )
@@ -51,7 +49,7 @@ fun CameraScreen(
                 .align(Alignment.BottomCenter)
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 20.dp),
-            food,
+            uiState.food,
             onShowDetailsClick
         )
     }
@@ -103,10 +101,9 @@ fun ScanAreaRectangle(modifier: Modifier) {
 fun CameraScreenPreview() {
     AppTheme {
         CameraScreen(
-            getSampleFood(),
-            isFlashlightOn = false,
-            {}, {}, {},
-            imageAnalyzer = null
+            uiState = CameraUiState(food = getSampleFood()),
+            imageAnalyzer = null,
+            {}, {}, {}
         )
     }
 }

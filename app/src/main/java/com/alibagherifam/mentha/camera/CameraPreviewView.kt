@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CameraPreviewView(imageAnalyzer: ImageAnalyzer?) {
-    // Only for preview purpose
+    // Only in compose preview
     if (imageAnalyzer == null) {
         Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {}
         return
