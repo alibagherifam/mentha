@@ -29,4 +29,5 @@
     <string name="app_name">مِنتا</string>
     <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
     <string name="message_download_app">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n %1$s</string>
+    <string name="message_camera_permission_required">دسترسی به دوربین برای تشخیص خوراکی لازم است.</string>
 </resources>

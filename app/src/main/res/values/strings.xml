@@ -31,4 +31,5 @@
     <string name="app_name">Mentha</string>
     <string name="message_commercial_slogan">Scan foods before eating!</string>
     <string name="message_download_app">Control your diet with Mentha 💚\nDownload:\n%1$s</string>
+    <string name="message_camera_permission_required">Camera permission is required for scanning foods.</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.details.FoodDetailsActivity
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
@@ -96,7 +97,7 @@ class CameraActivity : AppCompatActivity() {
         if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
             Toast.makeText(
                 this,
-                "Camera permission is required!",
+                getString(R.string.message_camera_permission_required),
                 Toast.LENGTH_LONG
             ).show()
         }
