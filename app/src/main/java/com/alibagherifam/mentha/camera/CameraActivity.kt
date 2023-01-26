@@ -29,7 +29,7 @@ import org.tensorflow.lite.support.label.Category
 class CameraActivity : AppCompatActivity() {
 
     companion object {
-        private const val PERMISSION_CAMERA = Manifest.permission.CAMERA
+        private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
     }
 
     private val recognitionChannel = Channel<Category?>(capacity = Channel.CONFLATED)
@@ -78,10 +78,8 @@ class CameraActivity : AppCompatActivity() {
         startActivity(i)
     }
 
-    private fun hasCameraPermission() =
-        ContextCompat.checkSelfPermission(
-            this, PERMISSION_CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
+    private fun hasCameraPermission() = ContextCompat
+        .checkSelfPermission(this, CAMERA_PERMISSION) == PackageManager.PERMISSION_GRANTED
 
     private val requestPermissionsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -94,13 +92,13 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA)) {
+        if (shouldShowRequestPermissionRationale(CAMERA_PERMISSION)) {
             Toast.makeText(
                 this,
                 getString(R.string.message_camera_permission_required),
                 Toast.LENGTH_LONG
             ).show()
         }
-        requestPermissionsLauncher.launch(PERMISSION_CAMERA)
+        requestPermissionsLauncher.launch(CAMERA_PERMISSION)
     }
 }
