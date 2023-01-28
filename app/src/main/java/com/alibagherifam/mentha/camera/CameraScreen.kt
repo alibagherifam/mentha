@@ -40,6 +40,7 @@ fun CameraScreen(
                 .align(Alignment.TopCenter)
                 .padding(horizontal = 16.dp)
                 .padding(top = 16.dp),
+            uiState.isFlashlightSupported,
             uiState.isFlashlightEnabled,
             onFlashlightToggle,
             onSettingsClick
@@ -59,6 +60,7 @@ fun CameraScreen(
 @Composable
 fun ActionBar(
     modifier: Modifier = Modifier,
+    isFlashlightSupported: Boolean,
     isFlashlightEnabled: Boolean,
     onFlashlightToggle: (Boolean) -> Unit,
     onSettingsClick: () -> Unit
@@ -71,15 +73,18 @@ fun ActionBar(
             )
         }
         Spacer(modifier = Modifier.weight(1f))
-        FilledTonalIconToggleButton(
-            checked = isFlashlightEnabled,
-            onCheckedChange = onFlashlightToggle
-        ) {
-            val icon = if (isFlashlightEnabled) R.drawable.ic_flash_on else R.drawable.ic_flash_off
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = stringResource(R.string.a11y_flashlight_toggle)
-            )
+        if (isFlashlightSupported) {
+            FilledTonalIconToggleButton(
+                checked = isFlashlightEnabled,
+                onCheckedChange = onFlashlightToggle
+            ) {
+                val icon =
+                    if (isFlashlightEnabled) R.drawable.ic_flash_on else R.drawable.ic_flash_off
+                Icon(
+                    painter = painterResource(icon),
+                    contentDescription = stringResource(R.string.a11y_flashlight_toggle)
+                )
+            }
         }
     }
 }

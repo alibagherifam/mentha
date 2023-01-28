@@ -70,8 +70,9 @@ class CameraActivity : AppCompatActivity() {
                 lifecycleOwner = this@CameraActivity
             )
 
-            // TODO: Add isFlashlightSupported to UI state
-            // uiState.update { it.copy(isFlashlightSupported = camera.cameraInfo.hasFlashUnit()) }
+            uiState.update {
+                it.copy(isFlashlightSupported = camera.cameraInfo.hasFlashUnit())
+            }
 
             recognizer.recognizedFoodLabels.collect { foodLabel ->
                 val food = foodLabel?.let { repository.getFood(foodLabel) }
