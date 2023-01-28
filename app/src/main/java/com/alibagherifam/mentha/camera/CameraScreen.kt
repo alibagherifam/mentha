@@ -66,12 +66,13 @@ fun ActionBar(
     onSettingsClick: () -> Unit
 ) {
     Row(modifier) {
-        FilledTonalIconButton(onClick = onSettingsClick) {
+        // TODO: Add settings
+        /*FilledTonalIconButton(onClick = onSettingsClick) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
                 contentDescription = stringResource(R.string.a11y_settings_button)
             )
-        }
+        }*/
         Spacer(modifier = Modifier.weight(1f))
         if (isFlashlightSupported) {
             FilledTonalIconToggleButton(

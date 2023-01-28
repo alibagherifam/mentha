@@ -35,7 +35,7 @@ fun getPreviewUseCase(viewFinder: PreviewView) =
         .setTargetRotation(viewFinder.display.rotation)
         .build().apply {
             // Attach the viewfinder's surface provider to preview use case
-            // Todo: Sample calls this after binding use-cases
+            // Todo: Official sample code calls this after binding use-cases
             setSurfaceProvider(viewFinder.surfaceProvider)
         }
 
