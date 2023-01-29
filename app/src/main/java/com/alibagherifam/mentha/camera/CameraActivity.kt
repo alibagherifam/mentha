@@ -4,17 +4,16 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
 import androidx.camera.view.PreviewView
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.details.FoodDetailsActivity
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
@@ -27,19 +26,16 @@ import kotlinx.coroutines.launch
 
 class CameraActivity : AppCompatActivity() {
 
-    companion object {
-        private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
-    }
-
     private val repository: FoodRepository by lazy {
         provideFoodRepository(this)
     }
+
     private lateinit var camera: Camera
     private val uiState = MutableStateFlow(CameraUiState())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uiState.update { it.copy(isCameraPermissionGranted = hasCameraPermission()) }
+        checkForCameraPermission()
         setContent {
             AppTheme {
                 val state by uiState.collectAsState()
@@ -51,8 +47,13 @@ class CameraActivity : AppCompatActivity() {
                         onShowDetailsClick = ::openFoodDetails,
                         onPreviewViewCreated = ::startFoodRecognition
                     )
+                } else if (state.shouldShowCameraPermissionRationale) {
+                    CameraPermissionRationaleDialog(
+                        onConfirmClick = ::requestCameraPermission,
+                        onDismissRequest = this@CameraActivity::finish
+                    )
                 } else {
-                    requestCameraPermission()
+                    Surface { requestCameraPermission() }
                 }
             }
         }
@@ -61,7 +62,7 @@ class CameraActivity : AppCompatActivity() {
     private fun startFoodRecognition(viewFinder: PreviewView) {
         lifecycleScope.launch {
             // TODO: This delay is a workaround for unknown crash
-            delay(2000)
+            delay(1000)
 
             val recognizer = FoodImageRecognizer(this@CameraActivity)
             camera = setupCamera(
@@ -93,27 +94,35 @@ class CameraActivity : AppCompatActivity() {
         camera.cameraControl.enableTorch(isEnabled)
     }
 
-    private fun hasCameraPermission() = ContextCompat
-        .checkSelfPermission(this, CAMERA_PERMISSION) == PackageManager.PERMISSION_GRANTED
-
-    private val requestPermissionsLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            uiState.update { it.copy(isCameraPermissionGranted = true) }
-        } else {
-            finish()
+    private fun checkForCameraPermission() {
+        requestCameraPermission()
+        uiState.update {
+            it.copy(
+                isCameraPermissionGranted = ContextCompat.checkSelfPermission(
+                    this, Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            )
         }
     }
 
-    private fun requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(CAMERA_PERMISSION)) {
-            Toast.makeText(
-                this,
-                getString(R.string.message_camera_permission_required),
-                Toast.LENGTH_LONG
-            ).show()
+    private fun requestCameraPermission() =
+        requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+
+    private val requestCameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        val shouldShowRationale = !isGranted &&
+                shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
+
+        uiState.update {
+            it.copy(
+                isCameraPermissionGranted = isGranted,
+                shouldShowCameraPermissionRationale = shouldShowRationale
+            )
         }
-        requestPermissionsLauncher.launch(CAMERA_PERMISSION)
+
+        if (!isGranted && !shouldShowRationale) {
+            finish()
+        }
     }
 }

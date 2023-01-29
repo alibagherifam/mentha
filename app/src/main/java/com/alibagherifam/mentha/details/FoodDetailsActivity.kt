@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.camera.stringFormatted
+import com.alibagherifam.mentha.comoon.stringFormatted
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import com.alibagherifam.mentha.nutritionfacts.FoodRepository
 import com.alibagherifam.mentha.nutritionfacts.provideFoodRepository

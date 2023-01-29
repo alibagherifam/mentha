@@ -28,9 +28,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
 import com.alibagherifam.mentha.comoon.FoodImage
+import com.alibagherifam.mentha.comoon.stringFormatted
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import com.alibagherifam.mentha.sampledata.LocalizationPreview
-import com.alibagherifam.mentha.sampledata.getSampleFood
+import com.alibagherifam.mentha.comoon.LocalizationPreview
+import com.alibagherifam.mentha.comoon.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @Composable

@@ -6,12 +6,14 @@
     <string name="a11y_energy_icon">Calorie icon</string>
     <string name="a11y_flashlight_toggle">Toggle flashlight</string>
     <string name="a11y_food_image">Food image</string>
-    <string name="a11y_mentha_logo">Mentha logo</string>
     <string name="a11y_settings_button">Settings button</string>
     <string name="a11y_share_button">Share food information button</string>
     <string name="a11y_show_nutrition_facts">Show nutrition facts button</string>
 
+    <string name="label_camera_permission">Camera Permission</string>
     <string name="label_carbohydrate">Carbohydrate</string>
+    <string name="label_close_app">Close the App</string>
+    <string name="label_confirm">Confirm</string>
     <string name="label_energy">Energy</string>
     <string name="label_energy_in_kilo_calorie">%1$s kcal</string>
     <string name="label_fat">Fat</string>
@@ -31,5 +33,5 @@
     <string name="app_name">Mentha</string>
     <string name="message_commercial_slogan">Scan foods before eating!</string>
     <string name="message_download_app">Control your diet with Mentha 💚\nDownload:\n%1$s</string>
-    <string name="message_camera_permission_required">Camera permission is required for scanning foods.</string>
+    <string name="message_camera_permission_required">Camera permission is required for scanning foods. The app cannot work without this permission.</string>
 </resources>

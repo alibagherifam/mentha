@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilledTonalIconToggleButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -21,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alibagherifam.mentha.R
-import com.alibagherifam.mentha.sampledata.LocalizationPreview
-import com.alibagherifam.mentha.sampledata.getSampleFood
+import com.alibagherifam.mentha.comoon.LocalizationPreview
+import com.alibagherifam.mentha.comoon.getSampleFood
 import com.alibagherifam.mentha.theme.AppTheme
 
 @Composable

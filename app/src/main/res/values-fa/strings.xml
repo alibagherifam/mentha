@@ -4,12 +4,14 @@
     <string name="a11y_energy_icon">آیکون کالری</string>
     <string name="a11y_flashlight_toggle">دکمه‌ی چراغ قوه</string>
     <string name="a11y_food_image">تصویر خوراکی</string>
-    <string name="a11y_mentha_logo">آیکون برنامه</string>
     <string name="a11y_settings_button">دکمه‌ی تنظیمات</string>
     <string name="a11y_share_button">دکمه‌ی اشتراک گذاری</string>
     <string name="a11y_show_nutrition_facts">دکمه‌ی انتقال به صفحه جزئیات خوراکی</string>
 
+    <string name="label_camera_permission">مجوز دسترسی به دوربین</string>
     <string name="label_carbohydrate">کربوهیدرات</string>
+    <string name="label_close_app">بستن برنامه</string>
+    <string name="label_confirm">تایید</string>
     <string name="label_energy">انرژی</string>
     <string name="label_energy_in_kilo_calorie">%1$s کیلو کالری</string>
     <string name="label_fat">چربی</string>
@@ -29,5 +31,5 @@
     <string name="app_name">مِنتا</string>
     <string name="message_commercial_slogan">خوراکی رو اول اسکن کن!</string>
     <string name="message_download_app">کنترل رژیم غذایی با اپلیکیشن مِنتا 💚\n دانلود:\n %1$s</string>
-    <string name="message_camera_permission_required">دسترسی به دوربین برای تشخیص خوراکی لازم است.</string>
+    <string name="message_camera_permission_required">دسترسی به دوربین برای تشخیص خوراکی لازم است. اپلیکیشن بدون این دسترسی قابل اجرا نمی‌باشد.</string>
 </resources>

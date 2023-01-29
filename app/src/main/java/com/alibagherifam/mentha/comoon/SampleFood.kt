@@ -1,4 +1,4 @@
-package com.alibagherifam.mentha.sampledata
+package com.alibagherifam.mentha.comoon
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
