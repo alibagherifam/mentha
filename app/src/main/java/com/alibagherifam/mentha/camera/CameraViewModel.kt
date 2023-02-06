@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class CameraViewModel(private val repository: FoodRepository) : ViewModel() {
     val uiState = MutableStateFlow(CameraUiState())
 
-    suspend fun updateFood(foodLabel: String?) {
+    private suspend fun updateFood(foodLabel: String?) {
         val food = foodLabel?.let { repository.getFood(foodLabel) }
         uiState.update { it.copy(food = food) }
     }
@@ -21,6 +21,23 @@ class CameraViewModel(private val repository: FoodRepository) : ViewModel() {
             recognizer.recognizedFoodLabels.collect { foodLabel ->
                 updateFood(foodLabel)
             }
+        }
+    }
+
+    fun updateCameraPermissionState(
+        isRequested: Boolean,
+        isGranted: Boolean,
+        shouldShowRationale: Boolean
+    ) {
+        uiState.update {
+            it.copy(
+                cameraPermissionState = when {
+                    isGranted -> PermissionState.GRANTED
+                    shouldShowRationale -> PermissionState.SHOULD_SHOW_RATIONALE
+                    isRequested -> PermissionState.NEVER_ASK_AGAIN
+                    else -> PermissionState.NOT_REQUESTED
+                }
+            )
         }
     }
 

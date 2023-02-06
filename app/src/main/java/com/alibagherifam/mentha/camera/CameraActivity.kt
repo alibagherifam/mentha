@@ -33,25 +33,33 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkForCameraPermission()
+        updateCameraPermissionState(
+            isRequested = false,
+            isGranted = isCameraPermissionGranted()
+        )
         setContent {
             AppTheme {
                 val state by viewModel.uiState.collectAsState()
-                if (state.isCameraPermissionGranted) {
-                    CameraScreen(
-                        state,
-                        onFlashlightToggle = ::toggleFlashlight,
-                        onSettingsClick = { },
-                        onShowDetailsClick = ::openFoodDetails,
-                        onPreviewViewCreated = ::startFoodRecognition
-                    )
-                } else if (state.shouldShowCameraPermissionRationale) {
-                    CameraPermissionRationaleDialog(
-                        onConfirmClick = ::requestCameraPermission,
-                        onDismissRequest = this@CameraActivity::finish
-                    )
-                } else {
-                    Surface { requestCameraPermission() }
+                when (state.cameraPermissionState) {
+                    PermissionState.NOT_REQUESTED -> {
+                        Surface { requestCameraPermission() }
+                    }
+                    PermissionState.GRANTED -> {
+                        CameraScreen(
+                            state,
+                            onFlashlightToggle = ::toggleFlashlight,
+                            onSettingsClick = { },
+                            onShowDetailsClick = ::openFoodDetails,
+                            onPreviewViewCreated = ::startFoodRecognition
+                        )
+                    }
+                    PermissionState.SHOULD_SHOW_RATIONALE -> {
+                        CameraPermissionRationaleDialog(
+                            onConfirmClick = ::requestCameraPermission,
+                            onDismissRequest = this@CameraActivity::finish
+                        )
+                    }
+                    PermissionState.NEVER_ASK_AGAIN -> finish()
                 }
             }
         }
@@ -89,14 +97,22 @@ class CameraActivity : AppCompatActivity() {
         camera.cameraControl.enableTorch(isEnabled)
     }
 
-    private fun checkForCameraPermission() {
-        viewModel.uiState.update {
-            it.copy(
-                isCameraPermissionGranted = ContextCompat.checkSelfPermission(
-                    this, Manifest.permission.CAMERA
-                ) == PackageManager.PERMISSION_GRANTED
-            )
-        }
+    private fun isCameraPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this, Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun updateCameraPermissionState(
+        isRequested: Boolean,
+        isGranted: Boolean
+    ) {
+        viewModel.updateCameraPermissionState(
+            isRequested,
+            isGranted,
+            shouldShowRationale = !isGranted &&
+                    shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
+        )
     }
 
     private fun requestCameraPermission() =
@@ -105,18 +121,9 @@ class CameraActivity : AppCompatActivity() {
     private val requestCameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
-        val shouldShowRationale = !isGranted &&
-                shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
-
-        viewModel.uiState.update {
-            it.copy(
-                isCameraPermissionGranted = isGranted,
-                shouldShowCameraPermissionRationale = shouldShowRationale
-            )
-        }
-
-        if (!isGranted && !shouldShowRationale) {
-            finish()
-        }
+        updateCameraPermissionState(
+            isRequested = true,
+            isGranted = isGranted
+        )
     }
 }
