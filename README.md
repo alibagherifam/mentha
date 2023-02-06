@@ -48,10 +48,8 @@ Feel free to create pull requests, especially AI model improvements ;)
 
 ## 🙏 Acknowledgment
 
-- Thanks to [Dr. Hamidreza Hamidi](http://ikiu.ac.ir/members/?id=46&lang=1) for his guidance toward
-  the project.
-
-- Thanks to [Amir H. Bagherifam](https://dribbble.com/Amirh_UiUX) for designing the logo.
+Thanks to [Dr. Hamidreza Hamidi](http://ikiu.ac.ir/members/?id=46&lang=1) for his guidance toward
+the project.
 
 License
 -------
