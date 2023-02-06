@@ -73,9 +73,7 @@ class CameraActivity : AppCompatActivity() {
                 it.copy(isFlashlightSupported = camera.cameraInfo.hasFlashUnit())
             }
 
-            recognizer.recognizedFoodLabels.collect { foodLabel ->
-                viewModel.updateFood(foodLabel)
-            }
+            viewModel.setImageRecognizer(recognizer)
         }
     }
 
@@ -92,7 +90,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun checkForCameraPermission() {
-        requestCameraPermission()
         viewModel.uiState.update {
             it.copy(
                 isCameraPermissionGranted = ContextCompat.checkSelfPermission(
