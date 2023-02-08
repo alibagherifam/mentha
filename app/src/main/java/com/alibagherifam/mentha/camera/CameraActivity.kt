@@ -1,23 +1,22 @@
 package com.alibagherifam.mentha.camera
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
 import androidx.camera.view.PreviewView
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.core.content.ContextCompat
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.lifecycleScope
 import com.alibagherifam.mentha.comoon.provideCameraViewModelFactory
 import com.alibagherifam.mentha.details.FoodDetailsActivity
 import com.alibagherifam.mentha.nutritionfacts.model.FoodEntity
+import com.alibagherifam.mentha.permission.CameraPermissionScreen
 import com.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
@@ -33,33 +32,25 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        updateCameraPermissionState(
-            isRequested = false,
-            isGranted = isCameraPermissionGranted()
-        )
         setContent {
             AppTheme {
-                val state by viewModel.uiState.collectAsState()
-                when (state.cameraPermissionState) {
-                    PermissionState.NOT_REQUESTED -> {
-                        Surface { requestCameraPermission() }
-                    }
-                    PermissionState.GRANTED -> {
-                        CameraScreen(
-                            state,
-                            onFlashlightToggle = ::toggleFlashlight,
-                            onSettingsClick = { },
-                            onShowDetailsClick = ::openFoodDetails,
-                            onPreviewViewCreated = ::startFoodRecognition
-                        )
-                    }
-                    PermissionState.SHOULD_SHOW_RATIONALE -> {
-                        CameraPermissionRationaleDialog(
-                            onConfirmClick = ::requestCameraPermission,
-                            onDismissRequest = this@CameraActivity::finish
-                        )
-                    }
-                    PermissionState.NEVER_ASK_AGAIN -> finish()
+                var isCameraPermissionGranted by remember {
+                    mutableStateOf(false)
+                }
+                if (isCameraPermissionGranted) {
+                    val state by viewModel.uiState.collectAsState()
+                    CameraScreen(
+                        state,
+                        onFlashlightToggle = ::toggleFlashlight,
+                        onSettingsClick = { },
+                        onShowDetailsClick = ::openFoodDetails,
+                        onPreviewViewCreated = ::startFoodRecognition
+                    )
+                } else {
+                    CameraPermissionScreen(
+                        onPermissionGranted = { isCameraPermissionGranted = true },
+                        onPermissionDenied = { finish() }
+                    )
                 }
             }
         }
@@ -95,35 +86,5 @@ class CameraActivity : AppCompatActivity() {
     private fun toggleFlashlight(isEnabled: Boolean) {
         viewModel.uiState.update { it.copy(isFlashlightEnabled = isEnabled) }
         camera.cameraControl.enableTorch(isEnabled)
-    }
-
-    private fun isCameraPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this, Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun updateCameraPermissionState(
-        isRequested: Boolean,
-        isGranted: Boolean
-    ) {
-        viewModel.updateCameraPermissionState(
-            isRequested,
-            isGranted,
-            shouldShowRationale = !isGranted &&
-                    shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
-        )
-    }
-
-    private fun requestCameraPermission() =
-        requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
-
-    private val requestCameraPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        updateCameraPermissionState(
-            isRequested = true,
-            isGranted = isGranted
-        )
     }
 }

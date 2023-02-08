@@ -12,15 +12,16 @@ framework.
 
 ## ⚙ Technologies
 
-[TensorFlow Lite](https://www.tensorflow.org/lite)
+The project uses [TensorFlow Lite](https://www.tensorflow.org/lite) framework for machine learning
+on mobile.
 
-Currently, the project uses a pre-trained model
-from [Tensorflow Hub](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1). The model is
-based on the [MobileNet](https://arxiv.org/abs/1704.04861) CNN architecture and was trained over
-the [ImageNet](https://www.image-net.org/) dataset. As a future roadmap, I will replace this model
-with a custom one.
+Currently, the ML model is
+a [pre-trained one](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1) from
+Tensorflow Hub. It is based on the [MobileNet](https://arxiv.org/abs/1704.04861) CNN architecture
+and was trained over the [ImageNet](https://www.image-net.org/) dataset. As a future roadmap, I will
+replace this model with a custom one.
 
-Other Android technologies  :
+Other Android technologies:
 
 - Kotlin Coroutines
 - AndroidX Camera

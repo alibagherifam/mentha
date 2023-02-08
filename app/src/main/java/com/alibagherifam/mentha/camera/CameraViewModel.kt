@@ -24,23 +24,6 @@ class CameraViewModel(private val repository: FoodRepository) : ViewModel() {
         }
     }
 
-    fun updateCameraPermissionState(
-        isRequested: Boolean,
-        isGranted: Boolean,
-        shouldShowRationale: Boolean
-    ) {
-        uiState.update {
-            it.copy(
-                cameraPermissionState = when {
-                    isGranted -> PermissionState.GRANTED
-                    shouldShowRationale -> PermissionState.SHOULD_SHOW_RATIONALE
-                    isRequested -> PermissionState.NEVER_ASK_AGAIN
-                    else -> PermissionState.NOT_REQUESTED
-                }
-            )
-        }
-    }
-
     @Suppress("UNCHECKED_CAST")
     class Provider(
         private val repository: FoodRepository
