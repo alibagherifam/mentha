@@ -12,8 +12,8 @@ framework.
 
 ## ⚙ Technologies
 
-The project uses [TensorFlow Lite](https://www.tensorflow.org/lite) framework for machine learning
-on mobile.
+The project uses the [TensorFlow Lite](https://www.tensorflow.org/lite) framework for machine
+learning on mobile.
 
 Currently, the ML model is
 a [pre-trained one](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1) from
