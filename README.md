@@ -2,8 +2,9 @@
 
 Find nutrition facts using your phone camera!
 
-Mentha is an Android application that finds nutrition facts of the food you are scanning. It uses
-image classification and neural networks under the hood.
+Mentha is an Android application that finds nutrition facts by scanning foods using a phone camera.
+Under the hood, It performs Image Classification with a MobileNet CNN model over the TensorFlow
+framework.
 
 ## Screenshots
 
@@ -11,11 +12,15 @@ image classification and neural networks under the hood.
 
 ## ⚙ Technologies
 
-Image classification is based on [TensorFlow Lite](https://www.tensorflow.org/lite)
-with [EfficientNet-Lite](https://tfhub.dev/tensorflow/efficientnet/lite2/classification/2) and
-[MobileNet](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1) models.
+[TensorFlow Lite](https://www.tensorflow.org/lite)
 
-Other Android technologies:
+Currently, the project uses a pre-trained model
+from [Tensorflow Hub](https://tfhub.dev/iree/lite-model/mobilenet_v1_100_224/uint8/1). The model is
+based on the [MobileNet](https://arxiv.org/abs/1704.04861) CNN architecture and was trained over
+the [ImageNet](https://www.image-net.org/) dataset. As a future roadmap, I will replace this model
+with a custom one.
+
+Other Android technologies  :
 
 - Kotlin Coroutines
 - AndroidX Camera
@@ -36,15 +41,16 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Mentha):
 > "Mentha (also known as mint) is a genus of plants in the family Lamiaceae (mint family)."
 
 As a boy whose childhood was full of stomachaches, the word mentha means as a potion of healing to
-me. So I set it as the project's name.
+me. So I named the project Mentha.
 
 ## 💡 Inspiration
 
-This was the final project for my B.Sc. in Computer Engineering.
+This was the final project for the Artificial Intelligence course during my B.Sc. in Computer
+Engineering.
 
 ## 🤝 Contribution
 
-Feel free to create pull requests, especially AI model improvements ;)
+Feel free to create pull requests, especially ML model improvements ;)
 
 ## 🙏 Acknowledgment
 
