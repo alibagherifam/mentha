@@ -22,7 +22,7 @@
         tools:targetApi="tiramisu">
 
         <activity
-            android:name=".camera.CameraActivity"
+            android:name="dev.alibagherifam.mentha.camera.CameraActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.alibagherifam.mentha.buildlogic"
+group = "dev.alibagherifam.mentha.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -17,11 +17,11 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "com.alibagherifam.mentha.android.application"
+            id = "dev.alibagherifam.mentha.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidLibrary") {
-            id = "com.alibagherifam.mentha.android.library"
+            id = "dev.alibagherifam.mentha.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
     }

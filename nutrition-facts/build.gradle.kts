@@ -1,10 +1,10 @@
 plugins {
-    id("com.alibagherifam.mentha.android.library")
+    id("dev.alibagherifam.mentha.android.library")
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.alibagherifam.mentha.nutritionfacts"
+    namespace = "dev.alibagherifam.mentha.nutritionfacts"
 }
 
 dependencies {

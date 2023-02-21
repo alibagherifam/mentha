@@ -2,12 +2,12 @@ import com.android.build.gradle.internal.tasks.factory.dependsOn
 import de.undercouch.gradle.tasks.download.Download
 
 plugins {
-    id("com.alibagherifam.mentha.android.library")
+    id("dev.alibagherifam.mentha.android.library")
     alias(libs.plugins.gradleDownload)
 }
 
 android {
-    namespace = "com.alibagherifam.mentha.imageclassifier"
+    namespace = "dev.alibagherifam.mentha.imageclassifier"
 }
 
 dependencies {

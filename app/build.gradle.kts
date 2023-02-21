@@ -1,11 +1,11 @@
 plugins {
-    id("com.alibagherifam.mentha.android.application")
+    id("dev.alibagherifam.mentha.android.application")
 }
 
 android {
-    namespace = "com.alibagherifam.mentha"
+    namespace = "dev.alibagherifam.mentha"
     defaultConfig {
-        applicationId = "com.alibagherifam.mentha"
+        applicationId = "dev.alibagherifam.mentha"
         versionCode = 1
         versionName = "1.0.0"
     }
