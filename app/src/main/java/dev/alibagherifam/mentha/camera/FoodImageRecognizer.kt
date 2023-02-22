@@ -20,24 +20,25 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
 
-    private val recognitions = Channel<Bitmap>(capacity = Channel.CONFLATED)
-    val recognizedFoodLabels: Flow<String?> = recognitions
+    private val classifier = ImageClassifierHelper(
+        context,
+        threshold = 0.55f,
+        numOfThreads = 2,
+        maxResults = 1,
+        processorType = ImageClassifierHelper.PROCESSOR_CPU,
+        model = ImageClassifierHelper.MODEL_MOBILENET_V3
+    )
+
+    private val recognitionChannel = Channel<Bitmap>(capacity = Channel.CONFLATED)
+    val recognizedFoodLabels: Flow<String?> = recognitionChannel
         .consumeAsFlow()
         .map { bitmap ->
             val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
             Log.i(TAG, "Inference Time: $inferenceTime")
             results?.firstOutput()?.mostAccurateOne()?.label
-        }.filter { it in foods }
+        }
+        .filter { it == null || it in foods }
         .distinctUntilChanged()
-
-    private val classifier = ImageClassifierHelper(
-        context,
-        threshold = 0.55f,
-        numThreads = 2,
-        maxResults = 1,
-        currentDelegate = ImageClassifierHelper.DELEGATE_CPU,
-        currentModel = ImageClassifierHelper.MODEL_MOBILENET_V3
-    )
 
     override fun analyze(image: ImageProxy) {
         if (!::bitmapBuffer.isInitialized) {
@@ -54,7 +55,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         // Copy out RGB bits to the shared bitmap buffer
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
-        recognitions.trySend(bitmapBuffer)
+        recognitionChannel.trySend(bitmapBuffer)
     }
 
     // Our model has single output so we are only interested in

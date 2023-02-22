@@ -14,11 +14,11 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class ImageClassifierHelper(
     private val context: Context,
-    var threshold: Float = 0.5f,
-    var numThreads: Int = 2,
-    var maxResults: Int = 3,
-    var currentDelegate: Int = 0,
-    var currentModel: Int = 0
+    val threshold: Float = 0.5f,
+    val numOfThreads: Int = 2,
+    val maxResults: Int = 3,
+    val processorType: Int = 0,
+    val model: Int = 0
 ) {
     private var imageClassifier: ImageClassifier? = null
 
@@ -34,42 +34,48 @@ class ImageClassifierHelper(
         val optionsBuilder = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(threshold)
             .setMaxResults(maxResults)
+            .setBaseOptions(getExecutorOptions(processorType, numOfThreads))
 
+        try {
+            imageClassifier = ImageClassifier.createFromFileAndOptions(
+                context,
+                getModelPath(model),
+                optionsBuilder.build()
+            )
+        } catch (e: IllegalStateException) {
+            throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
+        }
+    }
+
+    private fun getExecutorOptions(processorType: Int, numThreads: Int): BaseOptions {
         val baseOptionsBuilder = BaseOptions.builder().setNumThreads(numThreads)
 
-        when (currentDelegate) {
-            DELEGATE_CPU -> {
+        when (processorType) {
+            PROCESSOR_CPU -> {
                 // Default
             }
-            DELEGATE_GPU -> {
+            PROCESSOR_GPU -> {
                 if (CompatibilityList().isDelegateSupportedOnThisDevice) {
                     baseOptionsBuilder.useGpu()
                 } else {
                     throw IllegalStateException("GPU is not supported on this device")
                 }
             }
-            DELEGATE_NNAPI -> {
+            PROCESSOR_NNAPI -> {
                 baseOptionsBuilder.useNnapi()
             }
         }
 
-        optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
+        return baseOptionsBuilder.build()
+    }
 
-        val modelName = when (currentModel) {
+    private fun getModelPath(model: Int): String {
+        val modelName = when (model) {
             MODEL_MOBILENET_V3 -> "mobilenet_v3"
             MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4"
             else -> throw IllegalStateException()
         }
-
-        try {
-            imageClassifier = ImageClassifier.createFromFileAndOptions(
-                context,
-                "models/$modelName.tflite",
-                optionsBuilder.build()
-            )
-        } catch (e: IllegalStateException) {
-            throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
-        }
+        return "models/$modelName.tflite"
     }
 
     fun classify(image: Bitmap, rotation: Int): Pair<List<Classifications>?, Long> {
@@ -118,9 +124,9 @@ class ImageClassifierHelper(
     }
 
     companion object {
-        const val DELEGATE_CPU = 0
-        const val DELEGATE_GPU = 1
-        const val DELEGATE_NNAPI = 2
+        const val PROCESSOR_CPU = 0
+        const val PROCESSOR_GPU = 1
+        const val PROCESSOR_NNAPI = 2
         const val MODEL_MOBILENET_V3 = 0
         const val MODEL_EFFICIENTNET_V4 = 1
     }
