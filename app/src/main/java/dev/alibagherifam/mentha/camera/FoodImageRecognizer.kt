@@ -14,6 +14,9 @@ import org.tensorflow.lite.task.vision.classifier.Classifications
 class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
     ImageClassifierHelper.ClassifierListener {
 
+    private lateinit var bitmapBuffer: Bitmap
+    private var imageRotationDegrees: Int = 0
+
     private val recognitions = Channel<String?>(capacity = Channel.CONFLATED)
     val recognizedFoodLabels: Flow<String?> = recognitions.consumeAsFlow()
 
@@ -27,10 +30,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
         imageClassifierListener = this
     )
 
-    private var pauseAnalysis: Boolean = false
-    private lateinit var bitmapBuffer: Bitmap
-    private var imageRotationDegrees: Int = 0
-
     override fun analyze(image: ImageProxy) {
         if (!::bitmapBuffer.isInitialized) {
             // The image rotation and RGB image buffer are initialized only once
@@ -39,12 +38,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
             bitmapBuffer = Bitmap.createBitmap(
                 image.width, image.height, Bitmap.Config.ARGB_8888
             )
-        }
-
-        // Early exit: image analysis is in paused state
-        if (pauseAnalysis) {
-            image.close()
-            return
         }
 
         // Copy out RGB bits to the shared bitmap buffer
