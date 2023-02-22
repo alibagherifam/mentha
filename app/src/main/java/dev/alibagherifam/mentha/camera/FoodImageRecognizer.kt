@@ -47,6 +47,8 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         // Perform the image classification for the current frame
         val (results, inferenceTime) = classifier.classify(bitmapBuffer, imageRotationDegrees)
 
+        Log.i(TAG, "Inference Time: $inferenceTime")
+
         results?.firstOutput()?.mostAccurateOne()
             ?.label?.takeIf { it in foods }
             .let { recognitions.trySend(it) }
