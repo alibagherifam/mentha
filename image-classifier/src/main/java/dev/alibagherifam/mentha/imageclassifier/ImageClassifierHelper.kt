@@ -18,8 +18,7 @@ class ImageClassifierHelper(
     var numThreads: Int = 2,
     var maxResults: Int = 3,
     var currentDelegate: Int = 0,
-    var currentModel: Int = 0,
-    private val imageClassifierListener: ClassifierListener?
+    var currentModel: Int = 0
 ) {
     private var imageClassifier: ImageClassifier? = null
 
@@ -71,7 +70,7 @@ class ImageClassifierHelper(
         }
     }
 
-    fun classify(image: Bitmap, rotation: Int) {
+    fun classify(image: Bitmap, rotation: Int): Pair<List<Classifications>?, Long> {
         if (imageClassifier == null) {
             setupImageClassifier()
         }
@@ -94,10 +93,7 @@ class ImageClassifierHelper(
 
         val results = imageClassifier?.classify(tensorImage, imageProcessingOptions)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
-        imageClassifierListener?.onResults(
-            results,
-            inferenceTime
-        )
+        return results to inferenceTime
     }
 
     // Receive the device rotation (Surface.x values range from 0->3) and return EXIF orientation
@@ -117,13 +113,6 @@ class ImageClassifierHelper(
         else -> {
             ImageProcessingOptions.Orientation.RIGHT_TOP
         }
-    }
-
-    interface ClassifierListener {
-        fun onResults(
-            results: List<Classifications>?,
-            inferenceTime: Long
-        )
     }
 
     companion object {

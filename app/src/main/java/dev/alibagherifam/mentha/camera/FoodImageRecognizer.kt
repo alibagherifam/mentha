@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
-class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
-    ImageClassifierHelper.ClassifierListener {
+class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
 
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
@@ -27,8 +26,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
         numThreads = 2,
         maxResults = 1,
         currentDelegate = ImageClassifierHelper.DELEGATE_CPU,
-        currentModel = ImageClassifierHelper.MODEL_MOBILENET_V3,
-        imageClassifierListener = this
+        currentModel = ImageClassifierHelper.MODEL_MOBILENET_V3
     )
 
     override fun analyze(image: ImageProxy) {
@@ -47,7 +45,11 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
         // Perform the image classification for the current frame
-        classifier.classify(bitmapBuffer, imageRotationDegrees)
+        val (results, inferenceTime) = classifier.classify(bitmapBuffer, imageRotationDegrees)
+
+        results?.firstOutput()?.mostAccurateOne()
+            ?.label?.takeIf { it in foods }
+            .let { recognitions.trySend(it) }
     }
 
     // Our model has single output so we are only interested in
@@ -57,12 +59,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
 
     private fun List<Category>.mostAccurateOne(): Category? =
         this.minByOrNull { category -> category.index }
-
-    override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
-        results?.firstOutput()?.mostAccurateOne()
-            ?.label?.takeIf { it in foods }
-            .let { recognitions.trySend(it) }
-    }
 
     // TODO: Remove this after changing model with a new one that only contains food labels
     companion object {
