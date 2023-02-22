@@ -8,6 +8,7 @@ import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
+import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
@@ -87,11 +88,18 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
         classifier.classify(bitmapBuffer, imageRotationDegrees)
     }
 
+    // Our model has single output so we are only interested in
+    // the first output from classification results.
+    private fun List<Classifications>.firstOutput(): List<Category>? =
+        this.firstOrNull()?.categories
+
+    private fun List<Category>.mostAccurateOne(): Category? =
+        this.minByOrNull { category -> category.index }
+
     override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
-        results?.firstOrNull()?.categories
-            ?.minByOrNull { category -> category.index }
-            ?.takeIf { it.label in foods }
-            .let { recognitions.trySend(it?.label) }
+        results?.firstOutput()?.mostAccurateOne()
+            ?.label?.takeIf { it in foods }
+            .let { recognitions.trySend(it) }
     }
 }
 
