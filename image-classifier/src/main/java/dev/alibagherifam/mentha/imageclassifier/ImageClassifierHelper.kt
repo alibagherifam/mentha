@@ -46,7 +46,7 @@ class ImageClassifierHelper(
                 if (CompatibilityList().isDelegateSupportedOnThisDevice) {
                     baseOptionsBuilder.useGpu()
                 } else {
-                    imageClassifierListener?.onError("GPU is not supported on this device")
+                    throw IllegalStateException("GPU is not supported on this device")
                 }
             }
             DELEGATE_NNAPI -> {
@@ -67,9 +67,7 @@ class ImageClassifierHelper(
             imageClassifier =
                 ImageClassifier.createFromFileAndOptions(context, modelName, optionsBuilder.build())
         } catch (e: IllegalStateException) {
-            imageClassifierListener?.onError(
-                "Image classifier failed to initialize. See error logs for details"
-            )
+            throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
         }
     }
 
@@ -85,9 +83,7 @@ class ImageClassifierHelper(
         // Create preprocessor for the image.
         // See https://www.tensorflow.org/lite/inference_with_metadata/
         //            lite_support#imageprocessor_architecture
-        val imageProcessor =
-            ImageProcessor.Builder()
-                .build()
+        val imageProcessor = ImageProcessor.Builder().build()
 
         // Preprocess the image and convert it into a TensorImage for classification.
         val tensorImage = imageProcessor.process(TensorImage.fromBitmap(image))
@@ -124,7 +120,6 @@ class ImageClassifierHelper(
     }
 
     interface ClassifierListener {
-        fun onError(error: String)
         fun onResults(
             results: List<Classifications>?,
             inferenceTime: Long

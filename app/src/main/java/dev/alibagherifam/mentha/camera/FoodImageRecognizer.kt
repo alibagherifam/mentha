@@ -17,8 +17,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
     val recognizedFoodLabels: Flow<String?> = recognitions.consumeAsFlow()
 
     /*
-    TODO: Remove this after changing model with
-          a new one that only contains food labels
+    TODO: Remove this after changing model with a new one that only contains food labels
     */
     companion object {
         private val foods = listOf(
@@ -93,10 +92,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
             ?.minByOrNull { category -> category.index }
             ?.takeIf { it.label in foods }
             .let { recognitions.trySend(it?.label) }
-    }
-
-    override fun onError(error: String) {
-        TODO("Not yet implemented")
     }
 }
 
