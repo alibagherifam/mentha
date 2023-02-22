@@ -20,14 +20,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
 
-    private val classifier = ImageClassifierHelper(
-        context,
-        threshold = 0.55f,
-        numOfThreads = 2,
-        maxResults = 1,
-        processorType = ImageClassifierHelper.PROCESSOR_CPU,
-        model = ImageClassifierHelper.MODEL_MOBILENET_V3
-    )
+    private val classifier = ImageClassifierHelper(context)
 
     private val recognitionChannel = Channel<Bitmap>(capacity = Channel.CONFLATED)
     val recognizedFoodLabels: Flow<String?> = recognitionChannel

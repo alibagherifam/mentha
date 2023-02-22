@@ -13,34 +13,23 @@ import org.tensorflow.lite.task.vision.classifier.Classifications
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class ImageClassifierHelper(
-    private val context: Context,
-    val threshold: Float = 0.5f,
-    val numOfThreads: Int = 2,
-    val maxResults: Int = 3,
-    val processorType: Int = 0,
-    val model: Int = 0
+    context: Context,
+    threshold: Float = 0.55f,
+    numOfThreads: Int = 2,
+    maxResults: Int = 1,
+    processorType: Int = PROCESSOR_CPU,
+    model: Int = MODEL_EFFICIENTNET_V4
 ) {
-    private var imageClassifier: ImageClassifier? = null
-
-    init {
-        setupImageClassifier()
-    }
-
-    fun clearImageClassifier() {
-        imageClassifier = null
-    }
-
-    private fun setupImageClassifier() {
-        val optionsBuilder = ImageClassifier.ImageClassifierOptions.builder()
+    private var imageClassifier: ImageClassifier = kotlin.run {
+        val options = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(threshold)
             .setMaxResults(maxResults)
             .setBaseOptions(getExecutorOptions(processorType, numOfThreads))
+            .build()
 
         try {
-            imageClassifier = ImageClassifier.createFromFileAndOptions(
-                context,
-                getModelPath(model),
-                optionsBuilder.build()
+            ImageClassifier.createFromFileAndOptions(
+                context, getModelPath(model), options
             )
         } catch (e: IllegalStateException) {
             throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
@@ -79,12 +68,6 @@ class ImageClassifierHelper(
     }
 
     fun classify(image: Bitmap, rotation: Int): Pair<List<Classifications>?, Long> {
-        if (imageClassifier == null) {
-            setupImageClassifier()
-        }
-
-        // Inference time is the difference between the system time at the start and finish of the
-        // process
         var inferenceTime = SystemClock.uptimeMillis()
 
         // Create preprocessor for the image.
@@ -99,7 +82,7 @@ class ImageClassifierHelper(
             .setOrientation(getOrientationFromRotation(rotation))
             .build()
 
-        val results = imageClassifier?.classify(tensorImage, imageProcessingOptions)
+        val results = imageClassifier.classify(tensorImage, imageProcessingOptions)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
         return results to inferenceTime
     }
