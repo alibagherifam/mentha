@@ -3,7 +3,6 @@ package dev.alibagherifam.mentha.imageclassifier
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.SystemClock
-import android.util.Log
 import android.view.Surface
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.image.ImageProcessor
@@ -59,7 +58,7 @@ class ImageClassifierHelper(
 
         val modelName =
             when (currentModel) {
-                MODEL_MOBILENET_V3-> "mobilenet_v3.tflite"
+                MODEL_MOBILENET_V3 -> "mobilenet_v3.tflite"
                 MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4.tflite"
                 else -> throw IllegalStateException()
             }
@@ -71,7 +70,6 @@ class ImageClassifierHelper(
             imageClassifierListener?.onError(
                 "Image classifier failed to initialize. See error logs for details"
             )
-            Log.e(TAG, "TFLite failed to load model with error: " + e.message)
         }
     }
 
@@ -139,7 +137,5 @@ class ImageClassifierHelper(
         const val DELEGATE_NNAPI = 2
         const val MODEL_MOBILENET_V3 = 0
         const val MODEL_EFFICIENTNET_V4 = 1
-
-        private const val TAG = "ImageClassifierHelper"
     }
 }
