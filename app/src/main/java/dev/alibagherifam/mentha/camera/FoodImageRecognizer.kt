@@ -9,6 +9,7 @@ import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import org.tensorflow.lite.support.label.Category
@@ -19,12 +20,15 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
 
-    private val recognitions = Channel<List<Classifications>?>(capacity = Channel.CONFLATED)
+    private val recognitions = Channel<Bitmap>(capacity = Channel.CONFLATED)
     val recognizedFoodLabels: Flow<String?> = recognitions
         .consumeAsFlow()
-        .map { results ->
+        .map { bitmap ->
+            val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
+            Log.i(TAG, "Inference Time: $inferenceTime")
             results?.firstOutput()?.mostAccurateOne()?.label
         }.filter { it in foods }
+        .distinctUntilChanged()
 
     private val classifier = ImageClassifierHelper(
         context,
@@ -50,12 +54,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         // Copy out RGB bits to the shared bitmap buffer
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
-        // Perform the image classification for the current frame
-        val (results, inferenceTime) = classifier.classify(bitmapBuffer, imageRotationDegrees)
-
-        Log.i(TAG, "Inference Time: $inferenceTime")
-
-        recognitions.trySend(results)
+        recognitions.trySend(bitmapBuffer)
     }
 
     // Our model has single output so we are only interested in
