@@ -1,26 +1,25 @@
 [versions]
-androidPlugin = "7.4.0"
-androidxCamera = "1.2.0"
-androidxComposeCompiler = "1.4.0"
-androidxLifecycle = "2.5.1"
+androidPlugin = "7.4.1"
+androidxCamera = "1.2.1"
+androidxComposeCompiler = "1.4.2"
+androidxLifecycle = "2.6.0-beta01"
 androidxRoom = "2.5.0"
 coil = "2.2.2"
 coroutines = "1.6.4"
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 
 [libraries]
 # AndroidX
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.6.1" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.0" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.0-beta01" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.1" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
-androidx-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version = "2023.02.00-alpha01" }
+androidx-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version = "2023.02.00-beta01" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.9.0" }
-androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version = "1.5.4" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
@@ -48,9 +47,9 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
-dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.44.0" }
+dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
 gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
-gradleDownload = { id = "de.undercouch.download", version = "5.3.0" }
+gradleDownload = { id = "de.undercouch.download", version = "5.3.1" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "1.8.0-1.0.8" }
+ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
