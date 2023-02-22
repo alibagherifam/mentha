@@ -35,7 +35,7 @@ tasks.register<Download>("downloadMLModel") {
 
 tasks.register<Download>("downloadMLModel2") {
     tfModel(
-        pathOnRepository = "tensorflow/lite-model/efficientnet/lite4/int8/2",
+        pathOnRepository = "tensorflow/lite-model/efficientnet/lite4/uint8/2",
         saveAs = "efficientnet_lite4"
     )
 }
