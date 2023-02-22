@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 class CameraActivity : AppCompatActivity() {
 
-    private val viewModel: dev.alibagherifam.mentha.camera.CameraViewModel by viewModels {
+    private val viewModel: CameraViewModel by viewModels {
         provideCameraViewModelFactory(this)
     }
 
@@ -39,7 +39,7 @@ class CameraActivity : AppCompatActivity() {
                 }
                 if (isCameraPermissionGranted) {
                     val state by viewModel.uiState.collectAsState()
-                    dev.alibagherifam.mentha.camera.CameraScreen(
+                    CameraScreen(
                         state,
                         onFlashlightToggle = ::toggleFlashlight,
                         onSettingsClick = { },
@@ -61,9 +61,8 @@ class CameraActivity : AppCompatActivity() {
             // TODO: This delay is a workaround for unknown crash
             delay(1000)
 
-            val recognizer =
-                dev.alibagherifam.mentha.camera.FoodImageRecognizer(this@CameraActivity)
-            camera = dev.alibagherifam.mentha.camera.setupCamera(
+            val recognizer = FoodImageRecognizer(this@CameraActivity)
+            camera = setupCamera(
                 viewFinder,
                 recognizer,
                 lifecycleOwner = this@CameraActivity
