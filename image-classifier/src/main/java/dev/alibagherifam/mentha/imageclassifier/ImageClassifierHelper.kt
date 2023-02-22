@@ -55,16 +55,18 @@ class ImageClassifierHelper(
 
         optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
 
-        val modelName =
-            when (currentModel) {
-                MODEL_MOBILENET_V3 -> "mobilenet_v3.tflite"
-                MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4.tflite"
-                else -> throw IllegalStateException()
-            }
+        val modelName = when (currentModel) {
+            MODEL_MOBILENET_V3 -> "mobilenet_v3"
+            MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4"
+            else -> throw IllegalStateException()
+        }
 
         try {
-            imageClassifier =
-                ImageClassifier.createFromFileAndOptions(context, modelName, optionsBuilder.build())
+            imageClassifier = ImageClassifier.createFromFileAndOptions(
+                context,
+                "models/$modelName.tflite",
+                optionsBuilder.build()
+            )
         } catch (e: IllegalStateException) {
             throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
         }
