@@ -2,6 +2,7 @@ package dev.alibagherifam.mentha.camera
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
@@ -40,6 +41,8 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
             )
         }
 
+        Log.i(TAG, "Image width: ${image.width}, height: ${image.height}")
+
         // Copy out RGB bits to the shared bitmap buffer
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
 
@@ -63,6 +66,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
 
     // TODO: Remove this after changing model with a new one that only contains food labels
     companion object {
+        private const val TAG = "FOOD_RECOGNIZER"
         private val foods = listOf(
             "banana",
             "broccoli",
