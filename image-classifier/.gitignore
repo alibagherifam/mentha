@@ -1,4 +1,4 @@
 /build
 
-# Tensorflow resources
-/src/main/assets/
+# ML models
+/src/main/assets/models

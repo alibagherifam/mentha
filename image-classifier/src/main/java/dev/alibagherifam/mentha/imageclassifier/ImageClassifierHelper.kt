@@ -59,11 +59,9 @@ class ImageClassifierHelper(
 
         val modelName =
             when (currentModel) {
-                MODEL_MOBILENETV1 -> "mobilenetv1.tflite"
-                MODEL_EFFICIENTNETV0 -> "efficientnet-lite0.tflite"
-                MODEL_EFFICIENTNETV1 -> "efficientnet-lite1.tflite"
-                MODEL_EFFICIENTNETV2 -> "efficientnet-lite2.tflite"
-                else -> "mobilenetv1.tflite"
+                MODEL_MOBILENET_V3-> "mobilenet_v3.tflite"
+                MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4.tflite"
+                else -> throw IllegalStateException()
             }
 
         try {
@@ -139,10 +137,8 @@ class ImageClassifierHelper(
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DELEGATE_NNAPI = 2
-        const val MODEL_MOBILENETV1 = 0
-        const val MODEL_EFFICIENTNETV0 = 1
-        const val MODEL_EFFICIENTNETV1 = 2
-        const val MODEL_EFFICIENTNETV2 = 3
+        const val MODEL_MOBILENET_V3 = 0
+        const val MODEL_EFFICIENTNET_V4 = 1
 
         private const val TAG = "ImageClassifierHelper"
     }

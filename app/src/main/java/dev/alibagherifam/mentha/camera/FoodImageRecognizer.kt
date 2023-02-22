@@ -57,7 +57,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer,
         numThreads = 2,
         maxResults = 1,
         currentDelegate = ImageClassifierHelper.DELEGATE_CPU,
-        currentModel = ImageClassifierHelper.MODEL_MOBILENETV1,
+        currentModel = ImageClassifierHelper.MODEL_MOBILENET_V3,
         imageClassifierListener = this
     )
 
