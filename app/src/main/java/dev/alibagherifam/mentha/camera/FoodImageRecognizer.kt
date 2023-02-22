@@ -9,6 +9,8 @@ import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
@@ -17,8 +19,12 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private lateinit var bitmapBuffer: Bitmap
     private var imageRotationDegrees: Int = 0
 
-    private val recognitions = Channel<String?>(capacity = Channel.CONFLATED)
-    val recognizedFoodLabels: Flow<String?> = recognitions.consumeAsFlow()
+    private val recognitions = Channel<List<Classifications>?>(capacity = Channel.CONFLATED)
+    val recognizedFoodLabels: Flow<String?> = recognitions
+        .consumeAsFlow()
+        .map { results ->
+            results?.firstOutput()?.mostAccurateOne()?.label
+        }.filter { it in foods }
 
     private val classifier = ImageClassifierHelper(
         context,
@@ -49,9 +55,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
 
         Log.i(TAG, "Inference Time: $inferenceTime")
 
-        results?.firstOutput()?.mostAccurateOne()
-            ?.label?.takeIf { it in foods }
-            .let { recognitions.trySend(it) }
+        recognitions.trySend(results)
     }
 
     // Our model has single output so we are only interested in
