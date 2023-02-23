@@ -1,8 +1,8 @@
 [versions]
 androidPlugin = "7.4.1"
 androidxCamera = "1.2.1"
-androidxComposeCompiler = "1.4.2"
-androidxLifecycle = "2.6.0-beta01"
+androidxComposeCompiler = "1.4.3"
+androidxLifecycle = "2.6.0-rc01"
 androidxRoom = "2.5.0"
 coil = "2.2.2"
 coroutines = "1.6.4"
@@ -10,12 +10,12 @@ kotlin = "1.8.10"
 
 [libraries]
 # AndroidX
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.0-beta01" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.0-beta02" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.1" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
-androidx-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version = "2023.02.00-beta01" }
+androidx-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version = "2023.02.00-beta02" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
