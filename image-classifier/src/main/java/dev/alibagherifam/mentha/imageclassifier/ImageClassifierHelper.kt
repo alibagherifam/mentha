@@ -3,6 +3,7 @@ package dev.alibagherifam.mentha.imageclassifier
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.SystemClock
+import android.util.Log
 import android.view.Surface
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.image.ImageProcessor
@@ -62,7 +63,7 @@ class ImageClassifierHelper(context: Context) {
         return "models/$modelName.tflite"
     }
 
-    fun classify(image: Bitmap, rotation: Int): Pair<List<Classifications>?, Long> {
+    fun classify(image: Bitmap, rotation: Int): List<Classifications>? {
         var inferenceTime = SystemClock.uptimeMillis()
 
         // Create preprocessor for the image.
@@ -79,7 +80,8 @@ class ImageClassifierHelper(context: Context) {
 
         val results = imageClassifier.classify(tensorImage, imageProcessingOptions)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
-        return results to inferenceTime
+        Log.i("mentha_debug", "Inference Time: $inferenceTime")
+        return results
     }
 
     // Receive the device rotation (Surface.x values range from 0->3) and return EXIF orientation
@@ -104,6 +106,8 @@ class ImageClassifierHelper(context: Context) {
     companion object {
         const val MAX_RESULT: Int = 1
         const val NUM_THREADS: Int = 2
+
+        // Use 0.55 for EfficientNet
         const val THRESHOLD: Float = 5.5f
 
         const val PROCESSOR_CPU = 0

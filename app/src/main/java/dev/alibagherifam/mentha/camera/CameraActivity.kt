@@ -26,7 +26,6 @@ import dev.alibagherifam.mentha.permission.PermissionState.SHOULD_SHOW_RATIONALE
 import dev.alibagherifam.mentha.permission.rememberPermissionStateHolder
 import dev.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CameraActivity : AppCompatActivity() {
@@ -90,18 +89,13 @@ class CameraActivity : AppCompatActivity() {
             // TODO: This delay is a workaround for unknown crash
             delay(1000)
 
-            val recognizer = ImageAnalyzer(this@CameraActivity)
             camera = setupCamera(
                 viewFinder,
-                recognizer,
+                ImageAnalyzer(viewModel.classifyImageChannel),
                 lifecycleOwner = this@CameraActivity
             )
 
-            viewModel.uiState.update {
-                it.copy(isFlashlightSupported = camera.cameraInfo.hasFlashUnit())
-            }
-
-            viewModel.setImageRecognizer(recognizer)
+            viewModel.setFlashlightSupported(camera.cameraInfo.hasFlashUnit())
         }
     }
 
@@ -113,7 +107,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun toggleFlashlight(isEnabled: Boolean) {
-        viewModel.uiState.update { it.copy(isFlashlightEnabled = isEnabled) }
+        viewModel.setFlashlightEnabled(isEnabled)
         camera.cameraControl.enableTorch(isEnabled)
     }
 }
