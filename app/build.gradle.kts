@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId = "dev.alibagherifam.mentha"
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "0.8.0"
     }
 
     buildFeatures {
