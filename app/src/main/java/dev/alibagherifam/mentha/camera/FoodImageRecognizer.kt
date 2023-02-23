@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.sample
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
@@ -25,6 +26,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private val recognitionChannel = Channel<Bitmap>(capacity = Channel.CONFLATED)
     val recognizedFoodLabels: Flow<String?> = recognitionChannel
         .consumeAsFlow()
+        .sample(periodMillis = 150L)
         .map { bitmap ->
             val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
             Log.i(TAG, "Inference Time: $inferenceTime")
