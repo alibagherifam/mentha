@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import dev.alibagherifam.mentha.comoon.provideCameraViewModelFactory
 import dev.alibagherifam.mentha.details.FoodDetailsActivity
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
+import dev.alibagherifam.mentha.permission.CameraPermissionRationaleDialog
 import dev.alibagherifam.mentha.permission.PermissionState
 import dev.alibagherifam.mentha.permission.rememberCameraPermissionStateHolder
 import dev.alibagherifam.mentha.theme.AppTheme
@@ -39,7 +40,7 @@ class CameraActivity : AppCompatActivity() {
                     PermissionState.NOT_REQUESTED -> {
                         Surface {
                             SideEffect {
-                                cameraPermissionStateHolder.requestPermission()
+                                cameraPermissionStateHolder.launchPermissionRequest()
                             }
                         }
                     }
@@ -55,7 +56,7 @@ class CameraActivity : AppCompatActivity() {
                     }
                     PermissionState.SHOULD_SHOW_RATIONALE -> {
                         CameraPermissionRationaleDialog(
-                            onConfirmClick = cameraPermissionStateHolder::requestPermission,
+                            onConfirmClick = cameraPermissionStateHolder::launchPermissionRequest,
                             onDismissRequest = { finish() }
                         )
                     }

@@ -1,4 +1,4 @@
-package dev.alibagherifam.mentha.camera
+package dev.alibagherifam.mentha.permission
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
