@@ -18,10 +18,10 @@ enum class PermissionState {
             val shouldShowRationale = !isGranted && activity
                 .shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
             return when {
-                isGranted -> PermissionState.GRANTED
-                shouldShowRationale -> PermissionState.SHOULD_SHOW_RATIONALE
-                isRequested -> PermissionState.NEVER_ASK_AGAIN
-                else -> PermissionState.NOT_REQUESTED
+                isGranted -> GRANTED
+                shouldShowRationale -> SHOULD_SHOW_RATIONALE
+                isRequested -> NEVER_ASK_AGAIN
+                else -> NOT_REQUESTED
             }
         }
     }
