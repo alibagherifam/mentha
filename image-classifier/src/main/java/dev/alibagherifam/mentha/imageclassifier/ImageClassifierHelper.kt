@@ -14,11 +14,11 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class ImageClassifierHelper(
     context: Context,
-    threshold: Float = 0.55f,
+    threshold: Float = 5.5f,
     numOfThreads: Int = 2,
     maxResults: Int = 1,
     processorType: Int = PROCESSOR_CPU,
-    model: Int = MODEL_EFFICIENTNET_V4
+    model: Int = MODEL_MOBILENET_V3
 ) {
     private var imageClassifier: ImageClassifier = kotlin.run {
         val options = ImageClassifier.ImageClassifierOptions.builder()
