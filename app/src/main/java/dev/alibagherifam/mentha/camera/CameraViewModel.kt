@@ -16,7 +16,7 @@ class CameraViewModel(private val repository: FoodRepository) : ViewModel() {
         uiState.update { it.copy(food = food) }
     }
 
-    fun setImageRecognizer(recognizer: FoodImageRecognizer) {
+    fun setImageRecognizer(recognizer: ImageAnalyzer) {
         viewModelScope.launch {
             recognizer.recognitionOutput.collect { foodLabel ->
                 updateFood(foodLabel)

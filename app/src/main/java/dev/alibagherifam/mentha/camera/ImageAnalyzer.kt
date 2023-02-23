@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.sample
 import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.vision.classifier.Classifications
 
-class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
+class ImageAnalyzer(context: Context) : ImageAnalysis.Analyzer {
 
     private lateinit var bitmap: Bitmap
     private var imageRotationDegrees: Int = 0
@@ -28,9 +28,14 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         .sample(periodMillis = 150L)
         .map { bitmap ->
             val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
-            Log.i(TAG, "Inference Time: $inferenceTime")
+            Log.i("mentha_debug", "Inference Time: $inferenceTime")
             results?.mostAccurateOne()?.label
         }.distinctUntilChanged()
+
+    // Our model has single result so we are only interested in
+    // the first index from classification results.
+    private fun List<Classifications>.mostAccurateOne(): Category? =
+        this.firstOrNull()?.categories?.firstOrNull()
 
     override fun analyze(image: ImageProxy) {
         if (!::bitmap.isInitialized) {
@@ -42,7 +47,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         }
 
         image.use {
-            Log.i(TAG, "Image width: ${it.width}, height: ${it.height}")
+            Log.i("mentha_debug", "Image width: ${it.width}, height: ${it.height}")
 
             // Copy out RGB bits to the shared bitmap buffer
             bitmap.copyPixelsFromBuffer(it.planes[0].buffer)
@@ -52,15 +57,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         }
 
         recognitionInput.trySend(bitmap)
-    }
-
-    // Our model has single result so we are only interested in
-    // the first index from classification results.
-    private fun List<Classifications>.mostAccurateOne(): Category? =
-        this.firstOrNull()?.categories?.firstOrNull()
-
-    companion object {
-        private const val TAG = "FOOD_RECOGNIZER"
     }
 }
 

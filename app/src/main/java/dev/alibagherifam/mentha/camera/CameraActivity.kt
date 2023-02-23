@@ -90,7 +90,7 @@ class CameraActivity : AppCompatActivity() {
             // TODO: This delay is a workaround for unknown crash
             delay(1000)
 
-            val recognizer = FoodImageRecognizer(this@CameraActivity)
+            val recognizer = ImageAnalyzer(this@CameraActivity)
             camera = setupCamera(
                 viewFinder,
                 recognizer,
