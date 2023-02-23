@@ -12,33 +12,27 @@ import org.tensorflow.lite.task.core.vision.ImageProcessingOptions
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
-class ImageClassifierHelper(
-    context: Context,
-    threshold: Float = 5.5f,
-    numOfThreads: Int = 2,
-    maxResults: Int = 1,
-    processorType: Int = PROCESSOR_CPU,
-    model: Int = MODEL_MOBILENET_V3
-) {
+class ImageClassifierHelper(context: Context) {
     private var imageClassifier: ImageClassifier = kotlin.run {
         val options = ImageClassifier.ImageClassifierOptions.builder()
-            .setScoreThreshold(threshold)
-            .setMaxResults(maxResults)
+            .setScoreThreshold(THRESHOLD)
+            .setMaxResults(MAX_RESULT)
             .setLabelAllowList(foods)
-            .setBaseOptions(getExecutorOptions(processorType, numOfThreads))
+            .setBaseOptions(getExecutorOptions(PROCESSOR_CPU))
             .build()
 
         try {
             ImageClassifier.createFromFileAndOptions(
-                context, getModelPath(model), options
+                context, getModelPath(MODEL_MOBILENET_V3), options
             )
         } catch (e: IllegalStateException) {
             throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
         }
     }
 
-    private fun getExecutorOptions(processorType: Int, numThreads: Int): BaseOptions {
-        val baseOptionsBuilder = BaseOptions.builder().setNumThreads(numThreads)
+    private fun getExecutorOptions(processorType: Int): BaseOptions {
+        val baseOptionsBuilder = BaseOptions.builder()
+            .setNumThreads(NUM_THREADS)
 
         when (processorType) {
             PROCESSOR_CPU -> {
@@ -108,9 +102,14 @@ class ImageClassifierHelper(
     }
 
     companion object {
+        const val MAX_RESULT: Int = 1
+        const val NUM_THREADS: Int = 2
+        const val THRESHOLD: Float = 5.5f
+
         const val PROCESSOR_CPU = 0
         const val PROCESSOR_GPU = 1
         const val PROCESSOR_NNAPI = 2
+
         const val MODEL_MOBILENET_V3 = 0
         const val MODEL_EFFICIENTNET_V4 = 1
 
