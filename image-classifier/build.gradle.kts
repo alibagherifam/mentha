@@ -33,7 +33,7 @@ fun Download.tfModel(
 tasks.register<Download>("downloadMLModel") {
     tfModel(
         publisher = "google",
-        pathOnRepository = "imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1",
+        pathOnRepository = "imagenet/mobilenet_v3_large_100_224/classification/5/metadata/1",
         saveAs = "mobilenet_v3"
     )
 }
