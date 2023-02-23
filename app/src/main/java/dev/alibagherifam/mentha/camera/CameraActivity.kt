@@ -88,3 +88,12 @@ class CameraActivity : AppCompatActivity() {
         camera.cameraControl.enableTorch(isEnabled)
     }
 }
+
+/*
+override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+    val imageAnalyzer: ImageAnalysis? = null
+    imageAnalyzer?.targetRotation = binding.viewFinder.display.rotation
+}
+*/
+

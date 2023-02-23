@@ -18,13 +18,13 @@ import org.tensorflow.lite.task.vision.classifier.Classifications
 
 class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
 
-    private lateinit var bitmapBuffer: Bitmap
+    private lateinit var bitmap: Bitmap
     private var imageRotationDegrees: Int = 0
 
     private val classifier = ImageClassifierHelper(context)
 
-    private val recognitionChannel = Channel<Bitmap>(capacity = Channel.CONFLATED)
-    val recognizedFoodLabels: Flow<String?> = recognitionChannel
+    private val recognitionInput = Channel<Bitmap>(capacity = Channel.CONFLATED)
+    val recognitionOutput: Flow<String?> = recognitionInput
         .consumeAsFlow()
         .sample(periodMillis = 150L)
         .map { bitmap ->
@@ -36,21 +36,25 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         .distinctUntilChanged()
 
     override fun analyze(image: ImageProxy) {
-        if (!::bitmapBuffer.isInitialized) {
-            // The image rotation and RGB image buffer are initialized only once
+        if (!::bitmap.isInitialized) {
+            // The RGB image buffer are initialized only once
             // the analyzer has started running
-            imageRotationDegrees = image.imageInfo.rotationDegrees
-            bitmapBuffer = Bitmap.createBitmap(
+            bitmap = Bitmap.createBitmap(
                 image.width, image.height, Bitmap.Config.ARGB_8888
             )
         }
 
-        Log.i(TAG, "Image width: ${image.width}, height: ${image.height}")
+        image.use {
+            Log.i(TAG, "Image width: ${it.width}, height: ${it.height}")
 
-        // Copy out RGB bits to the shared bitmap buffer
-        image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
+            // Copy out RGB bits to the shared bitmap buffer
+            bitmap.copyPixelsFromBuffer(it.planes[0].buffer)
 
-        recognitionChannel.trySend(bitmapBuffer)
+            // TODO: should it be replaced with getScreenOrientation() ?
+            imageRotationDegrees = it.imageInfo.rotationDegrees
+        }
+
+        recognitionInput.trySend(bitmap)
     }
 
     // Our model has single output so we are only interested in
@@ -94,13 +98,6 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         )
     }
 }
-
-
-/*override fun onConfigurationChanged(newConfig: Configuration) {
-    super.onConfigurationChanged(newConfig)
-    val imageAnalyzer: ImageAnalysis? = null
-    imageAnalyzer?.targetRotation = binding.viewFinder.display.rotation
-}*/
 
 /*
 private fun getScreenOrientation() : Int {
