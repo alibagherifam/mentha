@@ -29,7 +29,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         .map { bitmap ->
             val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
             Log.i(TAG, "Inference Time: $inferenceTime")
-            results?.firstOutput()?.mostAccurateOne()?.label
+            results?.mostAccurateOne()?.label
         }.distinctUntilChanged()
 
     override fun analyze(image: ImageProxy) {
@@ -54,13 +54,10 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
         recognitionInput.trySend(bitmap)
     }
 
-    // Our model has single output so we are only interested in
-    // the first output from classification results.
-    private fun List<Classifications>.firstOutput(): List<Category>? =
-        this.firstOrNull()?.categories
-
-    private fun List<Category>.mostAccurateOne(): Category? =
-        this.minByOrNull { category -> category.index }
+    // Our model has single result so we are only interested in
+    // the first index from classification results.
+    private fun List<Classifications>.mostAccurateOne(): Category? =
+        this.firstOrNull()?.categories?.firstOrNull()
 
     companion object {
         private const val TAG = "FOOD_RECOGNIZER"
