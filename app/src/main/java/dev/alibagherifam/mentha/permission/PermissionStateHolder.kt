@@ -10,23 +10,21 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.ContextCompat
 
-class CameraPermissionStateHolder(context: Context) {
+class PermissionStateHolder(context: Context, private val permission: String) {
     private val activity: Activity = context.findActivity()
     lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
     private val _state: MutableState<PermissionState> = kotlin.run {
-        val isPermissionGranted = ContextCompat.checkSelfPermission(
-            activity, Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
+        val isPermissionGranted = ContextCompat
+            .checkSelfPermission(activity, permission) == PackageManager.PERMISSION_GRANTED
 
-        val permissionState = reduce(isRequested = false, isPermissionGranted)
-
-        mutableStateOf(permissionState)
+        val initialState = reduce(isRequested = false, isPermissionGranted)
+        mutableStateOf(initialState)
     }
     val state: State<PermissionState> get() = _state
 
     fun launchPermissionRequest() {
-        requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+        requestPermissionLauncher.launch(permission)
     }
 
     fun onPermissionResult(isGranted: Boolean) {

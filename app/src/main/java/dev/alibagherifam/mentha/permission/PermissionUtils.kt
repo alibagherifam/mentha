@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun rememberCameraPermissionStateHolder(): CameraPermissionStateHolder {
+fun rememberPermissionStateHolder(permission: String): PermissionStateHolder {
     val context = LocalContext.current
-    val stateHolder = remember { CameraPermissionStateHolder(context) }
+    val stateHolder = remember { PermissionStateHolder(context, permission) }
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = stateHolder::onPermissionResult

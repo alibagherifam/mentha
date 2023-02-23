@@ -1,5 +1,6 @@
 package dev.alibagherifam.mentha.camera
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -7,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
 import androidx.camera.view.PreviewView
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,7 +17,7 @@ import dev.alibagherifam.mentha.details.FoodDetailsActivity
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import dev.alibagherifam.mentha.permission.CameraPermissionRationaleDialog
 import dev.alibagherifam.mentha.permission.PermissionState
-import dev.alibagherifam.mentha.permission.rememberCameraPermissionStateHolder
+import dev.alibagherifam.mentha.permission.rememberPermissionStateHolder
 import dev.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
@@ -35,19 +35,19 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                val cameraPermissionStateHolder = rememberCameraPermissionStateHolder()
+                val cameraPermissionStateHolder = rememberPermissionStateHolder(
+                    Manifest.permission.CAMERA
+                )
                 when (cameraPermissionStateHolder.state.value) {
                     PermissionState.NOT_REQUESTED -> {
-                        Surface {
-                            SideEffect {
-                                cameraPermissionStateHolder.launchPermissionRequest()
-                            }
+                        SideEffect {
+                            cameraPermissionStateHolder.launchPermissionRequest()
                         }
                     }
                     PermissionState.GRANTED -> {
-                        val state by viewModel.uiState.collectAsState()
+                        val screenState by viewModel.uiState.collectAsState()
                         CameraScreen(
-                            state,
+                            screenState,
                             onFlashlightToggle = ::toggleFlashlight,
                             onSettingsClick = { },
                             onShowDetailsClick = ::openFoodDetails,
