@@ -19,23 +19,29 @@ dependencies {
 // TODO: Place custom model in the "assets" directory and remove download task.
 project.ext.set("ASSET_DIR", "$projectDir/src/main/assets/")
 
-fun Download.tfModel(pathOnRepository: String, saveAs: String) {
+fun Download.tfModel(
+    publisher: String,
+    pathOnRepository: String,
+    saveAs: String
+) {
     val assetDirectory = ext.get("ASSET_DIR") as String
-    src("https://tfhub.dev/$pathOnRepository?lite-format=tflite")
+    src("https://tfhub.dev/$publisher/lite-model/$pathOnRepository?lite-format=tflite")
     dest("${assetDirectory}models/$saveAs.tflite")
     overwrite(false)
 }
 
 tasks.register<Download>("downloadMLModel") {
     tfModel(
-        pathOnRepository = "iree/lite-model/mobilenet_v3_large_100_224/uint8/1",
+        publisher = "google",
+        pathOnRepository = "imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1",
         saveAs = "mobilenet_v3"
     )
 }
 
 tasks.register<Download>("downloadMLModel2") {
     tfModel(
-        pathOnRepository = "tensorflow/lite-model/efficientnet/lite4/uint8/2",
+        publisher = "tensorflow",
+        pathOnRepository = "efficientnet/lite4/uint8/2",
         saveAs = "efficientnet_lite4"
     )
 }
