@@ -10,7 +10,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
 import org.tensorflow.lite.support.label.Category
@@ -31,9 +30,7 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
             val (results, inferenceTime) = classifier.classify(bitmap, imageRotationDegrees)
             Log.i(TAG, "Inference Time: $inferenceTime")
             results?.firstOutput()?.mostAccurateOne()?.label
-        }
-        .filter { it == null || it in foods }
-        .distinctUntilChanged()
+        }.distinctUntilChanged()
 
     override fun analyze(image: ImageProxy) {
         if (!::bitmap.isInitialized) {
@@ -65,37 +62,8 @@ class FoodImageRecognizer(context: Context) : ImageAnalysis.Analyzer {
     private fun List<Category>.mostAccurateOne(): Category? =
         this.minByOrNull { category -> category.index }
 
-    // TODO: Remove this after changing model with a new one that only contains food labels
     companion object {
         private const val TAG = "FOOD_RECOGNIZER"
-        private val foods = listOf(
-            "banana",
-            "broccoli",
-            "cucumber",
-            "lemon",
-            "orange",
-            "pineapple",
-            "pomegranate",
-            "strawberry",
-            "mushroom",
-            "French loaf",
-            "Granny Smith",
-            "bell pepper",
-            "cauliflower",
-            "head cabbage",
-            "fig",
-            "zucchini",
-            "bagel",
-            "pizza",
-            "hot dog",
-            "cheeseburger",
-            "mashed potato",
-            "espresso",
-            "chocolate sauce",
-            "butternut squash",
-            "ice cream",
-            "carbonara"
-        )
     }
 }
 
