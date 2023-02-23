@@ -15,7 +15,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
-androidx-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version = "2023.02.00-beta02" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.01.00" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
