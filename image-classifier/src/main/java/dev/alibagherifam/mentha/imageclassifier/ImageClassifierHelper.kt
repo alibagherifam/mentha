@@ -17,7 +17,7 @@ class ImageClassifierHelper(context: Context) {
         val options = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(THRESHOLD)
             .setMaxResults(MAX_RESULT)
-            .setLabelAllowList(foods)
+            .setLabelAllowList(allowedLabels)
             .setBaseOptions(getExecutorOptions(PROCESSOR_CPU))
             .build()
 
@@ -112,35 +112,5 @@ class ImageClassifierHelper(context: Context) {
 
         const val MODEL_MOBILENET_V3 = 0
         const val MODEL_EFFICIENTNET_V4 = 1
-
-        // TODO: Remove this after changing model with a new one that only contains food labels
-        private val foods = listOf(
-            "banana",
-            "broccoli",
-            "cucumber",
-            "lemon",
-            "orange",
-            "pineapple",
-            "pomegranate",
-            "strawberry",
-            "mushroom",
-            "French loaf",
-            "Granny Smith",
-            "bell pepper",
-            "cauliflower",
-            "head cabbage",
-            "fig",
-            "zucchini",
-            "bagel",
-            "pizza",
-            "hot dog",
-            "cheeseburger",
-            "mashed potato",
-            "espresso",
-            "chocolate sauce",
-            "butternut squash",
-            "ice cream",
-            "carbonara"
-        )
     }
 }
