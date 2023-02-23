@@ -7,16 +7,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
 import androidx.camera.view.PreviewView
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.lifecycleScope
 import dev.alibagherifam.mentha.comoon.provideCameraViewModelFactory
 import dev.alibagherifam.mentha.details.FoodDetailsActivity
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import dev.alibagherifam.mentha.permission.CameraPermissionScreen
+import dev.alibagherifam.mentha.permission.PermissionState
+import dev.alibagherifam.mentha.permission.rememberCameraPermissionStateHolder
 import dev.alibagherifam.mentha.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
@@ -34,23 +34,35 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                var isCameraPermissionGranted by remember {
-                    mutableStateOf(false)
-                }
-                if (isCameraPermissionGranted) {
-                    val state by viewModel.uiState.collectAsState()
-                    CameraScreen(
-                        state,
-                        onFlashlightToggle = ::toggleFlashlight,
-                        onSettingsClick = { },
-                        onShowDetailsClick = ::openFoodDetails,
-                        onPreviewViewCreated = ::startFoodRecognition
-                    )
-                } else {
-                    CameraPermissionScreen(
-                        onPermissionGranted = { isCameraPermissionGranted = true },
-                        onPermissionDenied = { finish() }
-                    )
+                val cameraPermissionStateHolder = rememberCameraPermissionStateHolder()
+                when (cameraPermissionStateHolder.state.value) {
+                    PermissionState.NOT_REQUESTED -> {
+                        Surface {
+                            SideEffect {
+                                cameraPermissionStateHolder.requestPermission()
+                            }
+                        }
+                    }
+                    PermissionState.GRANTED -> {
+                        val state by viewModel.uiState.collectAsState()
+                        CameraScreen(
+                            state,
+                            onFlashlightToggle = ::toggleFlashlight,
+                            onSettingsClick = { },
+                            onShowDetailsClick = ::openFoodDetails,
+                            onPreviewViewCreated = ::startFoodRecognition
+                        )
+                    }
+                    PermissionState.SHOULD_SHOW_RATIONALE -> {
+                        CameraPermissionRationaleDialog(
+                            onConfirmClick = cameraPermissionStateHolder::requestPermission,
+                            onDismissRequest = { finish() }
+                        )
+                    }
+                    PermissionState.NEVER_ASK_AGAIN -> {
+                        // TODO: Show a message explaining why the app can not run
+                        finish()
+                    }
                 }
             }
         }
