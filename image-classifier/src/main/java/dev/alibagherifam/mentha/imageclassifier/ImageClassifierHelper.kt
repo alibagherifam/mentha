@@ -8,6 +8,7 @@ import android.view.Surface
 import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.label.Category
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.core.vision.ImageProcessingOptions
 import org.tensorflow.lite.task.vision.classifier.Classifications
@@ -18,14 +19,14 @@ class ImageClassifierHelper(context: Context) {
         val options = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(THRESHOLD)
             .setMaxResults(MAX_RESULT)
-            .setLabelAllowList(allowedLabels)
+            .setLabelAllowList(ALLOWED_LABELS)
             .setBaseOptions(getExecutorOptions(PROCESSOR_CPU))
             .build()
 
+        val modelPath = "models/$MODEL_FILE_NAME.tflite"
+
         try {
-            ImageClassifier.createFromFileAndOptions(
-                context, getModelPath(MODEL_MOBILENET_V3), options
-            )
+            ImageClassifier.createFromFileAndOptions(context, modelPath, options)
         } catch (e: IllegalStateException) {
             throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
         }
@@ -54,16 +55,7 @@ class ImageClassifierHelper(context: Context) {
         return baseOptionsBuilder.build()
     }
 
-    private fun getModelPath(model: Int): String {
-        val modelName = when (model) {
-            MODEL_MOBILENET_V3 -> "mobilenet_v3"
-            MODEL_EFFICIENTNET_V4 -> "efficientnet_lite4"
-            else -> throw IllegalStateException()
-        }
-        return "models/$modelName.tflite"
-    }
-
-    fun classify(image: Bitmap, rotation: Int): List<Classifications>? {
+    fun classify(image: Bitmap, rotation: Int): String? {
         var inferenceTime = SystemClock.uptimeMillis()
 
         // Create preprocessor for the image.
@@ -79,10 +71,17 @@ class ImageClassifierHelper(context: Context) {
             .build()
 
         val results = imageClassifier.classify(tensorImage, imageProcessingOptions)
+
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
         Log.i("mentha_debug", "Inference Time: $inferenceTime")
-        return results
+
+        return results.mostAccurateOne()?.label
     }
+
+    // Our model has single result so we are only interested in
+    // the first index from classification results.
+    private fun List<Classifications>.mostAccurateOne(): Category? =
+        this.firstOrNull()?.categories?.firstOrNull()
 
     // Receive the device rotation (Surface.x values range from 0->3) and return EXIF orientation
     // http://jpegclub.org/exif_orientation.html
@@ -107,14 +106,16 @@ class ImageClassifierHelper(context: Context) {
         const val MAX_RESULT: Int = 1
         const val NUM_THREADS: Int = 2
 
-        // Use 0.55 for EfficientNet
+        // MobileNet-V3
+        const val MODEL_FILE_NAME = "mobilenet_v3"
         const val THRESHOLD: Float = 5.5f
+
+        // EfficientNet-Lite4
+        // const val MODEL_FILE_NAME  = "efficientnet_lite4"
+        // const val THRESHOLD: Float = 0.55f
 
         const val PROCESSOR_CPU = 0
         const val PROCESSOR_GPU = 1
         const val PROCESSOR_NNAPI = 2
-
-        const val MODEL_MOBILENET_V3 = 0
-        const val MODEL_EFFICIENTNET_V4 = 1
     }
 }

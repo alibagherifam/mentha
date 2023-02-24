@@ -1,7 +1,7 @@
 package dev.alibagherifam.mentha.imageclassifier
 
 // TODO: Remove this after changing model with a new one that only contains food labels
-val allowedLabels = listOf(
+val ALLOWED_LABELS = listOf(
     "banana",
     "broccoli",
     "cucumber",

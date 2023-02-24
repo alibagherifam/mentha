@@ -17,8 +17,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.flow.update
-import org.tensorflow.lite.support.label.Category
-import org.tensorflow.lite.task.vision.classifier.Classifications
 
 typealias RotatedBitmap = Pair<Bitmap, Int>
 
@@ -35,19 +33,11 @@ class CameraViewModel(
     init {
         _classifyImageChannel.consumeAsFlow()
             .sample(periodMillis = 150L)
-            .map { (bitmap, rotation) ->
-                val results = imageClassifier.classify(bitmap, rotation)
-                results?.mostAccurateOne()?.label
-            }
+            .map { (bitmap, rotation) -> imageClassifier.classify(bitmap, rotation) }
             .distinctUntilChanged()
             .onEach { foodLabel -> updateFood(foodLabel) }
             .launchIn(viewModelScope)
     }
-
-    // Our model has single result so we are only interested in
-    // the first index from classification results.
-    private fun List<Classifications>.mostAccurateOne(): Category? =
-        this.firstOrNull()?.categories?.firstOrNull()
 
     private suspend fun updateFood(foodLabel: String?) {
         val food = foodLabel?.let { repository.getFood(foodLabel) }

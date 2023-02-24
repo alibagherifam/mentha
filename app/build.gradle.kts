@@ -43,6 +43,4 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
-
-    implementation(libs.tensorflow.taskVision)
 }
