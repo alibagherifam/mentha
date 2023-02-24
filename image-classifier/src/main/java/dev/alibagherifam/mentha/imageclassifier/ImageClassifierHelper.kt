@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.os.SystemClock
 import android.util.Log
 import android.view.Surface
-import org.tensorflow.lite.gpu.CompatibilityList
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.label.Category
@@ -20,8 +19,9 @@ class ImageClassifierHelper(context: Context) {
             .setScoreThreshold(THRESHOLD)
             .setMaxResults(MAX_RESULT)
             .setLabelAllowList(ALLOWED_LABELS)
-            .setBaseOptions(getExecutorOptions(PROCESSOR_CPU))
-            .build()
+            .setBaseOptions(
+                BaseOptions.builder().setNumThreads(NUM_THREADS).build()
+            ).build()
 
         val modelPath = "models/$MODEL_FILE_NAME.tflite"
 
@@ -30,29 +30,6 @@ class ImageClassifierHelper(context: Context) {
         } catch (e: IllegalStateException) {
             throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
         }
-    }
-
-    private fun getExecutorOptions(processorType: Int): BaseOptions {
-        val baseOptionsBuilder = BaseOptions.builder()
-            .setNumThreads(NUM_THREADS)
-
-        when (processorType) {
-            PROCESSOR_CPU -> {
-                // Default
-            }
-            PROCESSOR_GPU -> {
-                if (CompatibilityList().isDelegateSupportedOnThisDevice) {
-                    baseOptionsBuilder.useGpu()
-                } else {
-                    throw IllegalStateException("GPU is not supported on this device")
-                }
-            }
-            PROCESSOR_NNAPI -> {
-                baseOptionsBuilder.useNnapi()
-            }
-        }
-
-        return baseOptionsBuilder.build()
     }
 
     fun classify(image: Bitmap, rotation: Int): String? {

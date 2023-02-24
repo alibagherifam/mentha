@@ -12,8 +12,6 @@ android {
 
 dependencies {
     implementation(libs.tensorflow.taskVision)
-    implementation(libs.tensorflow.gpu)
-    implementation(libs.tensorflow.gpuDelegate)
 }
 
 // TODO: Place custom model in the "assets" directory and remove download task.
