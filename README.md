@@ -14,12 +14,15 @@ framework.
 
 The project uses the [TensorFlow Lite](https://www.tensorflow.org/lite) framework for running the
 image classification model on mobile. Currently, the model is based on
-the [MobileNet V3](https://arxiv.org/abs/1704.04861) CNN architecture which has been trained over
-the [ImageNet](https://www.image-net.org) dataset. You can find it in
-the [TensorFlow Hub](https://tfhub.dev/google/lite-model/imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1)
-. As a future roadmap, I will
-use [transform learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique to
-customize the model for classifying foods.
+the [MobileNet V3](https://arxiv.org/abs/1704.04861) CNN architecture and has been trained over
+the [ILSVRC](https://www.kaggle.com/c/imagenet-object-localization-challenge/overview/description)
+dataset which is a subset of [ImageNet](https://www.image-net.org). The model is available
+on [TensorFlow Hub](https://tfhub.dev/google/lite-model/imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1)
+.
+
+> :warning: **Current model supports limited number of food categories**. As a future roadmap, I
+> will use [transform learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique
+> to customize the model for wider range of food categories.
 
 Other Android technologies:
 
