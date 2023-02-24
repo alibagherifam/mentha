@@ -5,11 +5,11 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
-    setSdkVersionBoundaries(android)
-    setCompilerVersion(android)
+    setSdkVersionBoundary(android)
+    setJvmTargetVersion(android)
 }
 
-fun setSdkVersionBoundaries(android: CommonExtension<*, *, *, *>) {
+fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>) {
     android.apply {
         compileSdk = 33
         buildToolsVersion = "34.0.0-rc1"
@@ -20,7 +20,7 @@ fun setSdkVersionBoundaries(android: CommonExtension<*, *, *, *>) {
     }
 }
 
-fun Project.setCompilerVersion(android: CommonExtension<*, *, *, *>) {
+fun Project.setJvmTargetVersion(android: CommonExtension<*, *, *, *>) {
     val javaVersion = JavaVersion.VERSION_11
     setJavaVersionForKotlinCompiler(javaVersion)
     android.compileOptions {
