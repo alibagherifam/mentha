@@ -7,18 +7,31 @@ import dev.alibagherifam.mentha.details.FoodDetailsViewModel
 import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
 import dev.alibagherifam.mentha.nutritionfacts.provideFoodRepository
 
+fun provideImageClassifier(context: Context) = ImageClassifierHelper(context)
+
+fun provideStringProvider(context: Context) = StringProvider(context.resources)
+
+fun provideFormatFloatValueUseCase(context: Context) =
+    FormatFloatValueUseCase(provideStringProvider(context))
+
+fun provideFormatNutritionWeightUseCase(context: Context) =
+    FormatNutritionWeightUseCase(provideFormatFloatValueUseCase(context))
+
+fun provideFormatEnergyUseCase(context: Context) =
+    FormatEnergyUseCase(provideFormatFloatValueUseCase(context))
+
 fun provideCameraViewModelFactory(context: Context): ViewModelProvider.Factory =
     CameraViewModel.Provider(
         provideImageClassifier(context),
         provideFoodRepository(context)
     )
 
-fun provideImageClassifier(context: Context) = ImageClassifierHelper(context)
-
 fun provideFoodDetailsViewModelFactory(
     foodId: String, context: Context
 ): ViewModelProvider.Factory = FoodDetailsViewModel.Provider(
-    foodId = foodId,
-    repository = provideFoodRepository(context),
-    stringProvider = StringProvider(context.resources)
+    foodId,
+    provideFoodRepository(context),
+    provideFormatEnergyUseCase(context),
+    provideFormatNutritionWeightUseCase(context),
+    provideStringProvider(context)
 )

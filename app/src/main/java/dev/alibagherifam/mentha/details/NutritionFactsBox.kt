@@ -15,14 +15,17 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
-import dev.alibagherifam.mentha.comoon.stringFormatted
-import dev.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
+import dev.alibagherifam.mentha.comoon.FormatNutritionWeightUseCase
 import dev.alibagherifam.mentha.comoon.LocalizationPreview
 import dev.alibagherifam.mentha.comoon.getSampleFood
+import dev.alibagherifam.mentha.comoon.provideFormatEnergyUseCase
+import dev.alibagherifam.mentha.comoon.provideFormatNutritionWeightUseCase
+import dev.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
 import dev.alibagherifam.mentha.theme.AppTheme
 import kotlin.math.roundToInt
 
@@ -65,11 +68,10 @@ fun ServingSize(data: NutritionFacts) {
 
 @Composable
 fun NutritionList(data: NutritionFacts) {
+    val formatEnergy = provideFormatEnergyUseCase(LocalContext.current)
+    val formatNutritionWeight = provideFormatNutritionWeightUseCase(LocalContext.current)
     val calorieLabel = stringResource(R.string.label_energy)
-    val calorieValue = stringResource(
-        R.string.label_energy_in_kilo_calorie,
-        data.energy.stringFormatted()
-    )
+    val calorieValue = formatEnergy(data.energy)
     Text(
         text = "$calorieLabel: $calorieValue",
         style = MaterialTheme.typography.titleLarge
@@ -83,6 +85,7 @@ fun NutritionList(data: NutritionFacts) {
         R.string.label_sugar to data.sugar
     ).forEach {
         Nutrition(
+            formatNutritionWeight,
             nutritionName = stringResource(it.first),
             nutritionWeight = it.second,
             foodServingWeight = data.servingWeight
@@ -93,6 +96,7 @@ fun NutritionList(data: NutritionFacts) {
 
 @Composable
 fun Nutrition(
+    formatNutritionWeight: FormatNutritionWeightUseCase,
     nutritionName: String,
     nutritionWeight: Float,
     foodServingWeight: Int
@@ -110,10 +114,7 @@ fun Nutrition(
             Spacer(modifier = Modifier.size(8.dp))
             Text(
                 style = MaterialTheme.typography.titleMedium,
-                text = stringResource(
-                    id = R.string.label_weight_in_gram,
-                    nutritionWeight.stringFormatted()
-                )
+                text = formatNutritionWeight(nutritionWeight)
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
