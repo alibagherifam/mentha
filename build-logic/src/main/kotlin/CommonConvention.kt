@@ -7,9 +7,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
     setSdkVersionBoundaries(android)
     setCompilerVersion(android)
-    android.androidResources {
-        noCompress("tflite")
-    }
 }
 
 fun setSdkVersionBoundaries(android: CommonExtension<*, *, *, *>) {

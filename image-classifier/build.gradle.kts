@@ -8,6 +8,10 @@ plugins {
 
 android {
     namespace = "dev.alibagherifam.mentha.imageclassifier"
+
+    android.androidResources {
+        noCompress("tflite")
+    }
 }
 
 dependencies {
