@@ -29,7 +29,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             buildTypes {
                 getByName("debug").matchingFallbacks += "release"
                 getByName("release") {
-                    isMinifyEnabled = false
+                    isMinifyEnabled = true
+                    isShrinkResources = true
                     proguardFiles(
                         getDefaultProguardFile("proguard-android-optimize.txt"),
                         "proguard-rules.pro"
