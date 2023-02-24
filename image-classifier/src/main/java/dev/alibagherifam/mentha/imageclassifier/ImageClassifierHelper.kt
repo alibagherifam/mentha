@@ -15,7 +15,7 @@ import org.tensorflow.lite.task.vision.classifier.Classifications
 import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class ImageClassifierHelper(context: Context) {
-    private var imageClassifier: ImageClassifier = kotlin.run {
+    private val imageClassifier: ImageClassifier = kotlin.run {
         val options = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(THRESHOLD)
             .setMaxResults(MAX_RESULT)
