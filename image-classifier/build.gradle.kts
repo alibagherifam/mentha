@@ -36,15 +36,14 @@ tasks.register<Download>("downloadMLModel") {
     )
 }
 
-tasks.register<Download>("downloadMLModel2") {
+/*tasks.register<Download>("downloadMLModel") {
     tfModel(
         publisher = "tensorflow",
         pathOnRepository = "efficientnet/lite4/uint8/2",
         saveAs = "efficientnet_lite4"
     )
-}
+}*/
 
 tasks.preBuild.apply {
     dependsOn("downloadMLModel")
-    dependsOn("downloadMLModel2")
 }
