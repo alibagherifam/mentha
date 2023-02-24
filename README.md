@@ -20,9 +20,11 @@ dataset which is a subset of [ImageNet](https://www.image-net.org). The model is
 on [TensorFlow Hub](https://tfhub.dev/google/lite-model/imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1)
 .
 
-> :warning: **Current model supports limited number of food categories**. As a future roadmap, I
-> will use [transform learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique
-> to customize the model for wider range of food categories.
+> :warning: **Current model
+supports [limited number](/image-classifier/src/main/java/dev/alibagherifam/mentha/imageclassifier/AllowedLabels.kt)
+of food categories**. As a future roadmap, I will
+> use [transform learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique to
+> customize the model for wider range of food categories.
 
 Other Android technologies:
 
