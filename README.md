@@ -12,19 +12,19 @@ framework.
 
 ## ⚙ Technologies
 
-The project uses the [TensorFlow Lite](https://www.tensorflow.org/lite) framework for running the
-image classification model on mobile. Currently, the model is based on
-the [MobileNet V3](https://arxiv.org/abs/1704.04861) CNN architecture and has been trained over
+The project uses the [TensorFlow Lite](https://www.tensorflow.org/lite) framework to run the image
+classification model on an android device. The model is
+a [MobileNet V3](https://arxiv.org/abs/1704.04861) CNN architecture trained over
 the [ILSVRC](https://www.kaggle.com/c/imagenet-object-localization-challenge/overview/description)
-dataset which is a subset of [ImageNet](https://www.image-net.org). The model is available
+dataset, a subset of [ImageNet](https://www.image-net.org). It is available
 on [TensorFlow Hub](https://tfhub.dev/google/lite-model/imagenet/mobilenet_v3_large_100_224/feature_vector/5/default/1)
 .
 
-> :warning: **Current model
-supports [limited number](/image-classifier/src/main/java/dev/alibagherifam/mentha/imageclassifier/AllowedLabels.kt)
-of food categories**. As a future roadmap, I will
-> use [transform learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique to
-> customize the model for wider range of food categories.
+> :warning: **The current model supports
+a [limited number](/image-classifier/src/main/java/dev/alibagherifam/mentha/imageclassifier/AllowedLabels.kt)
+of food classes**. As a future roadmap, I will use
+> the [transfer learning](https://www.tensorflow.org/lite/models/modify/model_maker) technique to
+> customize the model for a broader range of food classes.
 
 Other Android technologies:
 
