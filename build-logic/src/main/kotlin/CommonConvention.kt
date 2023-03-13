@@ -12,7 +12,7 @@ fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
 fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>) {
     android.apply {
         compileSdk = 33
-        buildToolsVersion = "34.0.0-rc1"
+        buildToolsVersion = "34.0.0-rc2"
         defaultConfig {
             minSdk = 23
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
