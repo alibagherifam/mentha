@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.dependencyVersions)
 }
 
-// Todo: do we really need this?
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
