@@ -1,5 +1,6 @@
 plugins {
     id("dev.alibagherifam.mentha.android.application")
+    id("dev.alibagherifam.mentha.compose")
 }
 
 android {
@@ -7,29 +8,13 @@ android {
     defaultConfig {
         applicationId = "dev.alibagherifam.mentha"
         versionCode = 1
-        versionName = "0.8.0"
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
+        versionName = "0.4.0"
     }
 }
 
 dependencies {
     implementation(project(":image-classifier"))
     implementation(project(":nutrition-facts"))
-
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.tooling.preview)
-    debugImplementation(libs.androidx.compose.tooling)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

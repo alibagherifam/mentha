@@ -1,6 +1,8 @@
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -33,4 +35,14 @@ fun Project.setJavaVersionForKotlinCompiler(version: JavaVersion) {
     tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = version.toString()
     }
+}
+
+fun DependencyHandlerScope.implementation(
+    libs: VersionCatalog,
+    dependencyAlias: String
+) {
+    add(
+        "implementation",
+        libs.findLibrary(dependencyAlias).get()
+    )
 }

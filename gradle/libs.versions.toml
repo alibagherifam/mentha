@@ -2,7 +2,7 @@
 androidPlugin = "7.4.1"
 androidxCamera = "1.2.1"
 androidxComposeCompiler = "1.4.3"
-androidxLifecycle = "2.6.0-rc01"
+androidxLifecycle = "2.6.0"
 androidxRoom = "2.5.0"
 coil = "2.2.2"
 coroutines = "1.6.4"
@@ -10,7 +10,7 @@ kotlin = "1.8.10"
 
 [libraries]
 # AndroidX
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.0-beta02" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.0-rc01" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.1" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
@@ -22,6 +22,7 @@ androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-t
 androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.9.0" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.5.3" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
@@ -39,6 +40,8 @@ tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task
 # Others
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.3.3" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.2" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
@@ -48,6 +51,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.22.0" }
 gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
 gradleDownload = { id = "de.undercouch.download", version = "5.3.1" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
