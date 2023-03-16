@@ -1,5 +1,5 @@
 [versions]
-androidPlugin = "7.4.1"
+androidPlugin = "7.4.2"
 androidxCamera = "1.2.1"
 androidxComposeCompiler = "1.4.3"
 androidxLifecycle = "2.6.0"
