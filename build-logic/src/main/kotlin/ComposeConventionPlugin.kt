@@ -47,6 +47,10 @@ class ComposeConventionPlugin : Plugin<Project> {
                 "debugImplementation",
                 libs.findLibrary("androidx-compose-tooling").get()
             )
+            add(
+                "detektPlugins",
+                libs.findPlugin("detekt-composeRules").get()
+            )
         }
     }
 }

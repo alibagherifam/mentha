@@ -24,3 +24,6 @@ fun DependencyHandlerScope.implementation(
 fun PluginManager.apply(libs: VersionCatalog, pluginAlias: String) {
     apply(libs.findPlugin(pluginAlias).get().get().pluginId)
 }
+
+fun VersionCatalog.getRequiredVersion(alias: String): String =
+    findVersion(alias).get().requiredVersion

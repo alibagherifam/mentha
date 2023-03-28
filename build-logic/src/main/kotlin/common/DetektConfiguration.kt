@@ -4,13 +4,12 @@ import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 
-fun Project.configureWithDetekt() {
-    val libs = getVersionCatalogs()
-
+fun Project.configureWithDetekt(libs: VersionCatalog) {
     pluginManager.apply(libs, "detekt.core")
 
     extensions.configure<DetektExtension> {
@@ -33,10 +32,6 @@ fun Project.configureWithDetekt() {
         add(
             "detektPlugins",
             libs.findPlugin("detekt-ktlintFormatting").get()
-        )
-        add(
-            "detektPlugins",
-            libs.findPlugin("detekt-composeRules").get()
         )
     }
 }

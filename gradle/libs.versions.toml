@@ -1,12 +1,15 @@
 [versions]
-kotlin = "1.8.10"
+androidCompileSdk = "33"
+androidMinSdk = "24"
+androidBuildTools = "34.0.0-rc2"
 androidPlugin = "7.4.2"
 androidxCamera = "1.2.2"
 androidxComposeCompiler = "1.4.4"
 androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
-coil = "2.3.0"
+kotlin = "1.8.10"
 coroutines = "1.6.4"
+coil = "2.3.0"
 detekt = "1.22.0"
 
 [libraries]

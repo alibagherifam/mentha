@@ -2,18 +2,21 @@ package common
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
 
 fun Project.configureAndroidBaseOptions(android: CommonExtension<*, *, *, *>) {
-    setSdkVersionBoundary(android)
+    val libs = getVersionCatalogs()
+    setSdkVersionBoundary(android, libs)
     setJvmTargetVersion(android)
+    configureWithDetekt(libs)
 }
 
-fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>) {
+fun setSdkVersionBoundary(android: CommonExtension<*, *, *, *>, libs: VersionCatalog) {
     android.apply {
-        compileSdk = 33
-        buildToolsVersion = "34.0.0-rc2"
+        compileSdk = libs.getRequiredVersion("androidCompileSdk").toInt()
+        buildToolsVersion = libs.getRequiredVersion("androidBuildTools")
         defaultConfig {
-            minSdk = 24
+            minSdk = libs.getRequiredVersion("androidMinSdk").toInt()
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
