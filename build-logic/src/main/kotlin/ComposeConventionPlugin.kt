@@ -1,28 +1,26 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
+import common.implementation
+import common.getVersionCatalogs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
-import org.gradle.kotlin.dsl.getByType
 
 @Suppress("unused")
 class ComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            val versionCatalog = extensions
-                .getByType<VersionCatalogsExtension>()
-                .named("libs")
+            val libs = getVersionCatalogs()
 
             val androidExtension = extensions.let {
                 it.findByType<LibraryExtension>() ?: it.findByType<ApplicationExtension>()
             } ?: error("Plugin should be applied on either Android Application or Library")
 
-            enableComposeCompiler(androidExtension, versionCatalog)
-            addComposeDependencies(versionCatalog)
+            enableComposeCompiler(androidExtension, libs)
+            addComposeDependencies(libs)
         }
     }
 
