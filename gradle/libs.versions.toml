@@ -1,4 +1,5 @@
 [versions]
+kotlin = "1.8.10"
 androidPlugin = "7.4.2"
 androidxCamera = "1.2.2"
 androidxComposeCompiler = "1.4.4"
@@ -6,7 +7,7 @@ androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
 coil = "2.3.0"
 coroutines = "1.6.4"
-kotlin = "1.8.10"
+detekt = "1.22.0"
 
 [libraries]
 # AndroidX
@@ -46,14 +47,17 @@ koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", versi
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
-dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.22.0" }
-gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
-gradleDownload = { id = "de.undercouch.download", version = "5.4.0" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
+dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
+detekt-composeRules = { id = "com.twitter.compose.rules:detekt", version = "0.0.26" }
+detekt-core = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt-ktlintFormatting = { id = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
+gradleDownload = { id = "de.undercouch.download", version = "5.4.0" }
