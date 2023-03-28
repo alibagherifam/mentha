@@ -4,7 +4,7 @@ androidxCamera = "1.2.2"
 androidxComposeCompiler = "1.4.4"
 androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
-coil = "2.2.2"
+coil = "2.3.0"
 coroutines = "1.6.4"
 kotlin = "1.8.10"
 
