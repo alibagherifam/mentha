@@ -44,6 +44,8 @@ tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task
 # Others
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
+detekt-ktlintFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
 
@@ -59,8 +61,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
-detekt-composeRules = { id = "com.twitter.compose.rules:detekt", version = "0.0.26" }
 detekt-core = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-detekt-ktlintFormatting = { id = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
 gradleDownload = { id = "de.undercouch.download", version = "5.4.0" }

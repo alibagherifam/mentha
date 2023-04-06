@@ -31,7 +31,7 @@ fun Project.configureWithDetekt(libs: VersionCatalog) {
     dependencies {
         add(
             "detektPlugins",
-            libs.findPlugin("detekt-ktlintFormatting").get()
+            libs.findLibrary("detekt-ktlintFormatting").get()
         )
     }
 }

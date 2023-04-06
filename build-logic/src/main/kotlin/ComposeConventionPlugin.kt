@@ -49,7 +49,7 @@ class ComposeConventionPlugin : Plugin<Project> {
             )
             add(
                 "detektPlugins",
-                libs.findPlugin("detekt-composeRules").get()
+                libs.findLibrary("detekt-composeRules").get()
             )
         }
     }
