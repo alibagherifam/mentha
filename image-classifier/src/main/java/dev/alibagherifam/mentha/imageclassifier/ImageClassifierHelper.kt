@@ -26,11 +26,9 @@ class ImageClassifierHelper(context: Context) {
         val modelPath = "models/$MODEL_FILE_NAME.tflite"
 
         try {
-            ImageClassifier.createFromFileAndOptions(
-                context, modelPath, options
-            )
+            ImageClassifier.createFromFileAndOptions(context, modelPath, options)
         } catch (e: IllegalStateException) {
-            throw IllegalStateException("TFLite failed to load model with error: ${e.message}")
+            error("TFLite failed to load model with error: ${e.message}")
         }
     }
 
