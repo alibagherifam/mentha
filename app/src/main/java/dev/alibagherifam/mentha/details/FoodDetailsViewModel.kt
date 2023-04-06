@@ -30,7 +30,7 @@ class FoodDetailsViewModel(
     }
 
     fun prepareShareNutritionFactsMessage(): String {
-        val food = uiState.value ?: throw IllegalStateException()
+        val food = requireNotNull(uiState.value)
         val nutritionFacts = food.nutritionFacts
 
         val foodEnergy = formatEnergy(nutritionFacts.energy)
@@ -60,8 +60,11 @@ class FoodDetailsViewModel(
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return FoodDetailsViewModel(
-                foodId, repository, formatEnergy,
-                formatNutritionWeight, stringProvider
+                foodId,
+                repository,
+                formatEnergy,
+                formatNutritionWeight,
+                stringProvider
             ) as T
         }
     }

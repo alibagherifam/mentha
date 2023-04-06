@@ -9,15 +9,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-fun CameraPreviewView(onPreviewViewCreated: ((PreviewView) -> Unit)?) {
+fun CameraPreviewView(
+    onPreviewViewCreated: ((PreviewView) -> Unit)?,
+    modifier: Modifier = Modifier
+) {
     // Only in compose preview
     if (onPreviewViewCreated == null) {
-        Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {}
-        return
+        Surface(modifier = modifier.fillMaxSize(), color = Color.Black) {}
+    } else {
+        AndroidView(
+            modifier = modifier.fillMaxSize(),
+            factory = { context -> PreviewView(context) },
+            update = { onPreviewViewCreated(it) }
+        )
     }
-    AndroidView(
-        modifier = Modifier.fillMaxSize(),
-        factory = { context -> PreviewView(context) },
-        update = { onPreviewViewCreated(it) }
-    )
 }

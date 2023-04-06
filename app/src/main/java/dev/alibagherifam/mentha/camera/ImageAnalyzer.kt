@@ -16,9 +16,7 @@ class ImageAnalyzer(
         if (!::bitmap.isInitialized) {
             // The RGB image buffer are initialized only once
             // the analyzer has started running
-            bitmap = Bitmap.createBitmap(
-                image.width, image.height, Bitmap.Config.ARGB_8888
-            )
+            bitmap = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
         }
 
         image.use {

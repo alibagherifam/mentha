@@ -119,4 +119,3 @@ override fun onConfigurationChanged(newConfig: Configuration) {
     imageAnalyzer?.targetRotation = binding.viewFinder.display.rotation
 }
 */
-

@@ -12,4 +12,4 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "Persian",
     locale = "fa"
 )
-annotation class LocalizationPreview
+annotation class LocalizationPreviews

@@ -34,6 +34,7 @@ class FormatEnergyUseCase(
     private val formatFloatValue: FormatFloatValueUseCase
 ) {
     operator fun invoke(energy: Float): String = formatFloatValue(
-        value = energy, unitStringRes = R.string.label_energy_in_kilo_calorie
+        value = energy,
+        unitStringRes = R.string.label_energy_in_kilo_calorie
     )
 }

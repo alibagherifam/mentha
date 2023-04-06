@@ -7,7 +7,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import dev.alibagherifam.mentha.R
-import dev.alibagherifam.mentha.comoon.LocalizationPreview
+import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.theme.AppTheme
 
 @Composable
@@ -36,7 +36,7 @@ fun CameraPermissionRationaleDialog(
     )
 }
 
-@LocalizationPreview
+@LocalizationPreviews
 @Composable
 fun RequestCameraPermissionRationaleDialogPreview() {
     AppTheme {

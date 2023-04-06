@@ -9,3 +9,7 @@ style:
     ignorePropertyDeclaration: true
   UnusedPrivateMember:
     ignoreAnnotated: [ 'Preview' ]
+
+complexity:
+  LongParameterList:
+    functionThreshold: 8

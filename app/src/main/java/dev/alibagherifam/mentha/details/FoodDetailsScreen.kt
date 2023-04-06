@@ -23,9 +23,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.FoodImage
-import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import dev.alibagherifam.mentha.comoon.LocalizationPreview
+import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
+import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import dev.alibagherifam.mentha.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,10 +33,12 @@ import dev.alibagherifam.mentha.theme.AppTheme
 fun FoodDetailsScreen(
     food: FoodEntity,
     onShareClick: () -> Unit,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
     Scaffold(
+        modifier,
         topBar = {
             FoodDetailsTopBar(
                 title = food.name,
@@ -67,10 +69,12 @@ fun FoodDetailsScreen(
 fun FoodDetailsTopBar(
     title: String,
     onBackPressed: () -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = title) },
+        modifier = modifier,
         navigationIcon = {
             IconButton(onClick = onBackPressed) {
                 Icon(
@@ -98,18 +102,19 @@ fun FoodDetailsTopBar(
 fun FoodDetails(
     name: String,
     summary: String,
-    imageUri: String
+    imageUri: String,
+    modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(modifier) {
         FoodImage(
-            modifier = Modifier
+            imageUri,
+            Modifier
                 .padding(start = 20.dp)
                 .size(150.dp)
                 .background(
                     color = MaterialTheme.colorScheme.secondaryContainer,
                     shape = CircleShape
-                ),
-            imageUri = imageUri
+                )
         )
         Spacer(modifier = Modifier.size(16.dp))
         Text(
@@ -125,7 +130,7 @@ fun FoodDetails(
     }
 }
 
-@LocalizationPreview
+@LocalizationPreviews
 @Composable
 fun FoodDetailsScreenPreview() {
     AppTheme {

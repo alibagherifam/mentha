@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.FormatNutritionWeightUseCase
-import dev.alibagherifam.mentha.comoon.LocalizationPreview
+import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.comoon.provideFormatEnergyUseCase
 import dev.alibagherifam.mentha.comoon.provideFormatNutritionWeightUseCase
@@ -30,8 +30,12 @@ import dev.alibagherifam.mentha.theme.AppTheme
 import kotlin.math.roundToInt
 
 @Composable
-fun NutritionFactsBox(data: NutritionFacts) {
+fun NutritionFactsBox(
+    data: NutritionFacts,
+    modifier: Modifier = Modifier
+) {
     OutlinedCard(
+        modifier,
         border = BorderStroke(
             width = 2.dp,
             color = MaterialTheme.colorScheme.outlineVariant
@@ -48,49 +52,59 @@ fun NutritionFactsBox(data: NutritionFacts) {
 }
 
 @Composable
-fun ServingSize(data: NutritionFacts) {
-    Text(
-        style = MaterialTheme.typography.headlineMedium,
-        text = stringResource(R.string.label_nutrition_facts)
-    )
-    Text(
-        style = MaterialTheme.typography.titleLarge,
-        text = stringResource(
-            R.string.label_serving_size,
-            data.servingSize,
-            stringResource(
-                R.string.label_weight_in_gram,
-                data.servingWeight.toString()
+fun ServingSize(
+    data: NutritionFacts,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
+        Text(
+            style = MaterialTheme.typography.headlineMedium,
+            text = stringResource(R.string.label_nutrition_facts)
+        )
+        Text(
+            style = MaterialTheme.typography.titleLarge,
+            text = stringResource(
+                R.string.label_serving_size,
+                data.servingSize,
+                stringResource(
+                    R.string.label_weight_in_gram,
+                    data.servingWeight.toString()
+                )
             )
         )
-    )
+    }
 }
 
 @Composable
-fun NutritionList(data: NutritionFacts) {
+fun NutritionList(
+    data: NutritionFacts,
+    modifier: Modifier = Modifier
+) {
     val formatEnergy = provideFormatEnergyUseCase(LocalContext.current)
     val formatNutritionWeight = provideFormatNutritionWeightUseCase(LocalContext.current)
     val calorieLabel = stringResource(R.string.label_energy)
     val calorieValue = formatEnergy(data.energy)
-    Text(
-        text = "$calorieLabel: $calorieValue",
-        style = MaterialTheme.typography.titleLarge
-    )
-    Spacer(modifier = Modifier.size(18.dp))
-    listOf(
-        R.string.label_water to data.water,
-        R.string.label_protein to data.protein,
-        R.string.label_carbohydrate to data.carbohydrate,
-        R.string.label_fat to data.fat,
-        R.string.label_sugar to data.sugar
-    ).forEach {
-        Nutrition(
-            formatNutritionWeight,
-            nutritionName = stringResource(it.first),
-            nutritionWeight = it.second,
-            foodServingWeight = data.servingWeight
+    Column(modifier) {
+        Text(
+            text = "$calorieLabel: $calorieValue",
+            style = MaterialTheme.typography.titleLarge
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(18.dp))
+        listOf(
+            R.string.label_water to data.water,
+            R.string.label_protein to data.protein,
+            R.string.label_carbohydrate to data.carbohydrate,
+            R.string.label_fat to data.fat,
+            R.string.label_sugar to data.sugar
+        ).forEach {
+            Nutrition(
+                formatNutritionWeight,
+                nutritionName = stringResource(it.first),
+                nutritionWeight = it.second,
+                foodServingWeight = data.servingWeight
+            )
+            Spacer(modifier = Modifier.size(16.dp))
+        }
     }
 }
 
@@ -99,13 +113,14 @@ fun Nutrition(
     formatNutritionWeight: FormatNutritionWeightUseCase,
     nutritionName: String,
     nutritionWeight: Float,
-    foodServingWeight: Int
+    foodServingWeight: Int,
+    modifier: Modifier = Modifier
 ) {
     val factor = nutritionWeight / foodServingWeight
     val nutritionPercentage = (factor * 100).roundToInt().let {
         if (it < 1) "<1%" else "$it%"
     }
-    Column {
+    Column(modifier) {
         Row {
             Text(
                 style = MaterialTheme.typography.titleMedium,
@@ -128,7 +143,7 @@ fun Nutrition(
     }
 }
 
-@LocalizationPreview
+@LocalizationPreviews
 @Composable
 fun NutritionFactsPreview() {
     AppTheme {

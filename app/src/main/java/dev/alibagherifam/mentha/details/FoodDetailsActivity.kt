@@ -22,8 +22,8 @@ class FoodDetailsActivity : AppCompatActivity() {
                 FoodDetailsFragment(
                     viewModel = viewModel(
                         factory = provideFoodDetailsViewModelFactory(
-                            foodId = intent.extras?.getString(FoodEntity::id.name)!!,
-                            context = this
+                            context = this,
+                            foodId = intent.extras?.getString(FoodEntity::id.name)!!
                         )
                     )
                 )

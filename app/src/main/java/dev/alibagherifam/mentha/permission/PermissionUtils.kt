@@ -27,5 +27,5 @@ fun Context.findActivity(): Activity {
         if (context is Activity) return context
         context = context.baseContext
     }
-    throw IllegalStateException("Permissions should be called in the context of an Activity")
+    error("Permissions should be called in the context of an Activity")
 }

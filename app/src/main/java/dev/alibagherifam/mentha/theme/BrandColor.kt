@@ -2,7 +2,7 @@ package dev.alibagherifam.mentha.theme
 
 import androidx.compose.ui.graphics.Color
 
-object CustomColor {
+object BrandColor {
     val Black200 = Color(0xFF1B1C18)
     val DarkRed = Color(0xFF690005)
     val Green = Color(0xFFA5D576)

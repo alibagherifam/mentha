@@ -29,7 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.FoodImage
-import dev.alibagherifam.mentha.comoon.LocalizationPreview
+import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.comoon.provideFormatEnergyUseCase
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
@@ -37,9 +37,9 @@ import dev.alibagherifam.mentha.theme.AppTheme
 
 @Composable
 fun AnimatedRecognitionCard(
-    modifier: Modifier,
     food: FoodEntity?,
-    onShowDetailsClick: () -> Unit
+    onShowDetailsClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val safeFood = remember {
         Ref<FoodEntity>()
@@ -52,10 +52,18 @@ fun AnimatedRecognitionCard(
     AnimatedVisibility(
         modifier = modifier,
         visible = food != null,
-        enter = fadeIn(tween(durationMillis = 500)) +
-                slideInVertically(tween(durationMillis = 500)) { it / 2 },
-        exit = fadeOut(tween(durationMillis = 500, delayMillis = 1000)) +
-                slideOutVertically(tween(durationMillis = 500, delayMillis = 1000)) { it / 2 }
+        enter = fadeIn(
+            tween(durationMillis = 500)
+        ) + slideInVertically(
+            tween(durationMillis = 500),
+            initialOffsetY = { it / 2 }
+        ),
+        exit = fadeOut(
+            tween(durationMillis = 500, delayMillis = 1000)
+        ) + slideOutVertically(
+            tween(durationMillis = 500, delayMillis = 1000),
+            targetOffsetY = { it / 2 }
+        )
     ) {
         safeFood.value?.let { RecognitionCard(food = it, onShowDetailsClick) }
     }
@@ -65,9 +73,10 @@ fun AnimatedRecognitionCard(
 @Composable
 fun RecognitionCard(
     food: FoodEntity,
-    onShowDetailsClick: () -> Unit
+    onShowDetailsClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Card(onClick = onShowDetailsClick) {
+    Card(onClick = onShowDetailsClick, modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -75,7 +84,32 @@ fun RecognitionCard(
                 .padding(vertical = 12.dp)
                 .padding(start = 12.dp)
         ) {
-            RecognitionInfo(food)
+            val formatEnergy = provideFormatEnergyUseCase(LocalContext.current)
+            FoodImage(
+                imageUri = food.image,
+                modifier = Modifier.size(60.dp)
+            )
+            Spacer(modifier = Modifier.size(14.dp))
+            Column(Modifier) {
+                Text(
+                    text = food.name,
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Spacer(modifier = Modifier.size(6.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        modifier = Modifier.size(16.dp),
+                        tint = MaterialTheme.colorScheme.primary,
+                        painter = painterResource(R.drawable.img_fire),
+                        contentDescription = stringResource(R.string.a11y_energy_icon)
+                    )
+                    Spacer(modifier = Modifier.size(6.dp))
+                    Text(
+                        text = formatEnergy(food.nutritionFacts.energy),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
             Spacer(modifier = Modifier.weight(1f))
             TextButton(onClick = onShowDetailsClick) {
                 Text(text = stringResource(R.string.label_nutrition_facts))
@@ -88,40 +122,13 @@ fun RecognitionCard(
     }
 }
 
-@Composable
-fun RecognitionInfo(food: FoodEntity) {
-    val formatEnergy = provideFormatEnergyUseCase(LocalContext.current)
-    FoodImage(
-        modifier = Modifier.size(60.dp),
-        imageUri = food.image,
-    )
-    Spacer(modifier = Modifier.size(14.dp))
-    Column {
-        Text(
-            text = food.name,
-            style = MaterialTheme.typography.headlineSmall
-        )
-        Spacer(modifier = Modifier.size(6.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                modifier = Modifier.size(16.dp),
-                tint = MaterialTheme.colorScheme.primary,
-                painter = painterResource(R.drawable.img_fire),
-                contentDescription = stringResource(R.string.a11y_energy_icon)
-            )
-            Spacer(modifier = Modifier.size(6.dp))
-            Text(
-                text = formatEnergy(food.nutritionFacts.energy),
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-    }
-}
-
-@LocalizationPreview
+@LocalizationPreviews
 @Composable
 fun RecognitionCardPreview() {
     AppTheme {
-        RecognitionCard(food = getSampleFood()) {}
+        RecognitionCard(
+            food = getSampleFood(),
+            onShowDetailsClick = {}
+        )
     }
 }

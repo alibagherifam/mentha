@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
-import dev.alibagherifam.mentha.comoon.LocalizationPreview
+import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.theme.AppTheme
 
@@ -30,39 +30,40 @@ fun CameraScreen(
     onFlashlightToggle: (Boolean) -> Unit,
     onSettingsClick: () -> Unit,
     onShowDetailsClick: () -> Unit,
-    onPreviewViewCreated: ((PreviewView) -> Unit)?
+    onPreviewViewCreated: ((PreviewView) -> Unit)?,
+    modifier: Modifier = Modifier
 ) {
-    Box(Modifier.fillMaxSize()) {
+    Box(modifier.fillMaxSize()) {
         CameraPreviewView(onPreviewViewCreated)
         ActionBar(
-            Modifier
-                .align(Alignment.TopCenter)
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp),
             uiState.isFlashlightSupported,
             uiState.isFlashlightEnabled,
             onFlashlightToggle,
-            onSettingsClick
+            onSettingsClick,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp),
         )
         ScanAreaRectangle(Modifier.align(Alignment.Center))
         AnimatedRecognitionCard(
-            modifier = Modifier
+            uiState.food,
+            onShowDetailsClick,
+            Modifier
                 .align(Alignment.BottomCenter)
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 20.dp),
-            uiState.food,
-            onShowDetailsClick
         )
     }
 }
 
 @Composable
 fun ActionBar(
-    modifier: Modifier = Modifier,
     isFlashlightSupported: Boolean,
     isFlashlightEnabled: Boolean,
     onFlashlightToggle: (Boolean) -> Unit,
-    onSettingsClick: () -> Unit
+    onSettingsClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(modifier) {
         // TODO: Add settings
@@ -90,19 +91,19 @@ fun ActionBar(
 }
 
 @Composable
-fun ScanAreaRectangle(modifier: Modifier) {
+fun ScanAreaRectangle(modifier: Modifier = Modifier) {
     Image(
         contentScale = ContentScale.FillBounds,
         modifier = modifier
             .fillMaxWidth(fraction = 0.80f)
-            .fillMaxHeight(0.56f)
+            .fillMaxHeight(fraction = 0.56f)
             .offset(y = (-50).dp),
         painter = painterResource(id = R.drawable.bg_scan_square),
         contentDescription = ""
     )
 }
 
-@LocalizationPreview
+@LocalizationPreviews
 @Composable
 fun CameraScreenPreview() {
     AppTheme {

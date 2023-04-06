@@ -27,7 +27,8 @@ fun provideCameraViewModelFactory(context: Context): ViewModelProvider.Factory =
     )
 
 fun provideFoodDetailsViewModelFactory(
-    foodId: String, context: Context
+    context: Context,
+    foodId: String
 ): ViewModelProvider.Factory = FoodDetailsViewModel.Provider(
     foodId,
     provideFoodRepository(context),
