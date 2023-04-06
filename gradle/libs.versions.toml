@@ -42,10 +42,10 @@ tensorflow-gpuDelegate = { group = "org.tensorflow", name = "tensorflow-lite-gpu
 tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version = "0.4.3" }
 
 # Others
-coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.3.3" }
-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.2" }
+coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.3" }
 
 # Build Configuration
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidPlugin" }
