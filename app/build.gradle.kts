@@ -1,6 +1,6 @@
 plugins {
-    id("dev.alibagherifam.mentha.android.application")
-    id("dev.alibagherifam.mentha.compose")
+    id("dev.alibagherifam.android.application")
+    id("dev.alibagherifam.compose")
 }
 
 android {

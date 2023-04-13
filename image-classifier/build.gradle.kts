@@ -2,7 +2,7 @@ import com.android.build.gradle.internal.tasks.factory.dependsOn
 import de.undercouch.gradle.tasks.download.Download
 
 plugins {
-    id("dev.alibagherifam.mentha.android.library")
+    id("dev.alibagherifam.android.library")
     alias(libs.plugins.gradleDownload)
 }
 

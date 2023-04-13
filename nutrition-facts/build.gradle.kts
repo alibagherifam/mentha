@@ -1,5 +1,5 @@
 plugins {
-    id("dev.alibagherifam.mentha.android.library")
+    id("dev.alibagherifam.android.library")
     alias(libs.plugins.ksp)
 }
 

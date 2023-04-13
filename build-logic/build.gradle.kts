@@ -18,19 +18,19 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "dev.alibagherifam.mentha.android.application"
+            id = "dev.alibagherifam.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidLibrary") {
-            id = "dev.alibagherifam.mentha.android.library"
+            id = "dev.alibagherifam.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("compose") {
-            id = "dev.alibagherifam.mentha.compose"
+            id = "dev.alibagherifam.compose"
             implementationClass = "ComposeConventionPlugin"
         }
         register("featureLibrary") {
-            id = "dev.alibagherifam.mentha.feature"
+            id = "dev.alibagherifam.feature"
             implementationClass = "FeatureLibraryConventionPlugin"
         }
     }
