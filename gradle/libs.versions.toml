@@ -1,13 +1,13 @@
 [versions]
 androidCompileSdk = "33"
 androidMinSdk = "24"
-androidBuildTools = "34.0.0-rc2"
-androidPlugin = "7.4.2"
+androidBuildTools = "34.0.0-rc3"
+androidPlugin = "8.0.0"
 androidxCamera = "1.2.2"
-androidxComposeCompiler = "1.4.4"
+androidxComposeCompiler = "1.4.5"
 androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 coroutines = "1.6.4"
 coil = "2.3.0"
 detekt = "1.22.0"
@@ -19,7 +19,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.03.00" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.04.00" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
@@ -42,6 +42,7 @@ tensorflow-gpuDelegate = { group = "org.tensorflow", name = "tensorflow-lite-gpu
 tensorflow-taskVision = { group = "org.tensorflow", name = "tensorflow-lite-task-vision", version = "0.4.3" }
 
 # Others
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version = "1.2.2" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
@@ -59,7 +60,7 @@ android-application = { id = "com.android.application", version.ref = "androidPl
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "1.8.10-1.0.9" }
+ksp = { id = "com.google.devtools.ksp", version = "1.8.20-1.0.10" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version = "0.46.0" }
 detekt-core = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradleDoctor = { id = "com.osacky.doctor", version = "0.8.1" }
