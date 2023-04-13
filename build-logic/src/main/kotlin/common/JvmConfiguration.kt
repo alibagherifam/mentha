@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.setJvmTargetVersion(android: CommonExtension<*, *, *, *>) {
-    val javaVersion = JavaVersion.VERSION_11
+    val javaVersion = JavaVersion.VERSION_17
     setJavaVersionForKotlinCompiler(javaVersion)
     android.compileOptions {
         sourceCompatibility = javaVersion
