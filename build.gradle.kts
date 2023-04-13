@@ -6,7 +6,9 @@ plugins {
     alias(libs.plugins.detekt.core) apply false
     alias(libs.plugins.gradleDownload) apply false
     alias(libs.plugins.ksp) apply false
+
     alias(libs.plugins.dependencyVersions)
+    alias(libs.plugins.gradleDoctor)
 }
 
 tasks.register<Delete>("clean") {
