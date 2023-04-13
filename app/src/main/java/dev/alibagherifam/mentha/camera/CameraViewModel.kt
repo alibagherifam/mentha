@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dev.alibagherifam.mentha.imageclassifier.ImageClassifierHelper
 import dev.alibagherifam.mentha.nutritionfacts.FoodRepository
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.update
 
 typealias RotatedBitmap = Pair<Bitmap, Int>
 
+@OptIn(FlowPreview::class)
 class CameraViewModel(
     private val imageClassifier: ImageClassifierHelper,
     private val repository: FoodRepository
