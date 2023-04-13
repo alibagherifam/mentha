@@ -43,10 +43,7 @@ class ComposeConventionPlugin : Plugin<Project> {
             add("androidTestImplementation", platform(bom))
             implementation(libs, "androidx-compose-material3")
             implementation(libs, "androidx-compose-tooling-preview")
-            add(
-                "debugImplementation",
-                libs.findLibrary("androidx-compose-tooling").get()
-            )
+            implementation(libs, "androidx-compose-tooling")
             add(
                 "detektPlugins",
                 libs.findLibrary("detekt-composeRules").get()
