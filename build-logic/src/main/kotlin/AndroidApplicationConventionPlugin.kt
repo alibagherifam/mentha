@@ -1,5 +1,7 @@
 import com.android.build.api.dsl.ApplicationExtension
 import common.configureAndroidBaseOptions
+import common.getRequiredVersion
+import common.getVersionCatalogs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -17,13 +19,18 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             extensions.configure<ApplicationExtension> {
                 configureAndroidBaseOptions(this)
+                configureTargetSdkVersion(this)
                 configureSigning(this)
                 configureBuildTypes(this)
                 configureLint(this)
-                defaultConfig {
-                    targetSdk = 33
-                }
             }
+        }
+    }
+
+    private fun Project.configureTargetSdkVersion(android: ApplicationExtension) {
+        android.defaultConfig {
+            val libs = getVersionCatalogs()
+            targetSdk = libs.getRequiredVersion("androidTargetSdk").toInt()
         }
     }
 

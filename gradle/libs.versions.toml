@@ -1,6 +1,7 @@
 [versions]
 androidCompileSdk = "33"
 androidMinSdk = "24"
+androidTargetSdk = "33"
 androidBuildTools = "34.0.0-rc4"
 androidPlugin = "8.0.2"
 androidxCamera = "1.2.3"
