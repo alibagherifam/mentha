@@ -17,7 +17,7 @@ import dev.alibagherifam.mentha.comoon.provideCameraViewModelFactory
 import dev.alibagherifam.mentha.details.FoodDetailsActivity
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import dev.alibagherifam.mentha.permission.RequestPermissionScaffold
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -32,7 +32,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
+            MenthaTheme {
                 RequestPermissionScaffold(
                     permission = Manifest.permission.CAMERA,
                     rationaleDialogTitle = stringResource(R.string.label_camera_permission),

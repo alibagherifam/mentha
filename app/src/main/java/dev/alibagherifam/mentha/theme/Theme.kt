@@ -81,7 +81,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun MenthaTheme(
     isInDarkMode: Boolean = isSystemInDarkTheme(),
     allowDynamicColor: Boolean = false,
     content: @Composable () -> Unit

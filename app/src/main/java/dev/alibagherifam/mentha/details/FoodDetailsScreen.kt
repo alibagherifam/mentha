@@ -26,7 +26,7 @@ import dev.alibagherifam.mentha.comoon.FoodImage
 import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -133,7 +133,7 @@ fun FoodDetails(
 @LocalizationPreviews
 @Composable
 fun FoodDetailsScreenPreview() {
-    AppTheme {
+    MenthaTheme {
         FoodDetailsScreen(
             getSampleFood(),
             onBackPressed = {},

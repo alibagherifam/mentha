@@ -11,14 +11,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.provideFoodDetailsViewModelFactory
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 
 class FoodDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme {
+            MenthaTheme {
                 FoodDetailsFragment(
                     viewModel = viewModel(
                         factory = provideFoodDetailsViewModelFactory(

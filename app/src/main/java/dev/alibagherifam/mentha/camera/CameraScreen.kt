@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 
 @Composable
 fun CameraScreen(
@@ -106,7 +106,7 @@ fun ScanAreaRectangle(modifier: Modifier = Modifier) {
 @LocalizationPreviews
 @Composable
 fun CameraScreenPreview() {
-    AppTheme {
+    MenthaTheme {
         CameraScreen(
             uiState = CameraUiState(food = getSampleFood()),
             onFlashlightToggle = {},

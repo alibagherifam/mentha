@@ -26,7 +26,7 @@ import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.comoon.provideFormatEnergyUseCase
 import dev.alibagherifam.mentha.comoon.provideFormatNutritionWeightUseCase
 import dev.alibagherifam.mentha.nutritionfacts.model.NutritionFacts
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 import kotlin.math.roundToInt
 
 @Composable
@@ -146,7 +146,7 @@ fun Nutrition(
 @LocalizationPreviews
 @Composable
 fun NutritionFactsPreview() {
-    AppTheme {
+    MenthaTheme {
         NutritionFactsBox(getSampleFood().nutritionFacts)
     }
 }

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import dev.alibagherifam.mentha.R
 import dev.alibagherifam.mentha.comoon.LocalizationPreviews
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 
 @Composable
 fun RequestPermissionDialog(
@@ -37,7 +37,7 @@ fun RequestPermissionDialog(
 @LocalizationPreviews
 @Composable
 internal fun RequestPermissionDialogPreview() {
-    AppTheme {
+    MenthaTheme {
         RequestPermissionDialog(
             title = stringResource(R.string.label_camera_permission),
             message = stringResource(R.string.message_camera_permission_required),

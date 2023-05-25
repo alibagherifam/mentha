@@ -33,7 +33,7 @@ import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.comoon.provideFormatEnergyUseCase
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
-import dev.alibagherifam.mentha.theme.AppTheme
+import dev.alibagherifam.mentha.theme.MenthaTheme
 
 @Composable
 fun AnimatedRecognitionCard(
@@ -125,7 +125,7 @@ fun RecognitionCard(
 @LocalizationPreviews
 @Composable
 fun RecognitionCardPreview() {
-    AppTheme {
+    MenthaTheme {
         RecognitionCard(
             food = getSampleFood(),
             onShowDetailsClick = {}
