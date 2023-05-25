@@ -1,29 +1,29 @@
 [versions]
 androidCompileSdk = "33"
 androidMinSdk = "24"
-androidBuildTools = "34.0.0-rc3"
-androidPlugin = "8.0.0"
-androidxCamera = "1.2.2"
+androidBuildTools = "34.0.0-rc4"
+androidPlugin = "8.0.2"
+androidxCamera = "1.2.3"
 androidxComposeCompiler = "1.4.7"
 androidxLifecycle = "2.6.1"
 androidxRoom = "2.5.1"
 kotlin = "1.8.21"
-coroutines = "1.7.0-RC"
-coil = "2.3.0"
-detekt = "1.22.0"
+coroutines = "1.7.1"
+coil = "2.4.0"
+detekt = "1.23.0"
 
 [libraries]
 # AndroidX
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.1" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.7.2" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version = "1.6.1" }
 androidx-camera-core = { group = "androidx.camera", name = "camera-camera2", version.ref = "androidxCamera" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "androidxCamera" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref= "androidxCamera" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.05.00" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version = "2023.05.01" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.10.0" }
+androidx-core = { group = "androidx.core", name = "core-ktx", version = "1.10.1" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.5.3" }
