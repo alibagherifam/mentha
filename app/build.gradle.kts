@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.coil.core)
     implementation(libs.coil.compose)
+    implementation(libs.google.accompanist)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
 }

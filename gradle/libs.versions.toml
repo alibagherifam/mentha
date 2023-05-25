@@ -48,6 +48,7 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 detekt-composeRules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
 detekt-ktlintFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+google-accompanist = { group = "com.google.accompanist", name = "accompanist-permissions", version = "0.30.1" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.4" }
 

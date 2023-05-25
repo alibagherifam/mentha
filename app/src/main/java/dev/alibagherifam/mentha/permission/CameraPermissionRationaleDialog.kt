@@ -11,18 +11,16 @@ import dev.alibagherifam.mentha.comoon.LocalizationPreviews
 import dev.alibagherifam.mentha.theme.AppTheme
 
 @Composable
-fun CameraPermissionRationaleDialog(
+fun RequestPermissionDialog(
+    title: String,
+    message: String,
     onConfirmClick: () -> Unit,
     onDismissRequest: () -> Unit
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
-        title = {
-            Text(text = stringResource(R.string.label_camera_permission))
-        },
-        text = {
-            Text(text = stringResource(R.string.message_camera_permission_required))
-        },
+        title = { Text(title) },
+        text = { Text(message) },
         confirmButton = {
             Button(onClick = onConfirmClick) {
                 Text(text = stringResource(R.string.label_confirm))
@@ -38,8 +36,13 @@ fun CameraPermissionRationaleDialog(
 
 @LocalizationPreviews
 @Composable
-fun RequestCameraPermissionRationaleDialogPreview() {
+internal fun RequestPermissionDialogPreview() {
     AppTheme {
-        CameraPermissionRationaleDialog({}, {})
+        RequestPermissionDialog(
+            title = stringResource(R.string.label_camera_permission),
+            message = stringResource(R.string.message_camera_permission_required),
+            onConfirmClick = {},
+            onDismissRequest = {}
+        )
     }
 }
