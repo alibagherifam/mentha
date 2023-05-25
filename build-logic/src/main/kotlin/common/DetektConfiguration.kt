@@ -14,7 +14,7 @@ fun Project.configureWithDetekt(libs: VersionCatalog) {
 
     extensions.configure<DetektExtension> {
         ignoreFailures = true
-        config = files("$rootDir/config/detekt.yml")
+        config.setFrom(files("$rootDir/config/detekt.yml"))
         buildUponDefaultConfig = true
     }
 
