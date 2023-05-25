@@ -21,6 +21,6 @@ tasks.register("detektAll") {
     dependsOn(
         subprojects.filter {
             it.plugins.hasPlugin(libs.plugins.detekt.core.get().pluginId)
-        }.map { it.tasks.named("detekt") }
+        }.map { it.tasks.named("detektMain") }
     )
 }
