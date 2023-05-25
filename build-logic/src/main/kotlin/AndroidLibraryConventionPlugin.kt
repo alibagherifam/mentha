@@ -15,6 +15,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
             extensions.configure<LibraryExtension> {
                 configureAndroidBaseOptions(this)
+                defaultConfig {
+                    consumerProguardFiles("consumer-rules.pro")
+                }
             }
             extensions.configure<LibraryAndroidComponentsExtension> {
                 disableDebugBuild(this)
