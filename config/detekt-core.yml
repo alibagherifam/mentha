@@ -1,0 +1,131 @@
+complexity:
+  ComplexInterface:
+    active: true
+  LongMethod:
+    ignoreAnnotated: [ 'Composable' ]
+  LongParameterList:
+    functionThreshold: 7
+    constructorThreshold: 8
+    ignoreAnnotated: [ 'Composable' ]
+  MethodOverloading:
+    active: true
+  NamedArguments:
+    active: true
+    threshold: 4
+  NestedBlockDepth:
+    active: true
+  NestedScopeFunctions:
+    active: true
+    threshold: 2
+  StringLiteralDuplication:
+    active: true
+  # May encourage people to write fewer but longer functions
+  TooManyFunctions:
+    active: false
+
+coroutines:
+  GlobalCoroutineUsage:
+    active: true
+  SuspendFunSwallowedCancellation:
+    active: true
+  SuspendFunWithCoroutineScopeReceiver:
+    active: true
+
+empty-blocks:
+  # Duplicate of Ktlint rule
+  EmptyKtFile:
+    active: false
+
+naming:
+  BooleanPropertyNaming:
+    active: true
+    # Optional underscore at start is for backing properties
+    allowedPattern: '^(_)?(is|has|are|should|can)'
+    excludes:
+      - '**/test/**'
+      - '**/androidTest/**'
+  ConstructorParameterNaming:
+    privateParameterPattern: '[_a-z][A-Za-z0-9]*'
+  FunctionNaming:
+    # `@Composable` functions can be named in PascalCase
+    # `@Test` functions can be named with underscore
+    ignoreAnnotated: [ 'Composable' , 'Test' ]
+  TopLevelPropertyNaming:
+    # Either Pascal Case or Upper Snake Case
+    constantPattern: '([A-Z][A-Za-z0-9]*|[A-Z][_A-Z0-9]*)'
+
+performance:
+  UnnecessaryPartOfBinaryExpression:
+    active: true
+
+potential-bugs:
+  CastNullableToNonNullableType:
+    active: true
+  CastToNullableType:
+    active: true
+  DontDowncastCollectionTypes:
+    active: true
+  ImplicitUnitReturnType:
+    active: true
+    # False positive on `runTest` blocks when testing coroutines
+    ignoreAnnotated: [ 'Test' ]
+  MissingPackageDeclaration:
+    active: true
+  NullableToStringCall:
+    active: true
+  NullCheckOnMutableProperty:
+    active: true
+  UnconditionalJumpStatementInLoop:
+    active: true
+  UnnecessaryNotNullCheck:
+    active: true
+
+style:
+  # We heavily used To-Do comments
+  ForbiddenComment:
+    active: false
+  ForbiddenImport:
+    active: true
+    imports:
+      - value: 'java.util.stream.*'
+        reason: "Use Kotlin's sequences instead."
+      # Prefer Java 8+ date-time API
+      - value: 'java.text.DateFormat'
+        reason: 'Use java.time.DateTimeFormatter instead.'
+      - value: 'java.text.SimpleDateFormat'
+        reason: 'Use java.time.DateTimeFormatter instead.'
+      - value: 'java.util.Date'
+        reason: 'Use kotlinx.datetime.Instant instead.'
+      # Prefer kotlin.test assertion API
+      - value: 'org.junit.jupiter.api.Assertions*'
+        reason: 'Use kotlin.test assertions instead.'
+      - value: 'org.junit.jupiter.api.assertAll'
+        reason: 'Use kotlin.test assertions instead.'
+      - value: 'org.junit.jupiter.api.assertThrows'
+        reason: 'Use kotlin.test.assertFailsWith instead.'
+      - value: 'org.junit.jupiter.api.assertDoesNotThrow'
+        reason: 'Use kotlin.test assertions instead.'
+      - value: 'org.junit.jupiter.api.fail'
+        reason: 'Use kotlin.test.fail instead.'
+  ForbiddenMethodCall:
+    active: true
+    methods:
+      # Prefer android.util.Log
+      - 'kotlin.io.print'
+      - 'kotlin.io.println'
+      # Prefer kotlinx.Clock.System.now()
+      - 'java.lang.System.currentTimeMillis()'
+  # Too many false positive cases
+  MagicNumber:
+    active: false
+  # Duplicate of Ktlint rule
+  NewLineAtEndOfFile:
+    active: false
+  ReturnCount:
+    excludeGuardClauses: true
+  ThrowsCount:
+    excludeGuardClauses: true
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' , 'PreviewWithBackground' ]
+  UseEmptyCounterpart:
+    active: true

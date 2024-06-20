@@ -1,11 +1,10 @@
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
-import common.configureAndroidBaseOptions
+import dev.alibagherifam.build.convention.configs.configureAndroidBaseOptions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-@Suppress("unused")
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -13,12 +12,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
                 apply("com.android.library")
             }
+
             extensions.configure<LibraryExtension> {
-                configureAndroidBaseOptions(this)
-                defaultConfig {
-                    consumerProguardFiles("consumer-rules.pro")
-                }
+                configureAndroidBaseOptions(target)
             }
+
             extensions.configure<LibraryAndroidComponentsExtension> {
                 disableDebugBuild(this)
             }

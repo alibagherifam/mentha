@@ -1,6 +1,6 @@
 plugins {
-    id("dev.alibagherifam.android.application")
-    id("dev.alibagherifam.compose")
+    alias(libs.plugins.alibagherifam.android.application)
+    alias(libs.plugins.alibagherifam.compose)
 }
 
 android {
@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId = "dev.alibagherifam.mentha"
         versionCode = 1
-        versionName = "0.4.0"
+        versionName = "0.5.0"
     }
 }
 
@@ -18,15 +18,15 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.coil.core)
     implementation(libs.coil.compose)
-    implementation(libs.google.accompanist)
+    implementation(libs.accompanist.permissions)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.guava)
 }

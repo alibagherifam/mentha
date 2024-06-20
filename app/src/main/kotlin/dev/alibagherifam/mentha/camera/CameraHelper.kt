@@ -36,7 +36,7 @@ fun getPreviewUseCase(viewFinder: PreviewView) =
         .build().apply {
             // Attach the viewfinder's surface provider to preview use case
             // Todo: Official sample code calls this after binding use-cases
-            setSurfaceProvider(viewFinder.surfaceProvider)
+            surfaceProvider = viewFinder.surfaceProvider
         }
 
 fun getImageAnalysisUseCase(

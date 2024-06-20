@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -35,7 +35,7 @@ fun NutritionFactsBox(
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
-        modifier,
+        modifier = modifier,
         border = BorderStroke(
             width = 2.dp,
             color = MaterialTheme.colorScheme.outlineVariant
@@ -43,9 +43,9 @@ fun NutritionFactsBox(
     ) {
         Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp)) {
             ServingSize(data)
-            Spacer(modifier = Modifier.size(10.dp))
-            Divider(thickness = 2.dp)
-            Spacer(modifier = Modifier.size(12.dp))
+            Spacer(Modifier.size(10.dp))
+            HorizontalDivider(thickness = 2.dp)
+            Spacer(Modifier.size(12.dp))
             NutritionList(data)
         }
     }
@@ -58,11 +58,10 @@ fun ServingSize(
 ) {
     Column(modifier) {
         Text(
-            style = MaterialTheme.typography.headlineMedium,
-            text = stringResource(R.string.label_nutrition_facts)
+            text = stringResource(R.string.label_nutrition_facts),
+            style = MaterialTheme.typography.headlineMedium
         )
         Text(
-            style = MaterialTheme.typography.titleLarge,
             text = stringResource(
                 R.string.label_serving_size,
                 data.servingSize,
@@ -70,7 +69,8 @@ fun ServingSize(
                     R.string.label_weight_in_gram,
                     data.servingWeight.toString()
                 )
-            )
+            ),
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
@@ -98,12 +98,12 @@ fun NutritionList(
             R.string.label_sugar to data.sugar
         ).forEach {
             Nutrition(
-                formatNutritionWeight,
+                formatNutritionWeight = formatNutritionWeight,
                 nutritionName = stringResource(it.first),
                 nutritionWeight = it.second,
                 foodServingWeight = data.servingWeight
             )
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(Modifier.size(16.dp))
         }
     }
 }
@@ -123,15 +123,15 @@ fun Nutrition(
     Column(modifier) {
         Row {
             Text(
-                style = MaterialTheme.typography.titleMedium,
-                text = nutritionName
+                text = nutritionName,
+                style = MaterialTheme.typography.titleMedium
             )
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(Modifier.size(8.dp))
             Text(
-                style = MaterialTheme.typography.titleMedium,
-                text = formatNutritionWeight(nutritionWeight)
+                text = formatNutritionWeight(nutritionWeight),
+                style = MaterialTheme.typography.titleMedium
             )
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(Modifier.weight(1f))
             Text(
                 text = nutritionPercentage,
                 modifier = Modifier.widthIn(min = 28.dp),
@@ -139,7 +139,10 @@ fun Nutrition(
                 textAlign = TextAlign.Center
             )
         }
-        LinearProgressIndicator(modifier = Modifier.fillMaxWidth(), progress = factor)
+        LinearProgressIndicator(
+            progress = { factor },
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 

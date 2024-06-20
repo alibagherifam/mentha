@@ -28,7 +28,6 @@ import dev.alibagherifam.mentha.comoon.getSampleFood
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 import dev.alibagherifam.mentha.theme.MenthaTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodDetailsScreen(
     food: FoodEntity,
