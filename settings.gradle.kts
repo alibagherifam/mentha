@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "mentha"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 include(":image-classifier")
