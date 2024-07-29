@@ -36,7 +36,7 @@ fun RequestPermissionDialog(
 
 @LocalizationPreviews
 @Composable
-internal fun RequestPermissionDialogPreview() {
+private fun RequestPermissionDialogPreview() {
     MenthaTheme {
         RequestPermissionDialog(
             title = stringResource(R.string.label_camera_permission),

@@ -30,7 +30,7 @@ private fun CommonExtension<*, *, *, *, *, *>.excludeRedundantResourcesFromApk()
 
 private fun CommonExtension<*, *, *, *, *, *>.specifySupportedLanguages() {
     defaultConfig {
-        resourceConfigurations += setOf("en", "fa", "ar")
+        resourceConfigurations += setOf("en", "fa")
     }
 }
 

@@ -122,7 +122,7 @@ fun RecognitionCard(
 
 @LocalizationPreviews
 @Composable
-fun RecognitionCardPreview() {
+private fun RecognitionCardPreview() {
     MenthaTheme {
         RecognitionCard(
             food = getSampleFood(),

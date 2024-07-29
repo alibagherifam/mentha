@@ -148,7 +148,7 @@ fun Nutrition(
 
 @LocalizationPreviews
 @Composable
-fun NutritionFactsPreview() {
+private fun NutritionFactsPreview() {
     MenthaTheme {
         NutritionFactsBox(getSampleFood().nutritionFacts)
     }

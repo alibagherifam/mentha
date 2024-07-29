@@ -105,7 +105,7 @@ fun ScanAreaRectangle(modifier: Modifier = Modifier) {
 
 @LocalizationPreviews
 @Composable
-fun CameraScreenPreview() {
+private fun CameraScreenPreview() {
     MenthaTheme {
         CameraScreen(
             uiState = CameraUiState(food = getSampleFood()),
