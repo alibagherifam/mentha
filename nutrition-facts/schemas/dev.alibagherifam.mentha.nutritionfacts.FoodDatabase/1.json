@@ -1,0 +1,112 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "3cb5a5bff1942220aa536c4dbfe1dfba",
+    "entities": [
+      {
+        "tableName": "food",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `summary` TEXT NOT NULL, `image` TEXT NOT NULL, `serving_size` TEXT NOT NULL, `serving_weight` INTEGER NOT NULL, `energy` REAL NOT NULL, `water` REAL NOT NULL, `protein` REAL NOT NULL, `carbohydrate` REAL NOT NULL, `fat` REAL NOT NULL, `dietary_fiber` REAL NOT NULL, `sugar` REAL NOT NULL, `sodium` REAL NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "summary",
+            "columnName": "summary",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.servingSize",
+            "columnName": "serving_size",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.servingWeight",
+            "columnName": "serving_weight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.energy",
+            "columnName": "energy",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.water",
+            "columnName": "water",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.protein",
+            "columnName": "protein",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.carbohydrate",
+            "columnName": "carbohydrate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.fat",
+            "columnName": "fat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.dietaryFiber",
+            "columnName": "dietary_fiber",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.sugar",
+            "columnName": "sugar",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nutritionFacts.sodium",
+            "columnName": "sodium",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3cb5a5bff1942220aa536c4dbfe1dfba')"
+    ]
+  }
+}

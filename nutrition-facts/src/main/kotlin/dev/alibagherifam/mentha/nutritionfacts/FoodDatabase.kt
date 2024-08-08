@@ -6,7 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.alibagherifam.mentha.nutritionfacts.model.FoodEntity
 
-@Database(entities = [FoodEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [FoodEntity::class],
+    version = 1
+)
 abstract class FoodDatabase : RoomDatabase() {
     abstract fun getFoodDao(): FoodDao
 
