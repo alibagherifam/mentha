@@ -64,6 +64,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidPlugin" }
 android-library = { id = "com.android.library", version.ref = "androidPlugin" }
+androidx-room = { id = "androidx.room", version.ref = "androidxRoom" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradleDoctor = { id = "com.osacky.doctor", version.ref = "gradleDoctor" }
 gradleDownload = { id = "de.undercouch.download", version.ref = "gradleDownload" }

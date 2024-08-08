@@ -1,10 +1,19 @@
 plugins {
     alias(libs.plugins.alibagherifam.android.library)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
 }
 
 android {
     namespace = "dev.alibagherifam.mentha.nutritionfacts"
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+}
+
+ksp {
+    arg("room.generateKotlin", "true")
 }
 
 dependencies {
