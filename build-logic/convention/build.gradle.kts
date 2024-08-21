@@ -18,10 +18,10 @@ kotlin {
 }
 
 dependencies {
-    compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
 }
 
 tasks {

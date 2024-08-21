@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.alibagherifam.android.library)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.room)
 }
 
 android {
